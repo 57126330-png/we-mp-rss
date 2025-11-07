@@ -311,7 +311,7 @@ async def add_mp(
             from core.queue import TaskQueue
             from core.wx import WxGather
             from driver.token import wx_cfg
-            from core.print import print_info, print_warning
+            from core.print import print_info, print_warning, print_error
             
             # 检查微信登录状态
             cookie = wx_cfg.get('cookie', '')
@@ -322,7 +322,29 @@ async def add_mp(
             else:
                 Max_page=int(cfg.get("max_page","2"))
                 print_info(f"添加公众号 [{mp_name}] 成功，已加入抓取队列，将抓取 {Max_page} 页内容")
-                TaskQueue.add_task( WxGather().Model().get_Articles,faker_id=mp_id,Mps_id=feed_id,CallBack=UpdateArticle,MaxPage=Max_page,Mps_title=mp_name)
+                print_info(f"抓取参数: faker_id={mp_id}, Mps_id={feed_id}, MaxPage={Max_page}")
+                
+                # 包装任务函数，添加错误处理和日志
+                def fetch_articles_task():
+                    try:
+                        print_info(f"开始执行抓取任务: 公众号 [{mp_name}], ID: {feed_id}")
+                        wx = WxGather().Model()
+                        wx.get_Articles(
+                            faker_id=mp_id,
+                            Mps_id=feed_id,
+                            CallBack=UpdateArticle,
+                            MaxPage=Max_page,
+                            Mps_title=mp_name
+                        )
+                        article_count = wx.all_count() if hasattr(wx, 'all_count') else 0
+                        print_info(f"抓取任务完成: 公众号 [{mp_name}], 共抓取 {article_count} 篇文章")
+                    except Exception as e:
+                        print_error(f"抓取任务执行失败: 公众号 [{mp_name}], 错误: {str(e)}")
+                        import traceback
+                        print_error(f"错误详情: {traceback.format_exc()}")
+                        raise
+                
+                TaskQueue.add_task(fetch_articles_task)
             
         return success_response({
             "id": feed_id,

@@ -159,38 +159,52 @@ class Db:
         return False
      
     def add_article(self, article_data: dict,check_exist=False) -> bool:
+        """添加文章到数据库
+        
+        Args:
+            article_data: 文章数据字典
+            check_exist: 是否检查文章是否已存在
+            
+        Returns:
+            bool: 是否成功添加
+        """
         try:
-            session=self.get_session()
             from datetime import datetime
-            art = Article(**article_data)
-            if art.id:
-               art.id=f"{str(art.mp_id)}-{art.id}".replace("MP_WXS_","")
-            
-            if check_exist:
-                # 检查文章是否已存在
-                existing_article = session.query(Article).filter(Article.url == art.url or Article.id == art.id).first()
-                if existing_article is not None:
-                    print_warning(f"Article already exists: {art.id}")
-                    return False
-                
-            if art.created_at is None:
-                art.created_at=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            if art.updated_at is None:
-                art.updated_at=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            art.created_at=datetime.strptime(art.created_at ,'%Y-%m-%d %H:%M:%S')
-            art.updated_at=datetime.strptime(art.updated_at,'%Y-%m-%d %H:%M:%S')
-            art.content=art.content
             from core.models.base import DATA_STATUS
-            art.status=DATA_STATUS.ACTIVE
-            session.add(art)
-            # self._session.merge(art)
-            sta=session.commit()
             
+            # 使用 session_scope 确保连接正确关闭
+            with self.session_scope(auto_commit=True) as session:
+                art = Article(**article_data)
+                if art.id:
+                   art.id=f"{str(art.mp_id)}-{art.id}".replace("MP_WXS_","")
+                
+                if check_exist:
+                    # 检查文章是否已存在
+                    existing_article = session.query(Article).filter(
+                        (Article.url == art.url) | (Article.id == art.id)
+                    ).first()
+                    if existing_article is not None:
+                        print_warning(f"Article already exists: {art.id}")
+                        return False
+                
+                if art.created_at is None:
+                    art.created_at=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                if art.updated_at is None:
+                    art.updated_at=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                art.created_at=datetime.strptime(art.created_at ,'%Y-%m-%d %H:%M:%S')
+                art.updated_at=datetime.strptime(art.updated_at,'%Y-%m-%d %H:%M:%S')
+                art.content=art.content
+                art.status=DATA_STATUS.ACTIVE
+                session.add(art)
+                # commit 会在 session_scope 退出时自动执行
+                
         except Exception as e:
-            if "UNIQUE" in str(e) or "Duplicate entry" in str(e):
-                print_warning(f"Article already exists: {art.id}")
+            if "UNIQUE" in str(e) or "Duplicate entry" in str(e) or "duplicate key" in str(e).lower():
+                print_warning(f"Article already exists: {art.id if 'art' in locals() else 'unknown'}")
             else:
                 print_error(f"Failed to add article: {e}")
+                import traceback
+                print_error(f"Error details: {traceback.format_exc()}")
             return False
         return True    
         
