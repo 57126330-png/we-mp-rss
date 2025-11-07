@@ -142,29 +142,30 @@ async def get_article_detail(
     content: bool = False,
     # current_user: dict = Depends(get_current_user)
 ):
-    session = DB.get_session()
-    try:
-        article = session.query(Article).filter(Article.id==article_id).filter(Article.status != DATA_STATUS.DELETED).first()
-        if not article:
-            from .base import error_response
-            raise HTTPException(
-                status_code=fast_status.HTTP_404_NOT_FOUND,
-                detail=error_response(
-                    code=40401,
-                    message="文章不存在"
+    # 使用上下文管理器确保 session 被正确清理（只读操作，不需要 commit）
+    with DB.session_scope(auto_commit=False) as session:
+        try:
+            article = session.query(Article).filter(Article.id==article_id).filter(Article.status != DATA_STATUS.DELETED).first()
+            if not article:
+                from .base import error_response
+                raise HTTPException(
+                    status_code=fast_status.HTTP_404_NOT_FOUND,
+                    detail=error_response(
+                        code=40401,
+                        message="文章不存在"
+                    )
                 )
-            )
-        return success_response(article)
-    except HTTPException as e:
-        raise e
-    except Exception as e:
-        raise HTTPException(
-            status_code=fast_status.HTTP_406_NOT_ACCEPTABLE,
-            detail=error_response(
-                code=50001,
-                message=f"获取文章详情失败: {str(e)}"
-            )
-        )   
+            return success_response(article)
+        except HTTPException as e:
+            raise e
+        except Exception as e:
+            raise HTTPException(
+                status_code=fast_status.HTTP_406_NOT_ACCEPTABLE,
+                detail=error_response(
+                    code=50001,
+                    message=f"获取文章详情失败: {str(e)}"
+                )
+            )   
 
 @router.delete("/{article_id}", summary="删除文章")
 async def delete_article(

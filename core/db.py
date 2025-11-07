@@ -1,7 +1,8 @@
 from sqlalchemy import create_engine, Engine,Text,event
-from sqlalchemy.orm import sessionmaker, declarative_base,scoped_session
+from sqlalchemy.orm import sessionmaker, declarative_base,scoped_session, Session
 from sqlalchemy import Column, Integer, String, DateTime
 from typing import Optional, List
+from contextlib import contextmanager
 from .models import Feed, Article
 from .config import cfg
 from core.models.base import Base  
@@ -39,12 +40,41 @@ class Db:
                     except Exception as e:
                         pass
                     open(db_path, 'w').close()
+            
+            # 根据数据库类型配置连接池参数
+            # Supabase Free 限制：最大 20 个连接（无 Pooler）
+            # 为了安全，我们设置最大连接数为 15（pool_size + max_overflow <= 15）
+            is_postgresql = con_str.startswith('postgresql://') or con_str.startswith('postgres://')
+            is_supabase = 'supabase.co' in con_str or 'supabase' in con_str.lower()
+            
+            if is_postgresql or is_supabase:
+                # Supabase/PostgreSQL 配置：保守的连接池设置
+                # pool_size=5, max_overflow=10 => 最大 15 个连接，留 5 个余量
+                pool_size = 5
+                max_overflow = 10
+                pool_recycle = 300  # PostgreSQL 连接回收时间（5分钟）
+                pool_pre_ping = True  # 连接前检查连接是否有效
+                print_info(f"[{self.tag}] 检测到 PostgreSQL/Supabase 连接，使用保守连接池配置: pool_size={pool_size}, max_overflow={max_overflow}")
+            elif con_str.startswith('sqlite:///'):
+                # SQLite 配置：不需要连接池
+                pool_size = 1
+                max_overflow = 0
+                pool_recycle = None
+                pool_pre_ping = False
+            else:
+                # MySQL 等其他数据库：中等配置
+                pool_size = 5
+                max_overflow = 10
+                pool_recycle = 3600  # 1小时
+                pool_pre_ping = True
+            
             self.engine = create_engine(con_str,
-                                     pool_size=2,          # 最小空闲连接数
-                                     max_overflow=20,      # 允许的最大溢出连接数
+                                     pool_size=pool_size,          # 最小空闲连接数
+                                     max_overflow=max_overflow,      # 允许的最大溢出连接数（总连接数 = pool_size + max_overflow）
                                      pool_timeout=30,      # 获取连接时的超时时间（秒）
                                      echo=False,
-                                     pool_recycle=60,  # 连接池回收时间（秒）
+                                     pool_recycle=pool_recycle,  # 连接池回收时间（秒）
+                                     pool_pre_ping=pool_pre_ping,  # 连接前检查连接是否有效（防止使用已断开的连接）
                                      isolation_level="AUTOCOMMIT",  # 设置隔离级别
                                     #  isolation_level="READ COMMITTED",  # 设置隔离级别
                                     #  query_cache_size=0,
@@ -185,7 +215,11 @@ class Db:
         def close(dbapi_connection, connection_record):
             print("Database connection closed.")
     def get_session(self):
-        """获取新的数据库会话"""
+        """获取新的数据库会话
+        
+        注意：使用 scoped_session 时，需要在请求结束后调用 session.remove() 来清理
+        建议在 FastAPI 中使用 session_dependency() 作为依赖注入
+        """
         UseInThread=self.User_In_Thread
         def _session():
             if UseInThread:
@@ -209,11 +243,11 @@ class Db:
             print_info(f"[{self.tag}] Session is already closed.")
             _session()
             return self.Session()
-        # 检查数据库连接是否已断开
+        # 检查数据库连接是否已断开（使用 pool_pre_ping 后这个检查可能不再需要，但保留作为备用）
         try:
             from core.models import User
             # 尝试执行一个简单的查询来检查连接状态
-            session.query(User.id).count()
+            session.query(User.id).limit(1).first()
         except Exception as e:
             from core.print import print_warning
             print_warning(f"[{self.tag}] Database connection lost: {e}. Reconnecting...")
@@ -229,13 +263,71 @@ class Db:
         event.listen(Article,'after_update', receive_after_update)
         event.listen(MessageTask,'after_update',receive_after_update)
         
-    def session_dependency(self):
-        """FastAPI依赖项，用于请求范围的会话管理"""
+    @contextmanager
+    def session_scope(self, auto_commit=True):
+        """上下文管理器，确保 session 被正确关闭
+        
+        使用示例:
+            # 写入操作（默认自动 commit）
+            with DB.session_scope() as session:
+                session.add(item)
+                # commit 会自动调用
+            
+            # 只读操作（不需要 commit）
+            with DB.session_scope(auto_commit=False) as session:
+                items = session.query(Item).all()
+        """
         session = self.get_session()
         try:
             yield session
+            if auto_commit:
+                session.commit()
+        except Exception as e:
+            if auto_commit:
+                session.rollback()
+            raise
         finally:
-            session.remove()
+            # 对于 scoped_session，必须调用 remove() 来清理线程本地存储
+            if self.User_In_Thread and hasattr(session, 'remove'):
+                try:
+                    session.remove()
+                except Exception as e:
+                    print_warning(f"[{self.tag}] Error removing session: {e}")
+            elif hasattr(session, 'close'):
+                try:
+                    session.close()
+                except Exception as e:
+                    print_warning(f"[{self.tag}] Error closing session: {e}")
+    
+    def session_dependency(self):
+        """FastAPI依赖项，用于请求范围的会话管理
+        
+        使用示例:
+            @router.get("/items")
+            async def get_items(db: Session = Depends(DB.session_dependency)):
+                # 使用 db 进行数据库操作
+                items = db.query(Item).all()
+                return items
+            # session 会在请求结束后自动清理
+        """
+        session = self.get_session()
+        try:
+            yield session
+        except Exception as e:
+            session.rollback()
+            raise
+        finally:
+            # 对于 scoped_session，必须调用 remove() 来清理线程本地存储
+            if self.User_In_Thread and hasattr(session, 'remove'):
+                try:
+                    session.remove()
+                except Exception as e:
+                    print_warning(f"[{self.tag}] Error removing session: {e}")
+            elif hasattr(session, 'close'):
+                try:
+                    session.close()
+                except Exception as e:
+                    print_warning(f"[{self.tag}] Error closing session: {e}")
 
 # 全局数据库实例
 DB = Db(User_In_Thread=True)
