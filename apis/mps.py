@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Query, Body, UploadFile, File
 from fastapi.responses import FileResponse
 from fastapi.background import BackgroundTasks
+from typing import Optional, List
 from core.auth import get_current_user
 from core.db import DB
 from core.wx import search_Biz
@@ -200,47 +201,92 @@ async def add_mp(
     mp_id: str = Body(None, max_length=255),
     avatar: str = Body(None, max_length=500),
     mp_intro: str = Body(None, max_length=255),
+    tag_ids: Optional[List[str]] = Body(None),  # 新增：标签ID列表（可选）
     current_user: dict = Depends(get_current_user)
 ):
-    session = DB.get_session()
+    # 使用 session_scope 确保连接正确关闭
     try:
         from core.models.feed import Feed
+        from core.models.tags import Tags as TagsModel
         import time
+        import json
         now = datetime.now()
         
         import base64
         mpx_id = base64.b64decode(mp_id).decode("utf-8")
         local_avatar_path = f"{save_avatar_locally(avatar)}"
         
-        # 检查公众号是否已存在
-        existing_feed = session.query(Feed).filter(Feed.faker_id == mp_id).first()
+        # 初始化变量，确保在with块外也能访问
+        existing_feed = None
+        feed = None
         
-        if existing_feed:
-            # 更新现有记录
-            existing_feed.mp_name = mp_name
-            existing_feed.mp_cover = local_avatar_path
-            existing_feed.mp_intro = mp_intro
-            existing_feed.updated_at = now
-        else:
-            # 创建新的Feed记录
-            new_feed = Feed(
-                id=f"MP_WXS_{mpx_id}",
-                mp_name=mp_name,
-                mp_cover= local_avatar_path,
-                mp_intro=mp_intro,
-                status=1,  # 默认启用状态
-                created_at=now,
-                updated_at=now,
-                faker_id=mp_id,
-                update_time=0,
-                sync_time=0,
-            )
-            session.add(new_feed)
-           
-        session.commit()
+        with DB.session_scope(auto_commit=True) as session:
+            # 检查公众号是否已存在
+            existing_feed = session.query(Feed).filter(Feed.faker_id == mp_id).first()
+            
+            if existing_feed:
+                # 更新现有记录
+                existing_feed.mp_name = mp_name
+                existing_feed.mp_cover = local_avatar_path
+                existing_feed.mp_intro = mp_intro
+                existing_feed.updated_at = now
+                feed = existing_feed
+            else:
+                # 创建新的Feed记录
+                new_feed = Feed(
+                    id=f"MP_WXS_{mpx_id}",
+                    mp_name=mp_name,
+                    mp_cover= local_avatar_path,
+                    mp_intro=mp_intro,
+                    status=1,  # 默认启用状态
+                    created_at=now,
+                    updated_at=now,
+                    faker_id=mp_id,
+                    update_time=0,
+                    sync_time=0,
+                )
+                session.add(new_feed)
+                feed = new_feed
         
-        feed = existing_feed if existing_feed else new_feed
-         #在这里实现第一次添加获取公众号文章
+        # 确保feed已创建
+        if not feed:
+            raise ValueError("创建或获取Feed失败")
+        
+        # 如果提供了标签ID列表，更新相关标签的mps_id（在单独的session中处理）
+        if tag_ids and isinstance(tag_ids, list) and len(tag_ids) > 0:
+            try:
+                with DB.session_scope(auto_commit=True) as tag_session:
+                    # 准备要添加的公众号信息
+                    mp_info = {
+                        "id": feed.id,
+                        "mp_name": feed.mp_name,
+                        "mp_cover": feed.mp_cover
+                    }
+                    
+                    # 遍历所有选中的标签
+                    for tag_id in tag_ids:
+                        tag = tag_session.query(TagsModel).filter(TagsModel.id == tag_id).first()
+                        if tag:
+                            # 解析现有的mps_id
+                            try:
+                                mps_list = json.loads(tag.mps_id) if tag.mps_id else []
+                            except:
+                                mps_list = []
+                            
+                            # 检查是否已存在该公众号
+                            mp_exists = any(mp.get("id") == feed.id for mp in mps_list)
+                            
+                            if not mp_exists:
+                                # 添加新公众号到标签
+                                mps_list.append(mp_info)
+                                tag.mps_id = json.dumps(mps_list, ensure_ascii=False)
+                                tag.updated_at = now
+            except Exception as tag_error:
+                # 标签更新失败不影响订阅号创建，只记录错误
+                from core.print import print_error
+                print_error(f"更新标签关联失败: {tag_error}")
+        
+        # 在这里实现第一次添加获取公众号文章（只有新创建的才需要）
         if not existing_feed:
             from core.queue import TaskQueue
             from core.wx import WxGather
@@ -257,13 +303,13 @@ async def add_mp(
             "created_at": feed.created_at.isoformat()
         })
     except Exception as e:
-        session.rollback()
-        print(f"添加公众号错误: {str(e)}")
+        from core.print import print_error
+        print_error(f"添加公众号错误: {str(e)}")
         raise HTTPException(
-            status_code=status.HTTP_201_CREATED,
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=error_response(
                 code=50001,
-                message="添加公众号失败"
+                message=f"添加公众号失败: {str(e)}"
             )
         )
 

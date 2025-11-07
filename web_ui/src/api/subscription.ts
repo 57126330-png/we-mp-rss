@@ -26,6 +26,7 @@ export interface AddSubscriptionParams {
   mp_id: string
   avatar: string
   mp_intro?: string
+  tag_ids?: string[]
 }
 
 export interface MpItem {

@@ -73,6 +73,18 @@
           />
         </a-form-item>
         
+        <a-form-item label="标签" field="tag_ids">
+          <a-space>
+            <a-input
+              :model-value="selectedTagNames"
+              placeholder="请选择标签（可选）"
+              readonly
+              style="width: 300px"
+            />
+            <a-button @click="showTagSelector = true">选择标签</a-button>
+          </a-space>
+        </a-form-item>
+        
         <a-form-item>
           <a-space>
             <a-button type="primary" html-type="submit" :loading="loading">
@@ -84,26 +96,71 @@
       </a-form>
     </a-card>
   </div>
+  
+  <!-- 标签选择器模态框 -->
+  <a-modal
+    v-model:visible="showTagSelector"
+    title="选择标签"
+    :footer="false"
+    width="800px"
+  >
+    <TagMultiSelect 
+      ref="tagSelectorRef"
+      v-model="form.tag_ids"
+    />
+    <template #footer>
+      <a-button type="primary" @click="showTagSelector = false">确定</a-button>
+    </template>
+  </a-modal>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { Message, Modal } from '@arco-design/web-vue'
 import { addSubscription,AddSubscriptionParams, searchBiz,getSubscriptionInfo } from '@/api/subscription'
+import { listTags } from '@/api/tagManagement'
 import {Avatar} from '@/utils/constants'
+import TagMultiSelect from '@/components/TagMultiSelect.vue'
 const router = useRouter()
 const loading = ref(false)
 const isFetching = ref(false)
 const searchResults = ref([])
 const avatar_url = ref('/static/default-avatar.png')
 const formRef = ref(null)
+const showTagSelector = ref(false)
+const tagSelectorRef = ref<InstanceType<typeof TagMultiSelect> | null>(null)
+const tagList = ref<any[]>([])
+
 const form = ref({
   name: '',
   wx_id: '',
   avatar:'',
-  description: ''
+  description: '',
+  tag_ids: [] as string[]
 })
+
+// 获取标签名称显示
+const selectedTagNames = computed(() => {
+  if (!form.value.tag_ids || form.value.tag_ids.length === 0) {
+    return ''
+  }
+  const names = form.value.tag_ids.map(id => {
+    const tag = tagList.value.find(t => t.id === id)
+    return tag ? tag.name : id
+  })
+  return names.join(', ')
+})
+
+// 加载标签列表
+const loadTags = async () => {
+  try {
+    const res = await listTags({ offset: 0, limit: 100 })
+    tagList.value = res.list || []
+  } catch (error) {
+    console.error('加载标签列表失败:', error)
+  }
+}
 
 // 监听 form.avatar 的变化
 watch(() => form.value.avatar, (newValue, oldValue) => {
@@ -210,6 +267,7 @@ const handleSubmit = async () => {
       mp_id: form.value.wx_id,
       avatar: form.value.avatar,
       mp_intro: form.value.description,
+      tag_ids: form.value.tag_ids || []
     })
     
     Message.success('订阅添加成功')
@@ -225,13 +283,19 @@ const handleSubmit = async () => {
 const resetForm = () => {
   form.value = {
     name: '',
-    accountId: '',
-    rssUrl: '',
-    category: '',
-    description: ''
+    wx_id: '',
+    avatar: '',
+    description: '',
+    tag_ids: []
   }
   searchResults.value = []
+  if (tagSelectorRef.value) {
+    tagSelectorRef.value.parseSelected([])
+  }
 }
+
+// 初始化时加载标签列表
+loadTags()
 
 const modalVisible = ref(false);
 const articleLink = ref('');
