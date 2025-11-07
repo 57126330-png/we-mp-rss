@@ -87,16 +87,17 @@ class DatabaseSynchronizer:
             with self.engine.begin() as conn:
                 # 检查是否可以创建表
                 if "postgresql" in self.db_url or "postgres" in self.db_url:
+                    from sqlalchemy import text
                     # 检查当前用户权限
-                    result = conn.execute("SELECT current_user, current_database(), current_schema()")
+                    result = conn.execute(text("SELECT current_user, current_database(), current_schema()"))
                     user_info = result.fetchone()
                     self.logger.info(f"当前用户: {user_info[0]}, 数据库: {user_info[1]}, Schema: {user_info[2]}")
                     
                     # 检查schema权限
-                    result = conn.execute("""
+                    result = conn.execute(text("""
                         SELECT has_schema_privilege(current_user, 'public', 'CREATE') as can_create,
                                has_schema_privilege(current_user, 'public', 'USAGE') as can_use
-                    """)
+                    """))
                     perms = result.fetchone()
                     
                     if not perms[0]:  # 没有CREATE权限
