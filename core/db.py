@@ -60,21 +60,28 @@ class Db:
             connect_args_config = {}
             
             if is_postgresql or is_supabase:
-                # Supabase/PostgreSQL 配置：平衡的连接池设置
-                # 在多进程环境中，每个进程都会创建连接池
-                # 假设最多4个workers，每个进程最多4个连接 => 总共16个连接，留4个余量
-                # Supabase Free 限制：最大 20 个连接
-                pool_size = 2  # 基础连接数
-                max_overflow = 2  # 溢出连接数（总连接数 = pool_size + max_overflow = 4）
+                # Supabase Pooler Session 模式限制非常严格
+                # 如果使用 pooler.supabase.com，Session 模式下每个应用实例只能使用 pool_size 个连接
+                # 不能使用 max_overflow，因为 Session 模式不支持
+                # 解决方案：使用最小连接池配置
+                if 'pooler.supabase.com' in con_str:
+                    # Supabase Pooler Session 模式：每个实例只能使用 1 个连接
+                    pool_size = 1
+                    max_overflow = 0  # Session 模式不支持 overflow
+                    print_info(f"[{self.tag}] 检测到 Supabase Pooler Session 模式，使用最小连接池: pool_size={pool_size}, max_overflow={max_overflow}")
+                else:
+                    # 直接连接或 Transaction 模式：可以使用更多连接
+                    pool_size = 2
+                    max_overflow = 2
+                    print_info(f"[{self.tag}] 检测到 PostgreSQL/Supabase 直接连接，使用连接池: pool_size={pool_size}, max_overflow={max_overflow}")
+                
                 pool_recycle = 300  # PostgreSQL 连接回收时间（5分钟）
                 pool_pre_ping = True  # 连接前检查连接是否有效
                 # 添加连接参数：设置查询超时和连接超时
-                # 增加连接超时时间，避免启动时连接失败
                 connect_args_config = {
-                    "connect_timeout": 30,  # 连接超时30秒（从10秒增加到30秒）
+                    "connect_timeout": 30,  # 连接超时30秒
                     "options": "-c statement_timeout=30000"  # 查询超时30秒（PostgreSQL）
                 }
-                print_info(f"[{self.tag}] 检测到 PostgreSQL/Supabase 连接，使用保守连接池配置: pool_size={pool_size}, max_overflow={max_overflow}, connect_timeout=30s")
             elif con_str.startswith('sqlite:///'):
                 # SQLite 配置：不需要连接池
                 pool_size = 1
