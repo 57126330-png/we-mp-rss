@@ -310,8 +310,19 @@ async def add_mp(
         if is_new_feed:
             from core.queue import TaskQueue
             from core.wx import WxGather
-            Max_page=int(cfg.get("max_page","2"))
-            TaskQueue.add_task( WxGather().Model().get_Articles,faker_id=mp_id,Mps_id=feed_id,CallBack=UpdateArticle,MaxPage=Max_page,Mps_title=mp_name)
+            from driver.token import wx_cfg
+            from core.print import print_info, print_warning
+            
+            # 检查微信登录状态
+            cookie = wx_cfg.get('cookie', '')
+            token = wx_cfg.get('token', '')
+            
+            if not cookie or not token:
+                print_warning(f"添加公众号 [{mp_name}] 成功，但微信未登录，无法立即抓取内容。请先登录微信公众平台。")
+            else:
+                Max_page=int(cfg.get("max_page","2"))
+                print_info(f"添加公众号 [{mp_name}] 成功，已加入抓取队列，将抓取 {Max_page} 页内容")
+                TaskQueue.add_task( WxGather().Model().get_Articles,faker_id=mp_id,Mps_id=feed_id,CallBack=UpdateArticle,MaxPage=Max_page,Mps_title=mp_name)
             
         return success_response({
             "id": feed_id,
