@@ -216,9 +216,15 @@ async def add_mp(
         mpx_id = base64.b64decode(mp_id).decode("utf-8")
         local_avatar_path = f"{save_avatar_locally(avatar)}"
         
-        # 初始化变量，确保在with块外也能访问
+        # 初始化变量
         existing_feed = None
-        feed = None
+        feed_id = None
+        feed_mp_name = None
+        feed_mp_cover = None
+        feed_mp_intro = None
+        feed_status = None
+        feed_created_at = None
+        is_new_feed = False
         
         with DB.session_scope(auto_commit=True) as session:
             # 检查公众号是否已存在
@@ -230,7 +236,14 @@ async def add_mp(
                 existing_feed.mp_cover = local_avatar_path
                 existing_feed.mp_intro = mp_intro
                 existing_feed.updated_at = now
-                feed = existing_feed
+                # 在session关闭前保存所有需要的属性值
+                feed_id = existing_feed.id
+                feed_mp_name = existing_feed.mp_name
+                feed_mp_cover = existing_feed.mp_cover
+                feed_mp_intro = existing_feed.mp_intro
+                feed_status = existing_feed.status
+                feed_created_at = existing_feed.created_at
+                is_new_feed = False
             else:
                 # 创建新的Feed记录
                 new_feed = Feed(
@@ -246,21 +259,28 @@ async def add_mp(
                     sync_time=0,
                 )
                 session.add(new_feed)
-                feed = new_feed
+                # 在session关闭前保存所有需要的属性值
+                feed_id = new_feed.id
+                feed_mp_name = new_feed.mp_name
+                feed_mp_cover = new_feed.mp_cover
+                feed_mp_intro = new_feed.mp_intro
+                feed_status = new_feed.status
+                feed_created_at = new_feed.created_at
+                is_new_feed = True
         
         # 确保feed已创建
-        if not feed:
+        if not feed_id:
             raise ValueError("创建或获取Feed失败")
         
         # 如果提供了标签ID列表，更新相关标签的mps_id（在单独的session中处理）
         if tag_ids and isinstance(tag_ids, list) and len(tag_ids) > 0:
             try:
                 with DB.session_scope(auto_commit=True) as tag_session:
-                    # 准备要添加的公众号信息
+                    # 准备要添加的公众号信息（使用已保存的值）
                     mp_info = {
-                        "id": feed.id,
-                        "mp_name": feed.mp_name,
-                        "mp_cover": feed.mp_cover
+                        "id": feed_id,
+                        "mp_name": feed_mp_name,
+                        "mp_cover": feed_mp_cover
                     }
                     
                     # 遍历所有选中的标签
@@ -274,7 +294,7 @@ async def add_mp(
                                 mps_list = []
                             
                             # 检查是否已存在该公众号
-                            mp_exists = any(mp.get("id") == feed.id for mp in mps_list)
+                            mp_exists = any(mp.get("id") == feed_id for mp in mps_list)
                             
                             if not mp_exists:
                                 # 添加新公众号到标签
@@ -287,20 +307,20 @@ async def add_mp(
                 print_error(f"更新标签关联失败: {tag_error}")
         
         # 在这里实现第一次添加获取公众号文章（只有新创建的才需要）
-        if not existing_feed:
+        if is_new_feed:
             from core.queue import TaskQueue
             from core.wx import WxGather
             Max_page=int(cfg.get("max_page","2"))
-            TaskQueue.add_task( WxGather().Model().get_Articles,faker_id=feed.faker_id,Mps_id=feed.id,CallBack=UpdateArticle,MaxPage=Max_page,Mps_title=mp_name)
+            TaskQueue.add_task( WxGather().Model().get_Articles,faker_id=mp_id,Mps_id=feed_id,CallBack=UpdateArticle,MaxPage=Max_page,Mps_title=mp_name)
             
         return success_response({
-            "id": feed.id,
-            "mp_name": feed.mp_name,
-            "mp_cover": feed.mp_cover,
-            "mp_intro": feed.mp_intro,
-            "status": feed.status,
+            "id": feed_id,
+            "mp_name": feed_mp_name,
+            "mp_cover": feed_mp_cover,
+            "mp_intro": feed_mp_intro,
+            "status": feed_status,
             "faker_id":mp_id,
-            "created_at": feed.created_at.isoformat()
+            "created_at": feed_created_at.isoformat() if feed_created_at else now.isoformat()
         })
     except Exception as e:
         from core.print import print_error
