@@ -63,17 +63,20 @@ class Db:
                 # Supabase Pooler Session 模式限制非常严格
                 # 如果使用 pooler.supabase.com，Session 模式下每个应用实例只能使用 pool_size 个连接
                 # 不能使用 max_overflow，因为 Session 模式不支持
-                # 解决方案：使用最小连接池配置
+                # 但是代码中有多个 Db 实例，每个实例都需要连接
+                # 解决方案：恢复到原始配置，但检测 Pooler Session 模式时使用更保守的设置
                 if 'pooler.supabase.com' in con_str:
-                    # Supabase Pooler Session 模式：每个实例只能使用 1 个连接
-                    pool_size = 1
+                    # Supabase Pooler Session 模式：使用原始配置但更保守
+                    # 原始配置是 pool_size=5, max_overflow=10，但 Session 模式不支持 max_overflow
+                    # 所以使用 pool_size=3, max_overflow=0，这样每个实例最多3个连接
+                    pool_size = 3
                     max_overflow = 0  # Session 模式不支持 overflow
-                    print_info(f"[{self.tag}] 检测到 Supabase Pooler Session 模式，使用最小连接池: pool_size={pool_size}, max_overflow={max_overflow}")
+                    print_info(f"[{self.tag}] 检测到 Supabase Pooler Session 模式，使用保守连接池: pool_size={pool_size}, max_overflow={max_overflow}")
                 else:
-                    # 直接连接或 Transaction 模式：可以使用更多连接
-                    pool_size = 2
-                    max_overflow = 2
-                    print_info(f"[{self.tag}] 检测到 PostgreSQL/Supabase 直接连接，使用连接池: pool_size={pool_size}, max_overflow={max_overflow}")
+                    # 直接连接或 Transaction 模式：使用原始配置
+                    pool_size = 5
+                    max_overflow = 10
+                    print_info(f"[{self.tag}] 检测到 PostgreSQL/Supabase 直接连接，使用原始连接池配置: pool_size={pool_size}, max_overflow={max_overflow}")
                 
                 pool_recycle = 300  # PostgreSQL 连接回收时间（5分钟）
                 pool_pre_ping = True  # 连接前检查连接是否有效
