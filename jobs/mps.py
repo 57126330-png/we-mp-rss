@@ -70,12 +70,53 @@ def add_job(feeds:list[Feed]=None,task:MessageTask=None,isTest=False):
     pass
 import json
 def get_feeds(task:MessageTask=None):
-     mps = json.loads(task.mps_id)
-     ids=",".join([item["id"]for item in mps])
-     mps=wx_db.get_mps_list(ids)
-     if len(mps)==0:
-        mps=wx_db.get_all_mps()
-     return mps
+    """
+    获取任务关联的公众号列表
+    
+    Args:
+        task: MessageTask对象，包含mps_id字段
+        
+    Returns:
+        List[Feed]: 公众号列表，如果查询失败返回空列表
+    """
+    try:
+        if not task or not task.mps_id:
+            print_warning("任务没有设置mps_id，返回所有公众号")
+            mps = wx_db.get_all_mps()
+            return mps if isinstance(mps, list) else []
+        
+        mps_data = json.loads(task.mps_id)
+        ids = ",".join([item["id"] for item in mps_data if item.get("id")])
+        
+        if not ids:
+            print_warning("任务mps_id中没有有效的ID，返回所有公众号")
+            mps = wx_db.get_all_mps()
+            return mps if isinstance(mps, list) else []
+        
+        mps = wx_db.get_mps_list(ids)
+        # 确保返回的是列表
+        if not isinstance(mps, list):
+            print_warning(f"get_mps_list返回了非列表类型: {type(mps)}，返回所有公众号")
+            mps = wx_db.get_all_mps()
+            return mps if isinstance(mps, list) else []
+        
+        if len(mps) == 0:
+            print_warning("根据ID未找到公众号，返回所有公众号")
+            mps = wx_db.get_all_mps()
+            return mps if isinstance(mps, list) else []
+        
+        return mps
+    except json.JSONDecodeError as e:
+        print_error(f"解析任务mps_id JSON失败: {e}")
+        # JSON解析失败，返回所有公众号
+        mps = wx_db.get_all_mps()
+        return mps if isinstance(mps, list) else []
+    except Exception as e:
+        print_error(f"获取公众号列表失败: {e}")
+        import traceback
+        print_error(f"错误详情: {traceback.format_exc()}")
+        # 出错时返回空列表，避免后续处理出错
+        return []
 scheduler=TaskScheduler()
 def reload_job():
     print_success("重载任务")

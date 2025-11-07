@@ -213,37 +213,57 @@ class Db:
             data = self.get_session().query(Article).limit(limit).offset(offset)
             return data
         except Exception as e:
-            print(f"Failed to fetch Feed: {e}")
-            return e    
+            print_error(f"Failed to fetch Articles: {e}")
+            return []    
              
     def get_all_mps(self) -> List[Feed]:
         """Get all Feed records"""
         try:
-            return self.get_session().query(Feed).all()
+            with self.session_scope(auto_commit=False) as session:
+                return session.query(Feed).all()
         except Exception as e:
-            print(f"Failed to fetch Feed: {e}")
-            return e
+            print_error(f"Failed to fetch all Feeds: {e}")
+            import traceback
+            print_error(f"Error details: {traceback.format_exc()}")
+            return []
             
     def get_mps_list(self, mp_ids:str) -> List[Feed]:
         try:
+            if not mp_ids or not mp_ids.strip():
+                return []
             ids=mp_ids.split(',')
-            data =  self.get_session().query(Feed).filter(Feed.id.in_(ids)).all()
-            return data
+            # 过滤空字符串
+            ids = [id.strip() for id in ids if id.strip()]
+            if not ids:
+                return []
+            with self.session_scope(auto_commit=False) as session:
+                data = session.query(Feed).filter(Feed.id.in_(ids)).all()
+                return data
         except Exception as e:
-            print(f"Failed to fetch Feed: {e}")
-            return e
+            print_error(f"Failed to fetch Feeds by IDs: {e}")
+            import traceback
+            print_error(f"Error details: {traceback.format_exc()}")
+            return []
     def get_mps(self, mp_id:str) -> Optional[Feed]:
         try:
-            ids=mp_id.split(',')
-            data =  self.get_session().query(Feed).filter_by(id= mp_id).first()
-            return data
+            if not mp_id or not mp_id.strip():
+                return None
+            with self.session_scope(auto_commit=False) as session:
+                data = session.query(Feed).filter_by(id=mp_id).first()
+                return data
         except Exception as e:
-            print(f"Failed to fetch Feed: {e}")
-            return e
+            print_error(f"Failed to fetch Feed by ID: {e}")
+            import traceback
+            print_error(f"Error details: {traceback.format_exc()}")
+            return None
 
     def get_faker_id(self, mp_id:str):
+        """获取公众号的faker_id"""
         data = self.get_mps(mp_id)
-        return data.faker_id
+        if data is None:
+            print_error(f"未找到ID为 {mp_id} 的公众号")
+            return None
+        return data.faker_id if hasattr(data, 'faker_id') else None
     def expire_all(self):
         if self.Session:
             self.Session.expire_all()    
