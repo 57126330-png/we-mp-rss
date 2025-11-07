@@ -57,7 +57,7 @@ async def system_resources(
             code=50002,
             message=f"获取系统资源失败: {str(e)}"
         )
-from core.article_lax import ARTICLE_INFO,laxArticle
+from core.article_lax import laxArticle
 from .ver import API_VERSION
 from core.ver import VERSION as CORE_VERSION,LATEST_VERSION
 @router.get("/info", summary="获取系统信息")
@@ -76,6 +76,10 @@ async def get_system_info(
     try:
       
         wx_cfg.reload()
+        # 动态获取文章统计信息，而不是使用模块级别的变量
+        # 这样可以避免在模块导入时连接数据库
+        article_info = laxArticle()
+        
         # 获取系统信息
         system_info = {
             'os': {
@@ -100,11 +104,15 @@ async def get_system_info(
                 "info":getLoginInfo(),
                 "login":getStatus(),
             },
-            "article":ARTICLE_INFO,
+            "article":article_info,
             'queue':TaskQueue.get_queue_info(),
         }
         return success_response(data=system_info)
     except Exception as e:
+        from core.print import print_error
+        print_error(f"获取系统信息失败: {str(e)}")
+        import traceback
+        print_error(f"错误详情: {traceback.format_exc()}")
         return error_response(
             code=50001,
             message=f"获取系统信息失败: {str(e)}"
