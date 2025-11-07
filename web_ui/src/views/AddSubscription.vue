@@ -156,9 +156,31 @@ const selectedTagNames = computed(() => {
 const loadTags = async () => {
   try {
     const res = await listTags({ offset: 0, limit: 100 })
-    tagList.value = res.list || []
-  } catch (error) {
+    // 处理不同的返回格式
+    if (res && typeof res === 'object') {
+      // 如果返回的是 {list: [], total: 0} 格式
+      if ('list' in res) {
+        tagList.value = res.list || []
+      } 
+      // 如果返回的是数组格式
+      else if (Array.isArray(res)) {
+        tagList.value = res
+      }
+      // 如果返回的是 {data: {list: []}} 格式
+      else if (res.data && res.data.list) {
+        tagList.value = res.data.list || []
+      }
+      else {
+        tagList.value = []
+      }
+    } else {
+      tagList.value = []
+    }
+  } catch (error: any) {
     console.error('加载标签列表失败:', error)
+    const errorMsg = typeof error === 'string' ? error : (error?.message || '加载标签列表失败')
+    Message.error(errorMsg)
+    tagList.value = []
   }
 }
 

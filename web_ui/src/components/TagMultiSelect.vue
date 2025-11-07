@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { listTags } from '@/api/tagManagement'
 import type { Tag } from '@/types/tagManagement'
+import { Message } from '@arco-design/web-vue'
 
 const props = defineProps({
   modelValue: {
@@ -33,9 +34,31 @@ const fetchTags = async () => {
   loading.value = true
   try {
     const res = await listTags({ offset: 0, limit: 100 })
-    tagList.value = res.list || []
-  } catch (error) {
+    // 处理不同的返回格式
+    if (res && typeof res === 'object') {
+      // 如果返回的是 {list: [], total: 0} 格式
+      if ('list' in res) {
+        tagList.value = res.list || []
+      } 
+      // 如果返回的是数组格式
+      else if (Array.isArray(res)) {
+        tagList.value = res
+      }
+      // 如果返回的是 {data: {list: []}} 格式
+      else if (res.data && res.data.list) {
+        tagList.value = res.data.list || []
+      }
+      else {
+        tagList.value = []
+      }
+    } else {
+      tagList.value = []
+    }
+  } catch (error: any) {
     console.error('获取标签列表失败:', error)
+    const errorMsg = typeof error === 'string' ? error : (error?.message || '获取标签列表失败')
+    Message.error(errorMsg)
+    tagList.value = []
   } finally {
     loading.value = false
   }
@@ -102,47 +125,55 @@ onMounted(() => {
       </a-space>
 
       <a-spin :loading="loading">
-        <template v-if="selectedTagIds.length > 0">
-          <a-space align="center" class="title-line">
-            <h4>已选标签 ({{ selectedTagIds.length }})</h4>
-            <a-button size="mini" type="text" @click="clearAll">清空</a-button>
-          </a-space>
-          <a-space wrap>
-            <a-tag
-              v-for="tagId in selectedTagIds"
-              :key="tagId"
-              closable
-              @close="removeSelected(tagId)"
-            >
-              {{ tagList.find(t => t.id === tagId)?.name || tagId }}
-            </a-tag>
-          </a-space>
+        <template v-if="!loading && tagList.length === 0">
+          <a-empty description="暂无标签，请先创建标签" />
         </template>
-
-        <a-space align="center" class="title-line">
-          <h4>可选标签</h4>
-          <a-button size="mini" type="text" @click="selectAll">全选</a-button>
-        </a-space>
-        <div class="tag-list">
-          <div
-            v-for="tag in filteredTags"
-            :key="tag.id"
-            class="tag-item"
-            :class="{ 'tag-item-selected': selectedTagIds.includes(tag.id) }"
-            @click="toggleSelect(tag)"
-          >
-            <a-space>
-              <img 
-                v-if="tag.cover" 
-                :src="tag.cover" 
-                alt="cover"
-                class="tag-cover"
-              />
-              <span>{{ tag.name }}</span>
-              <a-tag v-if="tag.status === 0" size="small" color="red">禁用</a-tag>
+        <template v-else>
+          <template v-if="selectedTagIds.length > 0">
+            <a-space align="center" class="title-line">
+              <h4>已选标签 ({{ selectedTagIds.length }})</h4>
+              <a-button size="mini" type="text" @click="clearAll">清空</a-button>
             </a-space>
+            <a-space wrap>
+              <a-tag
+                v-for="tagId in selectedTagIds"
+                :key="tagId"
+                closable
+                @close="removeSelected(tagId)"
+              >
+                {{ tagList.find(t => t.id === tagId)?.name || tagId }}
+              </a-tag>
+            </a-space>
+          </template>
+
+          <a-space align="center" class="title-line">
+            <h4>可选标签</h4>
+            <a-button size="mini" type="text" @click="selectAll" :disabled="filteredTags.length === 0">全选</a-button>
+          </a-space>
+          <div class="tag-list">
+            <template v-if="filteredTags.length === 0">
+              <a-empty description="没有可选的标签" />
+            </template>
+            <div
+              v-for="tag in filteredTags"
+              :key="tag.id"
+              class="tag-item"
+              :class="{ 'tag-item-selected': selectedTagIds.includes(tag.id) }"
+              @click="toggleSelect(tag)"
+            >
+              <a-space>
+                <img 
+                  v-if="tag.cover" 
+                  :src="tag.cover" 
+                  alt="cover"
+                  class="tag-cover"
+                />
+                <span>{{ tag.name }}</span>
+                <a-tag v-if="tag.status === 0" size="small" color="red">禁用</a-tag>
+              </a-space>
+            </div>
           </div>
-        </div>
+        </template>
       </a-spin>
     </a-space>
   </a-card>
