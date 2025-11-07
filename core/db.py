@@ -47,6 +47,9 @@ class Db:
             is_postgresql = con_str.startswith('postgresql://') or con_str.startswith('postgres://')
             is_supabase = 'supabase.co' in con_str or 'supabase' in con_str.lower()
             
+            # 初始化连接参数配置
+            connect_args_config = {}
+            
             if is_postgresql or is_supabase:
                 # Supabase/PostgreSQL 配置：保守的连接池设置
                 # pool_size=5, max_overflow=10 => 最大 15 个连接，留 5 个余量
@@ -54,6 +57,11 @@ class Db:
                 max_overflow = 10
                 pool_recycle = 300  # PostgreSQL 连接回收时间（5分钟）
                 pool_pre_ping = True  # 连接前检查连接是否有效
+                # 添加连接参数：设置查询超时和连接超时
+                connect_args_config = {
+                    "connect_timeout": 10,  # 连接超时10秒
+                    "options": "-c statement_timeout=30000"  # 查询超时30秒（PostgreSQL）
+                }
                 print_info(f"[{self.tag}] 检测到 PostgreSQL/Supabase 连接，使用保守连接池配置: pool_size={pool_size}, max_overflow={max_overflow}")
             elif con_str.startswith('sqlite:///'):
                 # SQLite 配置：不需要连接池
@@ -61,24 +69,31 @@ class Db:
                 max_overflow = 0
                 pool_recycle = None
                 pool_pre_ping = False
+                connect_args_config = {"check_same_thread": False}
             else:
                 # MySQL 等其他数据库：中等配置
                 pool_size = 5
                 max_overflow = 10
                 pool_recycle = 3600  # 1小时
                 pool_pre_ping = True
+                connect_args_config = {}
+            
+            # 准备连接参数
+            connect_args = connect_args_config
+            
+            # 对于PostgreSQL/Supabase，不使用AUTOCOMMIT，使用默认的READ COMMITTED
+            # AUTOCOMMIT可能导致事务问题
+            isolation_level_config = None if (is_postgresql or is_supabase) else "AUTOCOMMIT"
             
             self.engine = create_engine(con_str,
                                      pool_size=pool_size,          # 最小空闲连接数
                                      max_overflow=max_overflow,      # 允许的最大溢出连接数（总连接数 = pool_size + max_overflow）
-                                     pool_timeout=30,      # 获取连接时的超时时间（秒）
+                                     pool_timeout=60,      # 获取连接时的超时时间（秒）- 增加到60秒
                                      echo=False,
                                      pool_recycle=pool_recycle,  # 连接池回收时间（秒）
                                      pool_pre_ping=pool_pre_ping,  # 连接前检查连接是否有效（防止使用已断开的连接）
-                                     isolation_level="AUTOCOMMIT",  # 设置隔离级别
-                                    #  isolation_level="READ COMMITTED",  # 设置隔离级别
-                                    #  query_cache_size=0,
-                                     connect_args={"check_same_thread": False} if con_str.startswith('sqlite:///') else {}
+                                     isolation_level=isolation_level_config,  # PostgreSQL使用默认隔离级别
+                                     connect_args=connect_args
                                      )
             self.session_factory=self.get_session_factory()
         except Exception as e:
@@ -243,17 +258,27 @@ class Db:
             print_info(f"[{self.tag}] Session is already closed.")
             _session()
             return self.Session()
-        # 检查数据库连接是否已断开（使用 pool_pre_ping 后这个检查可能不再需要，但保留作为备用）
+        # 检查数据库连接是否已断开
+        # 注意：由于已经启用了 pool_pre_ping（对于PostgreSQL/Supabase），这个检查可能不再需要
+        # 但保留作为备用，只在必要时执行（减少性能开销）
+        # 如果 pool_pre_ping 正常工作，这个检查应该很少触发
+        # 对于SQLite，pool_pre_ping通常是False，所以需要这个检查
         try:
-            from core.models import User
-            # 尝试执行一个简单的查询来检查连接状态
-            session.query(User.id).limit(1).first()
+            # 对于PostgreSQL/Supabase，pool_pre_ping已经处理了连接检查
+            # 这里只对SQLite进行额外检查（如果需要的话）
+            # 由于pool_pre_ping在init中设置，我们通过检查engine的pool_pre_ping属性来判断
+            if hasattr(self.engine, 'pool') and hasattr(self.engine.pool, '_pre_ping'):
+                # 如果启用了pre_ping，就不需要额外的检查
+                pass
+            else:
+                # 对于没有pre_ping的情况，执行简单检查
+                from core.models import User
+                session.query(User.id).limit(1).first()
         except Exception as e:
+            # 如果检查失败，可能是连接已断开，尝试重新初始化
             from core.print import print_warning
-            print_warning(f"[{self.tag}] Database connection lost: {e}. Reconnecting...")
-            self.init(self.connection_str)
-            _session()
-            return self.Session()
+            print_warning(f"[{self.tag}] Database connection check failed: {e}. This may be normal if pool_pre_ping is enabled.")
+            # 不立即重新初始化，让pool_pre_ping处理
         return session
     def auto_refresh(self):
         # 定义一个事件监听器，在对象更新后自动刷新

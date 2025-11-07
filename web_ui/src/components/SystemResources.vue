@@ -47,9 +47,10 @@ export default {
   },
   mounted() {
     this.fetchResources();
+    // 增加轮询间隔到10秒，减少数据库压力
     this.intervalId = setInterval(() => {
       this.fetchResources();
-    }, 2000);
+    }, 10000);
     
     // 监听路由变化
     this.unwatchRoute = this.$router.afterEach(() => {
@@ -62,9 +63,10 @@ export default {
   activated() {
     // 组件可见时重新开始获取数据
     this.fetchResources();
+    // 增加轮询间隔到10秒，减少数据库压力
     this.intervalId = setInterval(() => {
       this.fetchResources();
-    }, 1000);
+    }, 10000);
   },
   deactivated() {
     // 组件不可见时停止获取数据

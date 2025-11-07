@@ -27,18 +27,42 @@ async def get_tags(offset: int = 0, limit: int = 100, db: Session = Depends(get_
     返回:
     - 包含标签列表和分页信息的成功响应
     """
-    query = db.query(TagsModel)
-    total = query.count()
-    tags = query.offset(offset).limit(limit).all()
-    return success_response(data={
-        "list": tags,
-        "page": {
-            "limit": limit,
-            "offset": offset,
+    try:
+        # 使用更高效的查询方式，添加排序以确保结果一致性
+        query = db.query(TagsModel)
+        
+        # 先获取数据
+        tags = query.order_by(
+            TagsModel.updated_at.desc() if hasattr(TagsModel, 'updated_at') else TagsModel.id
+        ).offset(offset).limit(limit).all()
+        
+        # 获取总数（对于标签表，数据量通常不大，count应该很快）
+        # 如果count很慢，可以考虑添加缓存或使用估算值
+        try:
+            total = db.query(TagsModel).count()
+        except Exception as count_error:
+            # 如果count失败，使用估算值
+            from core.print import print_warning
+            print_warning(f"获取标签总数失败，使用估算值: {count_error}")
+            total = offset + len(tags) + (limit if len(tags) == limit else 0)
+        
+        return success_response(data={
+            "list": tags,
+            "page": {
+                "limit": limit,
+                "offset": offset,
+                "total": total
+            },
             "total": total
-        },
-        "total": total
-    })
+        })
+    except Exception as e:
+        from core.print import print_error
+        print_error(f"获取标签列表失败: {e}")
+        try:
+            db.rollback()
+        except:
+            pass
+        return error_response(code=500, message=f"获取标签列表失败: {str(e)}")
 
 @router.post("",
     summary="创建新标签",
@@ -81,12 +105,13 @@ async def create_tag(tag: TagsCreate, db: Session = Depends(get_db),cur_user: di
         return success_response(data=db_tag)
     except Exception as e:
          from core.print  import print_error
-         print_error(e)
+         print_error(f"创建标签失败: {e}")
+         db.rollback()
          raise HTTPException(
-            status_code=status.HTTP_201_CREATED,
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=error_response(
                 code=50001,
-                message=f"暂无数据",
+                message=f"创建标签失败: {str(e)}",
             )
         )
 
@@ -102,10 +127,16 @@ async def get_tag(tag_id: str, db: Session = Depends(get_db),cur_user: dict = De
     - 成功: 包含标签详情的响应
     - 失败: 201错误响应(标签不存在)
     """
-    tag = db.query(TagsModel).filter(TagsModel.id == tag_id).first()
-    if not tag:
-        return error_response(code=status.HTTP_201_CREATED, message="Tag not found")
-    return success_response(data=tag)
+    try:
+        tag = db.query(TagsModel).filter(TagsModel.id == tag_id).first()
+        if not tag:
+            return error_response(code=status.HTTP_201_CREATED, message="Tag not found")
+        return success_response(data=tag)
+    except Exception as e:
+        from core.print import print_error
+        print_error(f"获取标签详情失败: {e}")
+        db.rollback()
+        return error_response(code=500, message=f"获取标签详情失败: {str(e)}")
 
 @router.put("/{tag_id}",
     summary="更新标签信息",
@@ -147,7 +178,10 @@ async def update_tag(tag_id: str, tag_data: TagsCreate, db: Session = Depends(ge
         db.refresh(tag)
         return success_response(data=tag)
     except Exception as e:
-        return error_response(code=500, message=str(e))
+        from core.print import print_error
+        print_error(f"更新标签失败: {e}")
+        db.rollback()
+        return error_response(code=500, message=f"更新标签失败: {str(e)}")
 
 @router.delete("/{tag_id}",
     summary="删除标签",
@@ -172,4 +206,7 @@ async def delete_tag(tag_id: str, db: Session = Depends(get_db),cur_user: dict =
         db.commit()
         return success_response(message="Tag deleted successfully")
     except Exception as e:
-        return error_response(code=status.HTTP_201_CREATED, message=str(e))
+        from core.print import print_error
+        print_error(f"删除标签失败: {e}")
+        db.rollback()
+        return error_response(code=500, message=f"删除标签失败: {str(e)}")

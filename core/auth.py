@@ -59,19 +59,20 @@ def get_user(username: str) -> Optional[dict]:
     # 先检查缓存
     if username in _user_cache:
         return _user_cache[username]
-        
-    session = DB.get_session()
+    
+    # 使用 session_scope 确保连接正确关闭
     try:
-        user = session.query(DBUser).filter(DBUser.username == username).first()
-        if user:
-            # 转换为字典并存入缓存
-            user_dict = user.__dict__.copy()
-            # 移除 SQLAlchemy 内部属性（如 _sa_instance_state）
-            user_dict.pop('_sa_instance_state', None)
-            user_dict=User(**user_dict)
-            _user_cache[username] = user_dict
-            return user_dict
-        return None
+        with DB.session_scope(auto_commit=False) as session:
+            user = session.query(DBUser).filter(DBUser.username == username).first()
+            if user:
+                # 转换为字典并存入缓存
+                user_dict = user.__dict__.copy()
+                # 移除 SQLAlchemy 内部属性（如 _sa_instance_state）
+                user_dict.pop('_sa_instance_state', None)
+                user_dict=User(**user_dict)
+                _user_cache[username] = user_dict
+                return user_dict
+            return None
     except Exception as e:
         from core.print import print_error
         print_error(f"获取用户错误: {str(e)}")
