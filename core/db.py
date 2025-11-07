@@ -18,6 +18,15 @@ class Db:
         self.User_In_Thread=User_In_Thread
         self.tag=tag
         print_success(f"[{tag}]连接初始化")
+        # 在多进程环境中，延迟连接初始化以避免启动时连接冲突
+        import os
+        import time
+        # 使用进程ID生成延迟，确保每个进程有不同的延迟时间
+        # 延迟范围：0-2秒，基于进程ID的哈希值
+        process_id = os.getpid()
+        delay = (process_id % 20) / 10.0  # 0-2秒的延迟
+        if delay > 0:
+            time.sleep(delay)
         self.init(cfg.get("db"))
     def get_engine(self) -> Engine:
         """Return the SQLAlchemy engine for this database connection."""
@@ -52,17 +61,20 @@ class Db:
             
             if is_postgresql or is_supabase:
                 # Supabase/PostgreSQL 配置：保守的连接池设置
-                # pool_size=5, max_overflow=10 => 最大 15 个连接，留 5 个余量
-                pool_size = 5
-                max_overflow = 10
+                # 在多进程环境中，每个进程都会创建连接池
+                # 假设最多4个workers，每个进程最多3个连接 => 总共12个连接，留8个余量
+                # 如果使用 Supabase Pooler，可以适当增加
+                pool_size = 2  # 减少基础连接数
+                max_overflow = 3  # 减少溢出连接数（总连接数 = pool_size + max_overflow = 5）
                 pool_recycle = 300  # PostgreSQL 连接回收时间（5分钟）
                 pool_pre_ping = True  # 连接前检查连接是否有效
                 # 添加连接参数：设置查询超时和连接超时
+                # 增加连接超时时间，避免启动时连接失败
                 connect_args_config = {
-                    "connect_timeout": 10,  # 连接超时10秒
+                    "connect_timeout": 30,  # 连接超时30秒（从10秒增加到30秒）
                     "options": "-c statement_timeout=30000"  # 查询超时30秒（PostgreSQL）
                 }
-                print_info(f"[{self.tag}] 检测到 PostgreSQL/Supabase 连接，使用保守连接池配置: pool_size={pool_size}, max_overflow={max_overflow}")
+                print_info(f"[{self.tag}] 检测到 PostgreSQL/Supabase 连接，使用保守连接池配置: pool_size={pool_size}, max_overflow={max_overflow}, connect_timeout=30s")
             elif con_str.startswith('sqlite:///'):
                 # SQLite 配置：不需要连接池
                 pool_size = 1
@@ -88,7 +100,7 @@ class Db:
             self.engine = create_engine(con_str,
                                      pool_size=pool_size,          # 最小空闲连接数
                                      max_overflow=max_overflow,      # 允许的最大溢出连接数（总连接数 = pool_size + max_overflow）
-                                     pool_timeout=60,      # 获取连接时的超时时间（秒）- 增加到60秒
+                                     pool_timeout=90,      # 获取连接时的超时时间（秒）- 增加到90秒，给多进程启动更多时间
                                      echo=False,
                                      pool_recycle=pool_recycle,  # 连接池回收时间（秒）
                                      pool_pre_ping=pool_pre_ping,  # 连接前检查连接是否有效（防止使用已断开的连接）
