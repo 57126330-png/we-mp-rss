@@ -22,9 +22,9 @@ class Db:
         import os
         import time
         # 使用进程ID生成延迟，确保每个进程有不同的延迟时间
-        # 延迟范围：0-2秒，基于进程ID的哈希值
+        # 延迟范围：0-1秒，基于进程ID的哈希值（减少延迟时间）
         process_id = os.getpid()
-        delay = (process_id % 20) / 10.0  # 0-2秒的延迟
+        delay = (process_id % 10) / 10.0  # 0-1秒的延迟
         if delay > 0:
             time.sleep(delay)
         self.init(cfg.get("db"))
@@ -60,12 +60,12 @@ class Db:
             connect_args_config = {}
             
             if is_postgresql or is_supabase:
-                # Supabase/PostgreSQL 配置：保守的连接池设置
+                # Supabase/PostgreSQL 配置：平衡的连接池设置
                 # 在多进程环境中，每个进程都会创建连接池
-                # 假设最多4个workers，每个进程最多3个连接 => 总共12个连接，留8个余量
-                # 如果使用 Supabase Pooler，可以适当增加
-                pool_size = 2  # 减少基础连接数
-                max_overflow = 3  # 减少溢出连接数（总连接数 = pool_size + max_overflow = 5）
+                # 假设最多4个workers，每个进程最多4个连接 => 总共16个连接，留4个余量
+                # Supabase Free 限制：最大 20 个连接
+                pool_size = 2  # 基础连接数
+                max_overflow = 2  # 溢出连接数（总连接数 = pool_size + max_overflow = 4）
                 pool_recycle = 300  # PostgreSQL 连接回收时间（5分钟）
                 pool_pre_ping = True  # 连接前检查连接是否有效
                 # 添加连接参数：设置查询超时和连接超时
