@@ -60,23 +60,30 @@ class Db:
             connect_args_config = {}
             
             if is_postgresql or is_supabase:
-                # Supabase Pooler Session 模式限制非常严格
-                # 如果使用 pooler.supabase.com，Session 模式下每个应用实例只能使用 pool_size 个连接
-                # 不能使用 max_overflow，因为 Session 模式不支持
-                # 但是代码中有多个 Db 实例，每个实例都需要连接
-                # 解决方案：恢复到原始配置，但检测 Pooler Session 模式时使用更保守的设置
+                # Supabase Pooler 有两种模式：
+                # 1. Session 模式（端口 5432）：每个应用实例只能使用 pool_size 个连接，不支持 max_overflow
+                # 2. Transaction 模式（端口 6543）：支持连接池，可以使用 max_overflow，每个连接只能在一个事务中使用
+                # 
+                # 代码中已经使用 session_scope 模式，每个事务使用一个连接，符合 Transaction 模式的要求
+                # 因此推荐使用 Transaction 模式（端口 6543）以获得更好的连接池支持
                 if 'pooler.supabase.com' in con_str:
-                    # Supabase Pooler Session 模式：使用原始配置但更保守
-                    # 原始配置是 pool_size=5, max_overflow=10，但 Session 模式不支持 max_overflow
-                    # 所以使用 pool_size=3, max_overflow=0，这样每个实例最多3个连接
-                    pool_size = 3
-                    max_overflow = 0  # Session 模式不支持 overflow
-                    print_info(f"[{self.tag}] 检测到 Supabase Pooler Session 模式，使用保守连接池: pool_size={pool_size}, max_overflow={max_overflow}")
+                    # 检查端口号判断是 Session 模式还是 Transaction 模式
+                    if ':6543' in con_str:
+                        # Transaction 模式：支持连接池，可以使用 max_overflow
+                        pool_size = 5
+                        max_overflow = 10  # Transaction 模式支持 overflow
+                        print_info(f"[{self.tag}] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size={pool_size}, max_overflow={max_overflow}")
+                    else:
+                        # Session 模式（默认端口 5432）：限制严格，不支持 max_overflow
+                        pool_size = 3
+                        max_overflow = 0  # Session 模式不支持 overflow
+                        print_warning(f"[{self.tag}] 检测到 Supabase Pooler Session 模式（端口 5432），连接数限制严格: pool_size={pool_size}, max_overflow={max_overflow}")
+                        print_warning(f"[{self.tag}] 建议使用 Transaction 模式（端口 6543）以获得更好的连接池支持")
                 else:
-                    # 直接连接或 Transaction 模式：使用原始配置
+                    # 直接连接：使用原始配置
                     pool_size = 5
                     max_overflow = 10
-                    print_info(f"[{self.tag}] 检测到 PostgreSQL/Supabase 直接连接，使用原始连接池配置: pool_size={pool_size}, max_overflow={max_overflow}")
+                    print_info(f"[{self.tag}] 检测到 PostgreSQL/Supabase 直接连接，使用连接池配置: pool_size={pool_size}, max_overflow={max_overflow}")
                 
                 pool_recycle = 300  # PostgreSQL 连接回收时间（5分钟）
                 pool_pre_ping = True  # 连接前检查连接是否有效
