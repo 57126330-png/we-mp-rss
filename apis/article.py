@@ -76,65 +76,76 @@ async def get_articles(
     has_content:bool=Query(False),
     current_user: dict = Depends(get_current_user)
 ):
-    session = DB.get_session()
-    try:
-      
-        
-        # 构建查询条件
-        query = session.query(ArticleBase)
-        if has_content:
-            query=session.query(Article)
-        if status:
-            query = query.filter(Article.status == status)
-        else:
-            query = query.filter(Article.status != DATA_STATUS.DELETED)
-        if mp_id:
-            query = query.filter(Article.mp_id == mp_id)
-        if search:
-            query = query.filter(
-               format_search_kw(search)
+    with DB.session_scope(auto_commit=False) as session:
+        try:
+            model = Article if has_content else ArticleBase
+
+            # 构建查询条件
+            query = session.query(model)
+
+            if status:
+                query = query.filter(model.status == status)
+            else:
+                query = query.filter(model.status != DATA_STATUS.DELETED)
+
+            if mp_id:
+                query = query.filter(model.mp_id == mp_id)
+
+            if search:
+                query = query.filter(format_search_kw(search, model=model))
+
+            # 获取总数
+            total = query.count()
+
+            query = (
+                query.order_by(model.created_at.desc())
+                .offset(offset)
+                .limit(limit)
             )
-        
-        # 获取总数
-        total = query.count()
-        query= query.order_by(Article.publish_time.desc()).offset(offset).limit(limit)
-        # query= query.order_by(Article.id.desc()).offset(offset).limit(limit)
-        # 分页查询（按发布时间降序）
-        articles = query.all()
-        
-        # 打印生成的 SQL 语句（包含分页参数）
-        print_warning(query.statement.compile(compile_kwargs={"literal_binds": True}))
-                       
-        # 查询公众号名称
-        from core.models.feed import Feed
-        mp_names = {}
-        for article in articles:
-            if article.mp_id and article.mp_id not in mp_names:
-                feed = session.query(Feed).filter(Feed.id == article.mp_id).first()
-                mp_names[article.mp_id] = feed.mp_name if feed else "未知公众号"
-        
-        # 合并公众号名称到文章列表
-        article_list = []
-        for article in articles:
-            article_dict = article.__dict__
-            article_dict["mp_name"] = mp_names.get(article.mp_id, "未知公众号")
-            article_list.append(article_dict)
-        
-        from .base import success_response
-        return success_response({
-            "list": article_list,
-            "total": total
-        })
-    except HTTPException as e:
-        raise e
-    except Exception as e:
-        raise HTTPException(
-            status_code=fast_status.HTTP_406_NOT_ACCEPTABLE,
-            detail=error_response(
-                code=50001,
-                message=f"获取文章列表失败: {str(e)}"
+
+            # 分页查询（按发布时间降序）
+            articles = query.all()
+
+            # 打印生成的 SQL 语句（包含分页参数）
+            print_warning(
+                query.statement.compile(compile_kwargs={"literal_binds": True})
             )
-        )
+
+            # 查询公众号名称
+            from core.models.feed import Feed
+
+            mp_names = {}
+            for article in articles:
+                if article.mp_id and article.mp_id not in mp_names:
+                    feed = (
+                        session.query(Feed)
+                        .filter(Feed.id == article.mp_id)
+                        .first()
+                    )
+                    mp_names[article.mp_id] = feed.mp_name if feed else "未知公众号"
+
+            # 合并公众号名称到文章列表
+            article_list = []
+            for article in articles:
+                article_dict = dict(article.__dict__)
+                article_dict.pop("_sa_instance_state", None)
+                article_dict["mp_name"] = mp_names.get(article.mp_id, "未知公众号")
+                article_list.append(article_dict)
+
+            from .base import success_response
+
+            return success_response({"list": article_list, "total": total})
+        except HTTPException as e:
+            session.rollback()
+            raise e
+        except Exception as e:
+            session.rollback()
+            raise HTTPException(
+                status_code=fast_status.HTTP_406_NOT_ACCEPTABLE,
+                detail=error_response(
+                    code=50001, message=f"获取文章列表失败: {str(e)}"
+                ),
+            )
 
 @router.get("/{article_id}", summary="获取文章详情")
 async def get_article_detail(
