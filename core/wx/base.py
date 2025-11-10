@@ -1,5 +1,6 @@
 import requests
 import json
+from bs4 import BeautifulSoup
 from core.models import Feed
 from driver.wx import DoSuccess
 from core.db import DB
@@ -118,6 +119,14 @@ class WxGather:
                 setStatus(True)
                 from core.models import Article
                 from datetime import datetime
+                def _html_to_text(html: str) -> str:
+                    try:
+                        soup = BeautifulSoup(html, "html.parser")
+                        text = soup.get_text(separator=" ", strip=True)
+                        # 限制长度，避免简介过长
+                        return text[:500]
+                    except Exception:
+                        return html
                 art={
                     "id":str(data['id']),
                     "mp_id":data['mp_id'],
@@ -127,8 +136,23 @@ class WxGather:
                     "content":data.get("content",""),
                     "publish_time":data['update_time'],
                 }
-                if 'digest' in data:
-                    art['description']=data['digest']
+                digest = data.get('digest')
+                content = art.get("content","")
+                digest_contains_html = False
+                if digest:
+                    lower_digest = digest.lower()
+                    if "<" in digest and any(tag in lower_digest for tag in ("<p", "<img", "<section", "<figure", "<div")):
+                        digest_contains_html = True
+                if not content and digest and digest_contains_html:
+                    art["content"] = digest
+                    art["description"] = _html_to_text(digest)
+                else:
+                    if not content:
+                        art["content"] = content or ""
+                    if digest:
+                        art["description"] = _html_to_text(digest) if digest_contains_html else digest
+                    else:
+                        art["description"] = ""
                 if CallBack(art):
                     art["ext"]=Ext_Data
                     # art.pop("content")

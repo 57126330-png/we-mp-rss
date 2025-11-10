@@ -1,15 +1,18 @@
-[任务调度]连接初始化
-队列任务后台运行
-Key cookie not found in configuration
-Key token not found in configuration
-[文章采集API]连接初始化
-[任务调度]连接初始化
-队列任务后台运行
-{'no_content_count': 0, 'all_count': 0, 'has_content_count': 0, 'wrong_count': 0, 'mp_all_count': 0}
-{'no_content_count': 0, 'all_count': 0, 'has_content_count': 0, 'wrong_count': 0, 'mp_all_count': 0}
-INFO:     Started server process [8]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     Started server process [9]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
+成功添加文章: 钱花不完 (ID: 2247494527_1)
+成功添加文章: 防守模式 (ID: 2247494520_1)
+使用本地驱动: /app/driver/driver/geckodriver
+成功添加文章: 不开心 (ID: 2247494513_1)
+Get:https://mp.weixin.qq.com/s/alg-0UddSMMPwNZCJb3hIQ Wait:3
+item end
+第3页开始爬取
+成功添加文章: 生活里重要的东西都是免费的｜财务自由实证 #78 (ID: 2247494506_1)
+第2页爬取成功
+开始解析Biz
+INFO:     100.64.0.2:55586 - "POST /api/v1/wx/mps/by_article?url=https://mp.weixin.qq.com/s/alg-0UddSMMPwNZCJb3hIQ HTTP/1.1" 200 OK
+{'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1762760760', 'priority': 'i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '165.154.157.100', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'xrwDQDjtTF2GpjC_AQeqjw', 'x-real-ip': '165.154.157.100', 'x-request-start': '1762764224028'}
+INFO:     100.64.0.2:55586 - "GET /static/res/logo/http%3A//mmbiz.qpic.cn/mmbiz_png/l7LzJnwUvJQ78WmkuuzIbMic8Y3qVXKADYKiaQO8G6PgUeRMTpoILFDQtFpDbibCVC7YCpM6MH2oPhEOugTyS8Bmg/0?wx_fmt=png HTTP/1.1" 200 OK
+/usr/local/lib/python3.13/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'mp.weixin.qq.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(
+成功添加文章: 加速数钱～ (ID: 2247494493_1)
+Key local_avatar not found in configuration
+添加公众号 [冰神夜谈] 成功，已加入抓取队列，将抓取 5 页内容

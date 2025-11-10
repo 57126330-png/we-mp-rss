@@ -74,7 +74,7 @@ class MpsApi(WxGather):
             time.sleep(random.randint(0,interval))
             try:
                 headers = self.fix_header(url)
-                resp = session.get(url, headers=headers, params = params, verify=False)
+                resp = session.get(url, headers=headers, params = params, verify=True)
                 
                 msg = resp.json()
 
