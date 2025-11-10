@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
-const formRef = ref()
+import { ref, onMounted, nextTick, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getMessageTask, createMessageTask, updateMessageTask } from '@/api/messageTask'
-import type { MessageTask, MessageTaskCreate } from '@/types/messageTask'
+import type { MessageTaskCreate, MessageTaskSubmit } from '@/types/messageTask'
 import cronExpressionPicker from '@/components/CronExpressionPicker.vue'
 import MpMultiSelect from '@/components/MpMultiSelect.vue'
+import TagMultiSelect from '@/components/TagMultiSelect.vue'
+import { listTags } from '@/api/tagManagement'
+import type { Tag } from '@/types/tagManagement'
 import { Message } from '@arco-design/web-vue'
 import ACodeEditor from '@/components/ACodeEditor.vue'
+
+const formRef = ref()
 const route = useRoute()
 const router = useRouter()
 const loading = ref(false)
@@ -15,9 +19,11 @@ const isEditMode = ref(false)
 const taskId = ref<string | null>(null)
 const showCronPicker = ref(false)
 const showMpSelector = ref(false)
+const showTagSelector = ref(false)
 
 const cronPickerRef = ref<InstanceType<typeof cronExpressionPicker> | null>(null)
 const mpSelectorRef = ref<InstanceType<typeof MpMultiSelect> | null>(null)
+const tagSelectorRef = ref<InstanceType<typeof TagMultiSelect> | null>(null)
 
 const formData = ref<MessageTaskCreate>({
   name: '',
@@ -25,31 +31,108 @@ const formData = ref<MessageTaskCreate>({
   message_template: '',
   web_hook_url: '',
   mps_id: [],
+  tag_ids: [],
   status: 1,
   cron_exp: '*/5 * * * *'
 })
+
+const tagList = ref<Tag[]>([])
+
+const loadTags = async () => {
+  try {
+    const res = await listTags({ offset: 0, limit: 100 })
+    if (res && typeof res === 'object') {
+      if ('list' in res && Array.isArray(res.list)) {
+        tagList.value = res.list
+      } else if (Array.isArray(res)) {
+        tagList.value = res
+      } else if ((res as any).data?.list) {
+        tagList.value = (res as any).data.list
+      } else {
+        tagList.value = []
+      }
+    } else {
+      tagList.value = []
+    }
+  } catch (error) {
+    console.error('加载标签列表失败:', error)
+    tagList.value = []
+  }
+}
+
+const selectedMpSummary = computed(() => {
+  if (!Array.isArray(formData.value.mps_id) || formData.value.mps_id.length === 0) {
+    return ''
+  }
+  const names = formData.value.mps_id
+    .map((mp: any) => mp?.mp_name || mp?.id)
+    .filter(Boolean)
+  if (names.length === 0) return ''
+  return names.length > 3 ? `${names.slice(0, 3).join('、')} 等${names.length}个` : names.join('、')
+})
+
+const selectedTagNames = computed(() => {
+  if (!Array.isArray(formData.value.tag_ids) || formData.value.tag_ids.length === 0) {
+    return ''
+  }
+  const names = formData.value.tag_ids
+    .map(id => {
+      const tag = tagList.value.find(t => t.id === id)
+      return tag ? tag.name : id
+    })
+    .filter(Boolean)
+  if (names.length === 0) return ''
+  return names.length > 3 ? `${names.slice(0, 3).join('、')} 等${names.length}个` : names.join('、')
+})
+
+const ensureTargetsValid = () => {
+  const hasMp = Array.isArray(formData.value.mps_id) && formData.value.mps_id.length > 0
+  const hasTag = Array.isArray(formData.value.tag_ids) && formData.value.tag_ids.length > 0
+  return hasMp || hasTag
+}
+
+watch(() => formData.value.tag_ids, () => {
+  if (formRef.value?.clearValidate) {
+    formRef.value.clearValidate(['mps_id', 'tag_ids'])
+  }
+}, { deep: true })
 
 const fetchTaskDetail = async (id: string) => {
   loading.value = true
   try {
     const res = await getMessageTask(id)
+    let parsedMps: any[] = []
+    let parsedTags: string[] = []
+    try {
+      parsedMps = res.mps_id ? JSON.parse(res.mps_id) : []
+      if (!Array.isArray(parsedMps)) {
+        parsedMps = []
+      }
+    } catch {
+      parsedMps = []
+    }
+    try {
+      parsedTags = res.tag_ids ? JSON.parse(res.tag_ids) : []
+      if (!Array.isArray(parsedTags)) {
+        parsedTags = []
+      }
+    } catch {
+      parsedTags = []
+    }
     formData.value = {
       name: res.name,
       message_type: res.message_type,
       message_template: res.message_template,
       web_hook_url: res.web_hook_url,
-      mps_id: JSON.parse(res.mps_id||[]),
+      mps_id: parsedMps,
+      tag_ids: parsedTags,
       status: res.status,
       cron_exp: res.cron_exp
     }
-    // 初始化选择器数据
     nextTick(() => {
-      if (cronPickerRef.value) {
-        cronPickerRef.value.parseExpression(formData.value.cron_exp)
-      }
-      if (mpSelectorRef.value) {
-        mpSelectorRef.value.parseSelected(formData.value.mps_id)
-      }
+      cronPickerRef.value?.parseExpression(formData.value.cron_exp)
+      mpSelectorRef.value?.parseSelected(formData.value.mps_id)
+      tagSelectorRef.value?.parseSelected(formData.value.tag_ids)
     })
   } finally {
     loading.value = false
@@ -58,25 +141,25 @@ const fetchTaskDetail = async (id: string) => {
 
 const handleSubmit = async () => {
   try {
-    // 表单验证
-  
-  loading.value = true
-  
-  // 表单验证
-  try {
-    await formRef.value.validate()
-  } catch (error) {
-    Message.error(error?.errors?.join('\n') || '表单验证失败，请检查输入内容')
-    loading.value = false
-    return
-  }
-
-
     loading.value = true
-    // 将mps_id转换为字符串
-    const submitData = {
+    try {
+      await formRef.value.validate()
+    } catch (error: any) {
+      Message.error(error?.errors?.join('\n') || '表单验证失败，请检查输入内容')
+      loading.value = false
+      return
+    }
+
+    if (!ensureTargetsValid()) {
+      Message.error('请至少选择一个标签或公众号')
+      loading.value = false
+      return
+    }
+
+    const submitData: MessageTaskSubmit = {
       ...formData.value,
-      mps_id: JSON.stringify(formData.value.mps_id)
+      mps_id: JSON.stringify(formData.value.mps_id || []),
+      tag_ids: JSON.stringify(formData.value.tag_ids || [])
     }
     
     if (isEditMode.value && taskId.value) {
@@ -95,19 +178,19 @@ const handleSubmit = async () => {
     loading.value = false
   }
 }
+
 const rules = {
   name: [
     { required: true, message: '请输入任务名称' },
     { min: 2, max: 30, message: '公众号名称长度应在2-30个字符之间' }
-  ],
-  description: [
-    { max: 200, message: '描述不能超过200个字符' }
   ]
 }
+
 onMounted(() => {
+  loadTags()
   if (route.params.id) {
     isEditMode.value = true
-    taskId.value = route.params.id
+    taskId.value = route.params.id as string
     fetchTaskDetail(taskId.value)
   }
 })
@@ -185,12 +268,24 @@ onMounted(() => {
         <a-form-item label="公众号" field="mps_id">
           <a-space>
             <a-input
-              :model-value="(formData.mps_id||[]).map(mp => mp.id.toString()).join(',')"
-              placeholder="请选择公众号，留空则对所有公众号生效"
+              :model-value="selectedMpSummary"
+              placeholder="请选择公众号，至少选择标签或公众号其一"
               readonly
               style="width: 300px"
             />
             <a-button @click="showMpSelector = true">选择</a-button>
+          </a-space>
+        </a-form-item>
+
+        <a-form-item label="标签" field="tag_ids">
+          <a-space>
+            <a-input
+              :model-value="selectedTagNames"
+              placeholder="请选择标签，至少选择标签或公众号其一"
+              readonly
+              style="width: 300px"
+            />
+            <a-button @click="showTagSelector = true">选择</a-button>
           </a-space>
         </a-form-item>
 
@@ -240,6 +335,21 @@ onMounted(() => {
         />
         <template #footer>
           <a-button type="primary" @click="showMpSelector = false">确定</a-button>
+        </template>
+      </a-modal>
+
+      <a-modal
+        v-model:visible="showTagSelector"
+        title="选择标签"
+        :footer="false"
+        width="800px"
+      >
+        <TagMultiSelect
+          ref="tagSelectorRef"
+          v-model="formData.tag_ids"
+        />
+        <template #footer>
+          <a-button type="primary" @click="showTagSelector = false">确定</a-button>
         </template>
       </a-modal>
     </div>

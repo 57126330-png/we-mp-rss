@@ -37,6 +37,7 @@ def get_message_task(job_id:Union[str, list]=None) -> list[MessageTask]:
                 _ = task.name
                 _ = task.cron_exp
                 _ = task.mps_id
+                _ = task.tag_ids
                 _ = task.status
                 _ = task.message_template
                 _ = task.web_hook_url

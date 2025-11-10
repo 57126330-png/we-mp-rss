@@ -6,6 +6,8 @@ import { useRouter } from 'vue-router'
 import { Message, Modal } from '@arco-design/web-vue'
 import ResponsiveTable from '@/components/ResponsiveTable.vue'
 import TaskList from '@/components/TaskList.vue'
+import { listTags } from '@/api/tagManagement'
+import type { Tag } from '@/types/tagManagement'
 
 const isMobile = ref(window.innerWidth < 768)
 const handleResize = () => {
@@ -83,6 +85,31 @@ const pagination = ref({
   pageSize: 10,
   total: 0
 })
+const tagNameMap = ref<Record<string, string>>({})
+
+const loadTagMap = async () => {
+  try {
+    const res = await listTags({ offset: 0, limit: 200 })
+    let list: Tag[] = []
+    if (res && typeof res === 'object') {
+      if ('list' in res && Array.isArray(res.list)) {
+        list = res.list
+      } else if (Array.isArray(res)) {
+        list = res
+      } else if ((res as any).data?.list) {
+        list = (res as any).data.list
+      }
+    }
+    const map: Record<string, string> = {}
+    list.forEach(tag => {
+      map[tag.id] = tag.name
+    })
+    tagNameMap.value = map
+  } catch (error) {
+    console.error('加载标签映射失败:', error)
+    tagNameMap.value = {}
+  }
+}
 
 const fetchTaskList = async () => {
   loading.value = true
@@ -128,15 +155,15 @@ const FreshJob = () => {
   })
 }
 
-const handleEdit = (id: number) => {
+const handleEdit = (id: string) => {
   router.push(`/message-tasks/edit/${id}`)
 }
 
-const handleView = (id: number) => {
+const handleView = (id: string) => {
   router.push(`/message-tasks/detail/${id}`)
 }
 
-const handleDelete = async (id: number) => {
+const handleDelete = async (id: string) => {
   Modal.confirm({
     title: '确认删除',
     content: '确定要删除这条消息任务吗？删除后无法恢复',
@@ -154,7 +181,7 @@ const handleDelete = async (id: number) => {
     }
   })
 }
-const runTask = async (id: number,isTest:boolean=false) => {
+const runTask = async (id: string,isTest:boolean=false) => {
   Modal.confirm({
     title: '确认执行',
     content: '确定要执行这条消息任务吗？',
@@ -174,6 +201,7 @@ const runTask = async (id: number,isTest:boolean=false) => {
 }
 
 onMounted(() => {
+  loadTagMap()
   fetchTaskList()
 })
 </script>
@@ -197,6 +225,7 @@ onMounted(() => {
       :loading="loading"
       :pagination="pagination"
       :is-mobile="isMobile"
+      :tag-map="tagNameMap"
       @page-change="handlePageChange"
       @load-more="handleLoadMore"
     >

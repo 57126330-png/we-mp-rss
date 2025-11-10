@@ -22,6 +22,8 @@ class MessageTask(Base):
     web_hook_url = Column(String(500), nullable=False)
     # 定义需要通知的微信公众号ID集合
     mps_id = Column(Text, nullable=False)
+    # 定义需要通知的标签ID集合（JSON格式字符串，可为空）
+    tag_ids = Column(Text, nullable=True)
     # 定义 cron_exp 表达式
     cron_exp=Column(String(100),nullable='* * 1 * *')
     # 定义任务状态字段，默认值为 pending

@@ -11,15 +11,16 @@ const props = defineProps<{
     total: number
   }
   isMobile: boolean
+  tagMap?: Record<string, string>
 }>()
 
 const emit = defineEmits<{
   (e: 'pageChange', page: number): void
   (e: 'loadMore'): void
-  (e: 'edit', id: number): void
-  (e: 'test', id: number): void
-  (e: 'run', id: number): void
-  (e: 'delete', id: number): void
+  (e: 'edit', id: string): void
+  (e: 'test', id: string): void
+  (e: 'run', id: string): void
+  (e: 'delete', id: string): void
 }>()
 
 const parseCronExpression = (exp: string) => {
@@ -77,6 +78,38 @@ const parseCronExpression = (exp: string) => {
   
   return result || exp
 }
+
+const safeParse = (value: string | null | undefined) => {
+  if (!value || typeof value !== 'string' || value.trim() === '') {
+    return []
+  }
+  try {
+    const parsed = JSON.parse(value)
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}
+
+const getMpSummary = (task: MessageTask) => {
+  const data = safeParse(task.mps_id)
+  if (data.length === 0) return ''
+  const names = data
+    .map((item: any) => item?.mp_name || item?.id)
+    .filter(Boolean)
+  if (names.length === 0) return ''
+  return names.length > 3 ? `${names.slice(0, 3).join('、')} 等${names.length}个` : names.join('、')
+}
+
+const getTagSummary = (task: MessageTask) => {
+  const ids = safeParse(task.tag_ids)
+  if (ids.length === 0) return ''
+  const names = ids
+    .map((id: string) => props.tagMap?.[id] || id)
+    .filter(Boolean)
+  if (names.length === 0) return ''
+  return names.length > 3 ? `${names.slice(0, 3).join('、')} 等${names.length}个` : names.join('、')
+}
 </script>
 
 <template>
@@ -98,6 +131,13 @@ const parseCronExpression = (exp: string) => {
             <a-tag :color="record.message_type === 1 ? 'green' : 'red'">
               {{ record.message_type === 1 ? 'WeekHook' : 'Message' }}
             </a-tag>
+          </template>
+        </a-table-column>
+        <a-table-column title="目标">
+          <template #cell="{ record }">
+            <div v-if="getTagSummary(record)">标签：{{ getTagSummary(record) }}</div>
+            <div v-if="getMpSummary(record)">公众号：{{ getMpSummary(record) }}</div>
+            <div v-if="!getTagSummary(record) && !getMpSummary(record)">全部公众号</div>
           </template>
         </a-table-column>
         <a-table-column title="状态" :width="100">
@@ -130,6 +170,15 @@ const parseCronExpression = (exp: string) => {
                 <a-tag :color="item.status === 1 ? 'green' : 'red'">
                   {{ item.status === 1 ? '启用' : '禁用' }}
                 </a-tag>
+              </div>
+              <div class="target-line">
+                <template v-if="getTagSummary(item) || getMpSummary(item)">
+                  <span v-if="getTagSummary(item)">标签：{{ getTagSummary(item) }}</span>
+                  <span v-if="getMpSummary(item)">公众号：{{ getMpSummary(item) }}</span>
+                </template>
+                <template v-else>
+                  全部公众号
+                </template>
               </div>
             </template>
           </a-list-item-meta>
@@ -187,6 +236,14 @@ const parseCronExpression = (exp: string) => {
 .a-list-item-extra {
   display: flex;
   gap: 8px;
+}
+
+.target-line {
+  margin-top: 8px;
+  color: var(--color-text-2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .load-more{

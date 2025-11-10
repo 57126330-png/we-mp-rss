@@ -7,7 +7,7 @@ from core.log import logger
 from core.task import TaskScheduler
 from core.models.feed import Feed
 from core.config import cfg,DEBUG
-from core.print import print_info,print_success,print_error
+from core.print import print_info,print_success,print_error,print_warning
 from driver.wx import WX_API
 from driver.success import Success
 wx_db=db.Db(tag="任务调度")
@@ -69,6 +69,57 @@ def add_job(feeds:list[Feed]=None,task:MessageTask=None,isTest=False):
     print_success(TaskQueue.get_queue_info())
     pass
 import json
+from core.models.tags import Tags as TagsModel
+def _collect_mp_ids_from_json(raw_value:str, source:str):
+    ids=[]
+    if not raw_value:
+        return ids
+    try:
+        data=json.loads(raw_value)
+    except json.JSONDecodeError as e:
+        print_error(f"解析{source} JSON失败: {e}")
+        return ids
+    if isinstance(data,list):
+        for item in data:
+            mp_id=None
+            if isinstance(item,dict):
+                mp_id=item.get("id")
+            elif isinstance(item,str):
+                mp_id=item
+            if mp_id and mp_id not in ids:
+                ids.append(mp_id)
+    else:
+        print_warning(f"{source} JSON 非列表格式，已忽略: {type(data)}")
+    return ids
+
+def _collect_mp_ids_from_tags(tag_ids_raw:str):
+    mp_ids=[]
+    if not tag_ids_raw:
+        return mp_ids
+    try:
+        tag_ids=json.loads(tag_ids_raw)
+    except json.JSONDecodeError as e:
+        print_error(f"解析任务tag_ids JSON失败: {e}")
+        return mp_ids
+    if not isinstance(tag_ids,list):
+        print_warning(f"任务tag_ids数据类型异常: {type(tag_ids)}")
+        return mp_ids
+    if not tag_ids:
+        return mp_ids
+    try:
+        with wx_db.session_scope(auto_commit=False) as session:
+            tags=session.query(TagsModel).filter(TagsModel.id.in_(tag_ids)).all()
+            for tag in tags:
+                mp_ids.extend(_collect_mp_ids_from_json(tag.mps_id or "[]", f"标签[{tag.id}]mps_id"))
+    except Exception as e:
+        print_error(f"根据标签获取公众号失败: {e}")
+    # 去重但保持顺序
+    unique=[]
+    for mp_id in mp_ids:
+        if mp_id not in unique:
+            unique.append(mp_id)
+    return unique
+
 def get_feeds(task:MessageTask=None):
     """
     获取任务关联的公众号列表
@@ -80,19 +131,25 @@ def get_feeds(task:MessageTask=None):
         List[Feed]: 公众号列表，如果查询失败返回空列表
     """
     try:
-        if not task or not task.mps_id:
-            print_warning("任务没有设置mps_id，返回所有公众号")
+        if not task:
+            print_warning("未提供任务信息，返回所有公众号")
             mps = wx_db.get_all_mps()
             return mps if isinstance(mps, list) else []
-        
-        mps_data = json.loads(task.mps_id)
-        ids = ",".join([item["id"] for item in mps_data if item.get("id")])
-        
-        if not ids:
-            print_warning("任务mps_id中没有有效的ID，返回所有公众号")
+        mp_ids=[]
+        # 先收集任务直接选择的公众号
+        mp_ids.extend(_collect_mp_ids_from_json(task.mps_id, "任务mps_id"))
+        # 再根据标签展开公众号
+        mp_ids_from_tags=_collect_mp_ids_from_tags(getattr(task,"tag_ids",None))
+        for mp_id in mp_ids_from_tags:
+            if mp_id not in mp_ids:
+                mp_ids.append(mp_id)
+
+        if not mp_ids:
+            print_warning("任务未配置公众号或标签，返回所有公众号")
             mps = wx_db.get_all_mps()
             return mps if isinstance(mps, list) else []
-        
+
+        ids = ",".join(mp_ids)
         mps = wx_db.get_mps_list(ids)
         # 确保返回的是列表
         if not isinstance(mps, list):
@@ -106,11 +163,6 @@ def get_feeds(task:MessageTask=None):
             return mps if isinstance(mps, list) else []
         
         return mps
-    except json.JSONDecodeError as e:
-        print_error(f"解析任务mps_id JSON失败: {e}")
-        # JSON解析失败，返回所有公众号
-        mps = wx_db.get_all_mps()
-        return mps if isinstance(mps, list) else []
     except Exception as e:
         print_error(f"获取公众号列表失败: {e}")
         import traceback

@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, root_validator
 
 # 标准导入分组和顺序
 # 1. 标准库导入
@@ -148,13 +148,14 @@ async def run_message_task(
         if not tasks:
             raise HTTPException(status_code=404, detail="Message task not found")
         else:
-            import json
+            from jobs.mps import get_feeds
             for task in tasks:
                 try:
-                    ids=json.loads(task.mps_id)
-                    count+=len(ids)
+                    feeds=get_feeds(task) or []
+                    feed_ids=[feed.id for feed in feeds if getattr(feed,"id",None)]
+                    count+=len(feed_ids)
                     mps['count']=count
-                    mps['list'].append(ids)
+                    mps['list'].append(feed_ids)
                 except Exception as e:
                     print_error(e)
                     pass
@@ -172,10 +173,19 @@ class MessageTaskCreate(BaseModel):
     message_template: str
     web_hook_url: str
     mps_id: str=""
+    tag_ids: str=""
     name: str=""
     message_type: int=0
     cron_exp:str=""
     status: Optional[int] = 0
+
+    @root_validator(pre=True)
+    def validate_targets(cls, values):
+        mps_id = (values.get("mps_id") or "").strip()
+        tag_ids = (values.get("tag_ids") or "").strip()
+        if not mps_id and not tag_ids:
+            raise ValueError("标签或公众号至少选择一项")
+        return values
 
 @router.post("", summary="创建消息任务", status_code=status.HTTP_201_CREATED)
 async def create_message_task(
@@ -203,6 +213,7 @@ async def create_message_task(
             web_hook_url=task_data.web_hook_url,
             cron_exp=task_data.cron_exp,
             mps_id=task_data.mps_id,
+            tag_ids=task_data.tag_ids,
             message_type=task_data.message_type,
             name=task_data.name,
             status=task_data.status if task_data.status is not None else 0
@@ -249,6 +260,8 @@ async def update_message_task(
             db_task.web_hook_url = task_data.web_hook_url
         if task_data.mps_id is not None:
             db_task.mps_id = task_data.mps_id
+        if task_data.tag_ids is not None:
+            db_task.tag_ids = task_data.tag_ids
         if task_data.status is not None:
             db_task.status = task_data.status
         if task_data.cron_exp is not None:

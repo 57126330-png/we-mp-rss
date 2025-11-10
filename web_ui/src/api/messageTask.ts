@@ -1,5 +1,5 @@
 import http from './http'
-import type { MessageTask, MessageTaskUpdate } from '@/types/messageTask'
+import type { MessageTask, MessageTaskSubmit, MessageTaskUpdate } from '@/types/messageTask'
 
 export const listMessageTasks = (params?: { offset?: number; limit?: number }) => {
   console.log(params)
@@ -16,7 +16,7 @@ export const RunMessageTask = (id: string,isTest:boolean=false) => {
   return http.get<MessageTask>(`/wx/message_tasks/${id}/run?isTest=${isTest}`)
 }
 
-export const createMessageTask = (data: MessageTaskUpdate) => {
+export const createMessageTask = (data: MessageTaskSubmit) => {
   return http.post('/wx/message_tasks', data)
 }
 
