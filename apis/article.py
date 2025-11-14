@@ -147,16 +147,19 @@ async def get_articles(
                 article_dict = dict(article.__dict__)
                 article_dict.pop("_sa_instance_state", None)
                 article_dict["mp_name"] = mp_names.get(article.mp_id, "未知公众号")
-                has_brief = article.id in brief_article_keys
-                article_dict["has_brief"] = has_brief  # 添加是否有简报的标识
+                # 确保类型一致，都转换为字符串进行比较
+                article_id_str = str(article.id)
+                brief_keys_str = {str(key) for key in brief_article_keys}
+                has_brief = article_id_str in brief_keys_str
+                article_dict["has_brief"] = bool(has_brief)  # 显式转换为布尔值
                 # 调试日志：打印匹配情况
                 if has_brief:
-                    print_info(f"✓ 文章 {article.id[:50]} 有简报 (article.id={article.id})")
+                    print_info(f"✓ 文章 {article_id_str[:50]} 有简报 (article.id={article_id_str}, type={type(article.id).__name__})")
                 else:
                     # 检查是否有类似的article_key（可能是格式问题）
-                    matching_keys = [key for key in brief_article_keys if article.id in key or key in article.id]
+                    matching_keys = [key for key in brief_keys_str if article_id_str in key or key in article_id_str]
                     if matching_keys:
-                        print_warning(f"⚠ 文章 {article.id[:50]} 没有匹配的简报，但发现相似的article_key: {matching_keys}")
+                        print_warning(f"⚠ 文章 {article_id_str[:50]} 没有匹配的简报，但发现相似的article_key: {matching_keys}")
                 article_list.append(article_dict)
 
             from .base import success_response

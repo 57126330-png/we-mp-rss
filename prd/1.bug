@@ -1,403 +1,1003 @@
-2025-11-14T08:51:01.000000000Z [inf]  Mounting volume on: /var/lib/containers/railwayapp/bind-mounts/e21b977c-ca0c-43ff-90ea-41452f736898/vol_rsgjgo9o3yrw5vf1
-2025-11-14T08:51:02.000000000Z [inf]  Starting Container
-2025-11-14T08:51:03.676393875Z [inf]  名称:we-mp-rss
-2025-11-14T08:51:03.676400825Z [inf]  版本:1.4.7 API_BASE:/api/v1/wx
-2025-11-14T08:51:03.676406571Z [inf]  [默认]连接初始化
-2025-11-14T08:51:03.676414153Z [inf]  [默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:03.676420165Z [inf]  [默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:03.676426942Z [inf]  [文章采集API]连接初始化
-2025-11-14T08:51:03.704843081Z [inf]  [文章采集API] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:03.704852442Z [inf]  [任务调度]连接初始化
-2025-11-14T08:51:03.805843474Z [inf]  [任务调度] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:04.572166225Z [inf]  队列任务后台运行
-2025-11-14T08:51:04.572171388Z [inf]  [AI简报生成]连接初始化
-2025-11-14T08:51:04.572176004Z [inf]  [AI简报生成] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:04.572181566Z [inf]  定时任务已启用
-2025-11-14T08:51:04.572186028Z [inf]  启动服务器
-2025-11-14T08:51:04.572190919Z [err]  WARNING:  Current configuration will not reload as not all conditions are met, please refer to documentation.
-2025-11-14T08:51:04.572194774Z [err]  INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-2025-11-14T08:51:04.572198574Z [err]  INFO:     Started parent process [1]
-2025-11-14T08:51:04.572205308Z [inf]  [内容修正]连接初始化
-2025-11-14T08:51:04.572209610Z [inf]  [内容修正] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:04.572213983Z [inf]  队列任务后台运行
-2025-11-14T08:51:04.572218806Z [inf]  自动检查并同步文章内容功能未启用
-2025-11-14T08:51:04.572222851Z [err]  2025-11-14 16:51:04 - INFO - Adding cron job with expression: 0 * * * *
-2025-11-14T08:51:04.572226871Z [err]  2025-11-14 16:51:04 - INFO - Successfully added job AI简报生成 ace5bb48-2072-436f-8ee6-d2314ef885b2
-2025-11-14T08:51:04.572231655Z [inf]  已添加AI简报生成定时任务: ace5bb48-2072-436f-8ee6-d2314ef885b2 (每60分钟执行一次，每批10篇)
-2025-11-14T08:51:04.572236841Z [inf]  [默认]连接初始化
-2025-11-14T08:51:04.572241481Z [inf]  [默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:04.575139330Z [inf]  版本:1.4.7 API_BASE:/api/v1/wx
-2025-11-14T08:51:04.575146580Z [err]  2025-11-14 16:51:04 - INFO - Adding cron job with expression: 0 9 * * 1-5
-2025-11-14T08:51:04.575162338Z [err]  2025-11-14 16:51:04 - INFO - Adding cron job with expression: 0 */5 * * *
-2025-11-14T08:51:04.575162691Z [err]  2025-11-14 16:51:04 - INFO - Successfully added job 定时采集 91256c34-30c3-4644-bcaa-ca9d611e447f
-2025-11-14T08:51:04.575172423Z [inf]  [默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:04.575177021Z [inf]  已添加任务: 91256c34-30c3-4644-bcaa-ca9d611e447f
-2025-11-14T08:51:04.575177346Z [err]  2025-11-14 16:51:04 - INFO - Successfully added job 定时采集 ea89327d-a2c6-40a7-b69e-c36df2453786
-2025-11-14T08:51:04.575182086Z [inf]  任务未配置公众号或标签，返回所有公众号
-2025-11-14T08:51:04.575184565Z [inf]  名称:we-mp-rss
-2025-11-14T08:51:04.575191336Z [inf]  已添加任务: ea89327d-a2c6-40a7-b69e-c36df2453786
-2025-11-14T08:51:04.575192137Z [err]  2025-11-14 16:51:04 - INFO - Adding cron job with expression: 0 */6 * * *
-2025-11-14T08:51:04.575193346Z [inf]  版本:1.4.7 API_BASE:/api/v1/wx
-2025-11-14T08:51:04.575202959Z [inf]  已添加任务: e3e575d2-fa9d-4d62-8487-40d8cf7d0584
-2025-11-14T08:51:04.575207803Z [inf]  名称:we-mp-rss
-2025-11-14T08:51:04.575213477Z [err]  2025-11-14 16:51:04 - INFO - Successfully added job 定时采集 e3e575d2-fa9d-4d62-8487-40d8cf7d0584
-2025-11-14T08:51:04.575230803Z [inf]  已添加任务: 23e141af-0140-4b73-96a4-24cce27ab3db
-2025-11-14T08:51:04.575238971Z [err]  2025-11-14 16:51:04 - INFO - Adding cron job with expression: 0 */8 * * *
-2025-11-14T08:51:04.575243065Z [err]  2025-11-14 16:51:04 - INFO - Adding cron job with expression: 0 12 * * *
-2025-11-14T08:51:04.575250226Z [err]  2025-11-14 16:51:04 - INFO - Successfully added job 定时采集 23e141af-0140-4b73-96a4-24cce27ab3db
-2025-11-14T08:51:04.578193236Z [err]  2025-11-14 16:51:04 - INFO - Successfully added job 定时采集 26864988-f8bd-4858-9032-a17ab79f76e8
-2025-11-14T08:51:04.578205161Z [inf]  已添加任务: 26864988-f8bd-4858-9032-a17ab79f76e8
-2025-11-14T08:51:04.578215116Z [err]  2025-11-14 16:51:04 - INFO - Adding cron job with expression: 0 8 * * *
-2025-11-14T08:51:04.578252735Z [err]  2025-11-14 16:51:04 - INFO - Successfully added job 定时采集 358afb65-dd49-4a30-9dce-23e6d2cb059e
-2025-11-14T08:51:04.578265917Z [inf]  已添加任务: 358afb65-dd49-4a30-9dce-23e6d2cb059e
-2025-11-14T08:51:04.578280523Z [inf]  已添加任务: 9be64db4-0464-4c2c-aec7-0dfd32fb07d8
-2025-11-14T08:51:04.578282367Z [err]  2025-11-14 16:51:04 - INFO - Adding cron job with expression: 0 0 * * *
-2025-11-14T08:51:04.578290247Z [err]  2025-11-14 16:51:04 - INFO - Successfully added job 定时采集 4e66b754-3b9f-4ecc-b24c-c84ba7927372
-2025-11-14T08:51:04.578293150Z [err]  2025-11-14 16:51:04 - INFO - Successfully added job 定时采集 9be64db4-0464-4c2c-aec7-0dfd32fb07d8
-2025-11-14T08:51:04.578294319Z [err]  2025-11-14 16:51:04 - INFO - Starting scheduler...
-2025-11-14T08:51:04.578304726Z [err]  2025-11-14 16:51:04 - INFO - Adding cron job with expression: 0 20 * * *
-2025-11-14T08:51:04.578306422Z [err]  2025-11-14 16:51:04 - INFO - Scheduler started successfully
-2025-11-14T08:51:04.578310275Z [inf]  已添加任务: 4e66b754-3b9f-4ecc-b24c-c84ba7927372
-2025-11-14T08:51:04.578317051Z [inf]  启动任务
-2025-11-14T08:51:05.741482212Z [inf]  [默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:05.741492313Z [inf]  [默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:05.741499183Z [inf]  [用户连接]连接初始化
-2025-11-14T08:51:05.741503201Z [inf]  [用户连接]连接初始化
-2025-11-14T08:51:05.741512446Z [inf]  [默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:05.741526273Z [inf]  [默认]连接初始化
-2025-11-14T08:51:05.741533630Z [inf]  [默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:05.741537780Z [inf]  [默认]连接初始化
-2025-11-14T08:51:06.566642910Z [inf]  [用户连接] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:06.566648625Z [inf]  [文章采集API]连接初始化
-2025-11-14T08:51:06.566653127Z [inf]  [用户连接] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:06.566663869Z [inf]  [文章采集API]连接初始化
-2025-11-14T08:51:06.770293562Z [inf]  [文章采集API] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:06.770311596Z [inf]  [任务调度]连接初始化
-2025-11-14T08:51:07.682987149Z [inf]  [任务调度]连接初始化
-2025-11-14T08:51:07.682995867Z [inf]  [任务调度] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:07.682999888Z [inf]  队列任务后台运行
-2025-11-14T08:51:07.683009872Z [inf]  [文章采集API] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:07.683012521Z [inf]  [AI简报生成]连接初始化
-2025-11-14T08:51:07.711322791Z [inf]  [任务调度] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:07.714954381Z [inf]  队列任务后台运行
-2025-11-14T08:51:07.733949276Z [inf]  [AI简报生成]连接初始化
-2025-11-14T08:51:07.799539427Z [inf]  [AI简报生成] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:08.652147112Z [err]  INFO:     Started server process [5]
-2025-11-14T08:51:08.652153674Z [err]  INFO:     Waiting for application startup.
-2025-11-14T08:51:08.652159410Z [err]  INFO:     Application startup complete.
-2025-11-14T08:51:08.652164773Z [inf]  [AI简报生成] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:51:08.793834971Z [err]  INFO:     Started server process [6]
-2025-11-14T08:51:08.793843020Z [err]  INFO:     Waiting for application startup.
-2025-11-14T08:51:08.793847890Z [err]  INFO:     Application startup complete.
-2025-11-14T08:55:39.232368679Z [inf]  INFO:     100.64.0.2:51382 - "GET / HTTP/1.1" 200 OK
-2025-11-14T08:55:39.232374202Z [inf]  INFO:     100.64.0.2:51382 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
-2025-11-14T08:55:39.232386090Z [inf]  INFO:     100.64.0.2:51388 - "GET /api/v1/wx/sys/info HTTP/1.1" 200 OK
-2025-11-14T08:55:39.232393697Z [inf]  INFO:     100.64.0.2:51396 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
-2025-11-14T08:55:39.232404642Z [inf]  INFO:     100.64.0.2:51396 - "GET /api/v1/wx/mps?offset=0&limit=10 HTTP/1.1" 200 OK
-2025-11-14T08:55:39.232410812Z [inf]  SELECT articles.id, articles.mp_id, articles.title, articles.pic_url, articles.url, articles.description, articles.status, articles.publish_time, articles.created_at, articles.updated_at, articles.is_export 
-2025-11-14T08:55:39.232418080Z [inf]  FROM articles 
-2025-11-14T08:55:39.232424098Z [inf]  WHERE articles.status != 1000 ORDER BY articles.created_at DESC
-2025-11-14T08:55:39.232430796Z [inf]   LIMIT 10 OFFSET 0
-2025-11-14T08:55:39.232437789Z [inf]  INFO:     100.64.0.2:51396 - "GET /api/v1/wx/articles?offset=0&limit=10&search=&status=&mp_id= HTTP/1.1" 200 OK
-2025-11-14T08:56:09.255519163Z [inf]  INFO:     100.64.0.2:29468 - "GET / HTTP/1.1" 200 OK
-2025-11-14T08:56:09.255530225Z [inf]  INFO:     100.64.0.2:29468 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
-2025-11-14T08:56:09.255540007Z [inf]  INFO:     100.64.0.2:29480 - "GET /api/v1/wx/sys/info HTTP/1.1" 200 OK
-2025-11-14T08:56:09.255549337Z [inf]  INFO:     100.64.0.2:29490 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
-2025-11-14T08:56:09.255570429Z [inf]  INFO:     100.64.0.2:29480 - "GET /api/v1/wx/articles?offset=0&limit=10&search=&status=&mp_id= HTTP/1.1" 200 OK
-2025-11-14T08:56:09.255597165Z [inf]  INFO:     100.64.0.2:29480 - "GET /api/v1/wx/mps?offset=0&limit=10 HTTP/1.1" 200 OK
-2025-11-14T08:56:09.255606042Z [inf]  SELECT articles.id, articles.mp_id, articles.title, articles.pic_url, articles.url, articles.description, articles.status, articles.publish_time, articles.created_at, articles.updated_at, articles.is_export 
-2025-11-14T08:56:09.255612940Z [inf]  FROM articles 
-2025-11-14T08:56:09.255620784Z [inf]  WHERE articles.status != 1000 ORDER BY articles.created_at DESC
-2025-11-14T08:56:09.255628204Z [inf]   LIMIT 10 OFFSET 0
-2025-11-14T08:58:39.480896858Z [inf]  INFO:     100.64.0.3:43576 - "GET /api/v1/wx/message_tasks?offset=0&limit=10 HTTP/1.1" 200 OK
-2025-11-14T08:58:39.480899527Z [inf]  INFO:     100.64.0.3:43556 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
-2025-11-14T08:58:39.480914317Z [inf]  INFO:     100.64.0.3:43556 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
-2025-11-14T08:58:39.480915952Z [inf]  INFO:     100.64.0.3:43562 - "GET /api/v1/wx/tags?offset=0&limit=200 HTTP/1.1" 200 OK
-2025-11-14T08:58:42.519459895Z [inf]  [默认]连接初始化
-2025-11-14T08:58:43.703886589Z [inf]  [默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:58:43.703893734Z [inf]  [默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
-2025-11-14T08:58:43.703901876Z [inf]  AI开发栏目：每日晚上20点更新 添加到队列运行
-2025-11-14T08:58:43.703908840Z [inf]  默认队列队列任务添加成功
-2025-11-14T08:58:43.703916338Z [inf]  
-2025-11-14T08:58:43.703923191Z [inf]  刘小排r，加入队列成功
-2025-11-14T08:58:43.703930155Z [inf]  默认队列队列任务添加成功
-2025-11-14T08:58:43.703937263Z [inf]  
-2025-11-14T08:58:43.703943880Z [inf]  逛逛GitHub，加入队列成功
-2025-11-14T08:58:43.703951607Z [inf]  {'is_running': True, 'pending_tasks': 2}
-2025-11-14T08:58:43.703957666Z [inf]  开始执行队列任务: do_job
-2025-11-14T08:58:43.703965984Z [inf]  执行任务
-2025-11-14T08:58:43.703972713Z [inf]  INFO:     100.64.0.2:52676 - "GET /api/v1/wx/message_tasks/4e66b754-3b9f-4ecc-b24c-c84ba7927372/run?isTest=false HTTP/1.1" 200 OK
-2025-11-14T08:58:43.703979314Z [inf]  更新公众号MP_WXS_3251517810的sync_time为1763110723
-2025-11-14T08:58:43.703985304Z [inf]  更新公众号MP_WXS_3251517810的updated_at为2025-11-14 16:58:43.143072
-2025-11-14T08:58:43.703992541Z [inf]  更新公众号MP_WXS_3251517810的update_time为1763110723
-2025-11-14T08:58:43.703999424Z [inf]  Web浏览器模式,是否采集[刘小排r]内容：True
-2025-11-14T08:58:43.704006092Z [inf]  
-2025-11-14T08:58:43.704012671Z [inf]  第1页开始爬取
-2025-11-14T08:58:43.704018748Z [inf]  
-2025-11-14T08:58:46.499884247Z [inf]  成功添加文章: Claude Skills 不就是把提示词存个文件夹吗？ (ID: 3251517810-2247499568_1)
-2025-11-14T08:58:46.499888715Z [inf]  默认队列队列任务添加成功
-2025-11-14T08:58:46.499893172Z [inf]  
-2025-11-14T08:58:46.499897274Z [inf]  已触发文章 3251517810-2247499568_1 的AI简报生成任务
-2025-11-14T08:58:46.573740535Z [inf]  INFO:     100.64.0.3:51570 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
-2025-11-14T08:58:47.579853328Z [inf]  INFO:     100.64.0.3:51570 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
-2025-11-14T08:58:47.579859616Z [inf]  INFO:     100.64.0.3:51580 - "GET /api/v1/wx/mps?offset=0&limit=10 HTTP/1.1" 200 OK
-2025-11-14T08:58:47.579866798Z [inf]  SELECT articles.id, articles.mp_id, articles.title, articles.pic_url, articles.url, articles.description, articles.status, articles.publish_time, articles.created_at, articles.updated_at, articles.is_export 
-2025-11-14T08:58:47.579876145Z [inf]  FROM articles 
-2025-11-14T08:58:47.579883701Z [inf]  WHERE articles.status != 1000 ORDER BY articles.created_at DESC
-2025-11-14T08:58:47.579890024Z [inf]   LIMIT 10 OFFSET 0
-2025-11-14T08:58:47.579896274Z [inf]  INFO:     100.64.0.3:51580 - "GET /api/v1/wx/articles?offset=0&limit=10&search=&status=&mp_id= HTTP/1.1" 200 OK
-2025-11-14T08:58:48.589926307Z [inf]  Article already exists: 3251517810-2247499562_1
-2025-11-14T08:58:48.589932383Z [inf]  文章添加失败或已存在: 终于有国产模型支持「看图写代码」了：9块9元包月的Doubao‑Seed‑Code实测 (ID: 2247499562_1)
-2025-11-14T08:58:49.654496340Z [inf]  Article already exists: 3251517810-2247499534_1
-2025-11-14T08:58:49.654502026Z [inf]  文章添加失败或已存在: 创业反思：选择最短路径，是对的吗？ (ID: 2247499534_1)
-2025-11-14T08:58:50.490402522Z [inf]  Article already exists: 3251517810-2247499525_1
-2025-11-14T08:58:50.490414964Z [inf]  文章添加失败或已存在: 双十一大福利：0.99块钱，买Kimi 【coding包月】套餐~ (ID: 2247499525_1)
-2025-11-14T08:58:51.502669249Z [inf]  
-2025-11-14T08:58:51.502739462Z [inf]  Article already exists: 3251517810-2247499495_1
-2025-11-14T08:58:51.502747101Z [inf]  文章添加失败或已存在: 三十八而立 (ID: 2247499495_1)
-2025-11-14T08:58:51.502754917Z [inf]  第1页爬取成功
-2025-11-14T08:58:51.502764312Z [inf]  
-2025-11-14T08:58:51.502774362Z [inf]  item end
-2025-11-14T08:58:51.502793682Z [inf]  成功1条
-2025-11-14T08:58:51.502801411Z [inf]  更新完成
-2025-11-14T08:58:51.502810438Z [inf]  发送消息: 
-2025-11-14T08:58:51.502819741Z [inf]  ### 刘小排r 订阅消息：
-2025-11-14T08:58:51.502827880Z [inf]  
-2025-11-14T08:58:51.502836478Z [inf]  
-2025-11-14T08:58:51.502845169Z [inf]  - [**Claude Skills 不就是把提示词存个文件夹吗？**](https://mp.weixin.qq.com/s/UjZAqvkfk8AzpOoK1KV0yw) (2025-11-14 11:19:11)
-2025-11-14T08:58:51.502852753Z [inf]  
-2025-11-14T08:58:51.502860787Z [inf]  
-2025-11-14T08:58:51.502867923Z [inf]  
-2025-11-14T08:58:51.502875036Z [inf]      
-2025-11-14T08:58:51.502891741Z [inf]  未提供webhook_url
-2025-11-14T08:58:51.502899337Z [inf]  任务(4e66b754-3b9f-4ecc-b24c-c84ba7927372)[刘小排r]执行成功,1成功条数
-2025-11-14T08:58:51.502906197Z [inf]  任务执行完成，耗时: 8.13秒
-2025-11-14T08:58:51.502912597Z [inf]  开始执行队列任务: do_job
-2025-11-14T08:58:51.502919693Z [inf]  执行任务
-2025-11-14T08:58:51.502928896Z [inf]  更新公众号MP_WXS_3516884134的sync_time为1763110731
-2025-11-14T08:58:51.502935952Z [inf]  更新公众号MP_WXS_3516884134的updated_at为2025-11-14 16:58:51.463212
-2025-11-14T08:58:51.502943541Z [inf]  更新公众号MP_WXS_3516884134的update_time为1763110731
-2025-11-14T08:58:51.502950150Z [inf]  Web浏览器模式,是否采集[逛逛GitHub]内容：True
-2025-11-14T08:58:51.503043420Z [inf]  
-2025-11-14T08:58:51.503051403Z [inf]  第1页开始爬取
-2025-11-14T08:58:56.581398840Z [inf]  Article already exists: 3516884134-2247528755_1
-2025-11-14T08:58:56.581407630Z [inf]  文章添加失败或已存在: 3 个顶呱呱的 GitHub 开源项目，有点意思啊。 (ID: 2247528755_1)
-2025-11-14T08:58:57.587075981Z [inf]  Article already exists: 3516884134-2247528737_1
-2025-11-14T08:58:57.587083458Z [inf]  文章添加失败或已存在: 副业搞个 100 万，这 5 个 GitHub 项目不能错过。 (ID: 2247528737_1)
-2025-11-14T08:58:58.672989242Z [inf]  Article already exists: 3516884134-2247528708_1
-2025-11-14T08:58:58.672997616Z [inf]  文章添加失败或已存在: GitHub 开源 AI 好玩神器，自动记录你的一天。 (ID: 2247528708_1)
-2025-11-14T08:59:00.645663248Z [inf]  Article already exists: 3516884134-2247528707_1
-2025-11-14T08:59:00.645669956Z [inf]  文章添加失败或已存在: GitHub 上的 3 个 AI 信息差利器，太绝了啊。 (ID: 2247528707_1)
-2025-11-14T08:59:01.620587470Z [inf]  Article already exists: 3516884134-2247528685_1
-2025-11-14T08:59:01.620591768Z [inf]  文章添加失败或已存在: 本周 6 个最火火火火 GitHub 项目，AI 杀疯了。 (ID: 2247528685_1)
-2025-11-14T08:59:01.620603562Z [inf]  第1页爬取成功
-2025-11-14T08:59:01.620609131Z [inf]  
-2025-11-14T08:59:01.620615498Z [inf]  item end
-2025-11-14T08:59:01.620621314Z [inf]  成功0条
-2025-11-14T08:59:01.620627853Z [inf]  更新完成
-2025-11-14T08:59:01.620633494Z [err]  2025-11-14 16:59:01 - WARNING - 没有更新到文章
-2025-11-14T08:59:01.620640735Z [inf]  任务(4e66b754-3b9f-4ecc-b24c-c84ba7927372)[逛逛GitHub]执行成功,0成功条数
-2025-11-14T08:59:01.620648470Z [inf]  任务执行完成，耗时: 9.76秒
-2025-11-14T08:59:01.620652882Z [inf]  开始执行队列任务: generate_brief_sync
-2025-11-14T08:59:01.620657242Z [inf]  开始为文章生成简报: Claude Skills 不就是把提示词存个文件夹吗？
-2025-11-14T08:59:01.620661410Z [inf]  正在生成简报 (尝试 1/3): Claude Skills 不就是把提示词存个文件夹吗？
-2025-11-14T09:00:01.745894806Z [inf]  默认队列队列任务添加成功
-2025-11-14T09:00:01.745899323Z [inf]  
-2025-11-14T09:00:01.745904213Z [inf]  开始执行队列任务: generate_briefs_batch_sync
-2025-11-14T09:00:01.745908959Z [inf]  开始批量生成简报，共 10 篇文章，最大并发数: 2
-2025-11-14T09:00:01.745913444Z [inf]  处理进度: 1/10 - 文章ID: 3251517810-2247499461_1
-2025-11-14T09:00:01.745919205Z [inf]  开始为文章生成简报: 难以置信！Kimi K2 Thinking 编程力正面超车 GPT-5 和 Sonnet 4.5
-2025-11-14T09:00:01.745924068Z [inf]  正在生成简报 (尝试 1/3): 难以置信！Kimi K2 Thinking 编程力正面超车 GPT-5 和 Sonnet 4.5
-2025-11-14T09:00:01.745928808Z [inf]  处理进度: 2/10 - 文章ID: 3251517810-2247499441_1
-2025-11-14T09:00:01.745934595Z [inf]  开始为文章生成简报: 我也不会，但我知道它很重要
-2025-11-14T09:00:01.745939356Z [inf]  正在生成简报 (尝试 1/3): 我也不会，但我知道它很重要
-2025-11-14T09:00:01.745944236Z [inf]  速率限制，等待 2 秒后重试...
-2025-11-14T09:00:01.745948819Z [inf]  请求超时 (超时时间: 60秒)，尝试 1/3
-2025-11-14T09:00:02.662515898Z [inf]  正在生成简报 (尝试 2/3): 难以置信！Kimi K2 Thinking 编程力正面超车 GPT-5 和 Sonnet 4.5
-2025-11-14T09:00:02.829809582Z [inf]  速率限制，等待 4 秒后重试...
-2025-11-14T09:00:03.807094164Z [inf]  正在生成简报 (尝试 2/3): Claude Skills 不就是把提示词存个文件夹吗？
-2025-11-14T09:00:04.838237662Z [inf]  速率限制，等待 4 秒后重试...
-2025-11-14T09:00:06.833122987Z [inf]  正在生成简报 (尝试 3/3): 难以置信！Kimi K2 Thinking 编程力正面超车 GPT-5 和 Sonnet 4.5
-2025-11-14T09:00:07.842362170Z [inf]  生成简报失败 (文章: 3251517810-2247499461_1): 速率限制，已达到最大重试次数
-2025-11-14T09:00:07.842371028Z [inf]  错误详情: Traceback (most recent call last):
-2025-11-14T09:00:07.842378391Z [inf]    File "/app/jobs/brief.py", line 89, in generate_brief_for_article
-2025-11-14T09:00:07.842385722Z [inf]      brief_data = await self.generator.generate(article_data, article_key)
-2025-11-14T09:00:07.842392607Z [inf]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-11-14T09:00:07.842401277Z [inf]    File "/app/core/ai/brief_generator.py", line 262, in generate
-2025-11-14T09:00:07.842420558Z [inf]      raise ValueError(f"速率限制，已达到最大重试次数")
-2025-11-14T09:00:07.842432416Z [inf]  ValueError: 速率限制，已达到最大重试次数
-2025-11-14T09:00:07.842488080Z [inf]  
-2025-11-14T09:00:07.842499891Z [inf]  处理进度: 3/10 - 文章ID: 3251517810-2247499434_1
-2025-11-14T09:00:07.842506572Z [inf]  开始为文章生成简报: 创业的真相
-2025-11-14T09:00:07.842514159Z [inf]  正在生成简报 (尝试 1/3): 创业的真相
-2025-11-14T09:00:07.842520885Z [inf]  速率限制，等待 2 秒后重试...
-2025-11-14T09:00:08.820434917Z [inf]      brief_data = await self.generator.generate(article_data, article_key)
-2025-11-14T09:00:08.820504338Z [inf]  正在生成简报 (尝试 3/3): Claude Skills 不就是把提示词存个文件夹吗？
-2025-11-14T09:00:08.820510869Z [inf]  生成简报失败 (文章: 3251517810-2247499568_1): 速率限制，已达到最大重试次数
-2025-11-14T09:00:08.820517021Z [inf]  错误详情: Traceback (most recent call last):
-2025-11-14T09:00:08.820522814Z [inf]    File "/app/jobs/brief.py", line 89, in generate_brief_for_article
-2025-11-14T09:00:08.824452989Z [inf]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-11-14T09:00:08.824470814Z [inf]    File "/app/core/ai/brief_generator.py", line 262, in generate
-2025-11-14T09:00:08.824495728Z [inf]      raise ValueError(f"速率限制，已达到最大重试次数")
-2025-11-14T09:00:08.824502338Z [inf]  ValueError: 速率限制，已达到最大重试次数
-2025-11-14T09:00:08.824510948Z [inf]  
-2025-11-14T09:00:08.824517615Z [inf]  任务执行完成，耗时: 66.92秒
-2025-11-14T09:00:09.820461546Z [inf]  正在生成简报 (尝试 2/3): 创业的真相
-2025-11-14T09:00:09.820468220Z [inf]  速率限制，等待 4 秒后重试...
-2025-11-14T09:00:14.127063464Z [inf]  处理进度: 4/10 - 文章ID: 3251517810-2247499429_1
-2025-11-14T09:00:14.127075434Z [inf]  开始为文章生成简报: 让Claude Code帮你精准提交代码：中文可读的 feat/fix/docs 规范一键生成
-2025-11-14T09:00:14.127083603Z [inf]  正在生成简报 (尝试 1/3): 让Claude Code帮你精准提交代码：中文可读的 feat/fix/docs 规范一键生成
-2025-11-14T09:00:14.127147032Z [inf]  生成简报失败 (文章: 3251517810-2247499434_1): 速率限制，已达到最大重试次数
-2025-11-14T09:00:14.127154779Z [inf]  错误详情: Traceback (most recent call last):
-2025-11-14T09:00:14.127161974Z [inf]    File "/app/jobs/brief.py", line 89, in generate_brief_for_article
-2025-11-14T09:00:14.127166970Z [inf]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-11-14T09:00:14.127170827Z [inf]      brief_data = await self.generator.generate(article_data, article_key)
-2025-11-14T09:00:14.127179097Z [inf]    File "/app/core/ai/brief_generator.py", line 262, in generate
-2025-11-14T09:00:14.127186892Z [inf]      raise ValueError(f"速率限制，已达到最大重试次数")
-2025-11-14T09:00:14.127206133Z [inf]  ValueError: 速率限制，已达到最大重试次数
-2025-11-14T09:00:14.127206458Z [inf]  正在生成简报 (尝试 3/3): 创业的真相
-2025-11-14T09:00:14.127215182Z [inf]  
-2025-11-14T09:00:14.132302070Z [inf]  速率限制，等待 2 秒后重试...
-2025-11-14T09:00:16.093116930Z [inf]  正在生成简报 (尝试 2/3): 让Claude Code帮你精准提交代码：中文可读的 feat/fix/docs 规范一键生成
-2025-11-14T09:00:17.003745822Z [inf]  速率限制，等待 4 秒后重试...
-2025-11-14T09:00:21.143611682Z [inf]  生成简报失败 (文章: 3251517810-2247499429_1): 速率限制，已达到最大重试次数
-2025-11-14T09:00:21.143624152Z [inf]  错误详情: Traceback (most recent call last):
-2025-11-14T09:00:21.143633678Z [inf]    File "/app/jobs/brief.py", line 89, in generate_brief_for_article
-2025-11-14T09:00:21.143706624Z [inf]  正在生成简报 (尝试 3/3): 让Claude Code帮你精准提交代码：中文可读的 feat/fix/docs 规范一键生成
-2025-11-14T09:00:21.148195365Z [inf]      brief_data = await self.generator.generate(article_data, article_key)
-2025-11-14T09:00:21.148210907Z [inf]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-11-14T09:00:21.148216377Z [inf]    File "/app/core/ai/brief_generator.py", line 262, in generate
-2025-11-14T09:00:21.148237445Z [inf]      raise ValueError(f"速率限制，已达到最大重试次数")
-2025-11-14T09:00:21.148244297Z [inf]  ValueError: 速率限制，已达到最大重试次数
-2025-11-14T09:00:21.148250494Z [inf]  
-2025-11-14T09:00:21.148256532Z [inf]  处理进度: 5/10 - 文章ID: 3891906515-2247644474_1
-2025-11-14T09:00:21.148261969Z [inf]  开始为文章生成简报: 跟亦仁开会聊项目后，我们发现了3个内容变现的新机会 | 双11限时优惠中
-2025-11-14T09:00:21.148267225Z [inf]  正在生成简报 (尝试 1/3): 跟亦仁开会聊项目后，我们发现了3个内容变现的新机会 | 双11限时优惠中
-2025-11-14T09:00:21.148272443Z [inf]  速率限制，等待 2 秒后重试...
-2025-11-14T09:00:23.147373218Z [inf]  正在生成简报 (尝试 2/3): 跟亦仁开会聊项目后，我们发现了3个内容变现的新机会 | 双11限时优惠中
-2025-11-14T09:00:24.146555525Z [inf]  速率限制，等待 4 秒后重试...
-2025-11-14T09:00:27.200745002Z [inf]  简报生成成功: 我也不会，但我知道它很重要
-2025-11-14T09:00:27.200755209Z [inf]  生成简报失败 (文章: 3251517810-2247499441_1): Instance <Article at 0x7f3f6e332d50> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
-2025-11-14T09:00:27.200761713Z [inf]  错误详情: Traceback (most recent call last):
-2025-11-14T09:00:27.200766904Z [inf]    File "/app/jobs/brief.py", line 110, in generate_brief_for_article
-2025-11-14T09:00:27.200771672Z [inf]      print_success(f"简报生成并保存成功: {article.title[:50] if article.title else '未知'}")
-2025-11-14T09:00:27.200776725Z [inf]                                                                 ^^^^^^^^^^^^^
-2025-11-14T09:00:27.200781117Z [inf]      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
-2025-11-14T09:00:27.200781893Z [inf]    File "/usr/local/lib/python3.13/site-packages/sqlalchemy/orm/attributes.py", line 566, in __get__
-2025-11-14T09:00:27.200787145Z [inf]      return self.impl.get(state, dict_)  # type: ignore[no-any-return]
-2025-11-14T09:00:27.200791916Z [inf]             ~~~~~~~~~~~~~^^^^^^^^^^^^^^
-2025-11-14T09:00:27.200883307Z [inf]    File "/usr/local/lib/python3.13/site-packages/sqlalchemy/orm/attributes.py", line 1086, in get
-2025-11-14T09:00:27.200902695Z [inf]      value = self._fire_loader_callables(state, key, passive)
-2025-11-14T09:00:27.200910766Z [inf]    File "/usr/local/lib/python3.13/site-packages/sqlalchemy/orm/attributes.py", line 1116, in _fire_loader_callables
-2025-11-14T09:00:27.200917536Z [inf]      return state._load_expired(state, passive)
-2025-11-14T09:00:27.200924508Z [inf]             ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
-2025-11-14T09:00:27.200931481Z [inf]    File "/usr/local/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 803, in _load_expired
-2025-11-14T09:00:27.200937589Z [inf]      self.manager.expired_attribute_loader(self, toload, passive)
-2025-11-14T09:00:27.207775380Z [inf]    File "/usr/local/lib/python3.13/site-packages/sqlalchemy/orm/loading.py", line 1603, in load_scalar_attributes
-2025-11-14T09:00:27.207781734Z [inf]      raise orm_exc.DetachedInstanceError(
-2025-11-14T09:00:27.207788865Z [inf]      ...<2 lines>...
-2025-11-14T09:00:27.207795884Z [inf]      )
-2025-11-14T09:00:27.207803419Z [inf]  sqlalchemy.orm.exc.DetachedInstanceError: Instance <Article at 0x7f3f6e332d50> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
-2025-11-14T09:00:27.207810587Z [inf]  
-2025-11-14T09:00:27.207818487Z [inf]  处理进度: 6/10 - 文章ID: 3891906515-2247644474_2
-2025-11-14T09:00:27.207825423Z [inf]  开始为文章生成简报: 加入129期生财3天体验营，领取双11限时优惠
-2025-11-14T09:00:27.207833429Z [inf]  正在生成简报 (尝试 1/3): 加入129期生财3天体验营，领取双11限时优惠
-2025-11-14T09:00:28.266814750Z [inf]  
-2025-11-14T09:00:28.266826929Z [inf]  处理进度: 7/10 - 文章ID: 3891906515-2247644094_1
-2025-11-14T09:00:28.266834323Z [inf]  开始为文章生成简报: 从流量主到私域变现，公众号垂直小号才是王道
-2025-11-14T09:00:28.266839751Z [inf]  正在生成简报 (尝试 1/3): 从流量主到私域变现，公众号垂直小号才是王道
-2025-11-14T09:00:28.266846229Z [inf]  速率限制，等待 2 秒后重试...
-2025-11-14T09:00:28.266980013Z [inf]  正在生成简报 (尝试 3/3): 跟亦仁开会聊项目后，我们发现了3个内容变现的新机会 | 双11限时优惠中
-2025-11-14T09:00:28.266986626Z [inf]  生成简报失败 (文章: 3891906515-2247644474_1): 速率限制，已达到最大重试次数
-2025-11-14T09:00:28.266998056Z [inf]  错误详情: Traceback (most recent call last):
-2025-11-14T09:00:28.267008431Z [inf]    File "/app/jobs/brief.py", line 89, in generate_brief_for_article
-2025-11-14T09:00:28.267015386Z [inf]      brief_data = await self.generator.generate(article_data, article_key)
-2025-11-14T09:00:28.267021625Z [inf]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-11-14T09:00:28.267028395Z [inf]    File "/app/core/ai/brief_generator.py", line 262, in generate
-2025-11-14T09:00:28.267036346Z [inf]      raise ValueError(f"速率限制，已达到最大重试次数")
-2025-11-14T09:00:28.267043431Z [inf]  ValueError: 速率限制，已达到最大重试次数
-2025-11-14T09:00:30.373700084Z [inf]  正在生成简报 (尝试 2/3): 从流量主到私域变现，公众号垂直小号才是王道
-2025-11-14T09:00:30.373711554Z [inf]  速率限制，等待 4 秒后重试...
-2025-11-14T09:00:34.295755518Z [inf]      raise ValueError(f"速率限制，已达到最大重试次数")
-2025-11-14T09:00:34.295768809Z [inf]  ValueError: 速率限制，已达到最大重试次数
-2025-11-14T09:00:34.295779534Z [inf]  
-2025-11-14T09:00:34.295788750Z [inf]  处理进度: 8/10 - 文章ID: 3891906515-2247644093_1
-2025-11-14T09:00:34.295796578Z [inf]  开始为文章生成简报: 真正赚钱的不是AI项目，而是被AI放大的生意｜生财编辑部AI洞察001期
-2025-11-14T09:00:34.295804000Z [inf]  正在生成简报 (尝试 1/3): 真正赚钱的不是AI项目，而是被AI放大的生意｜生财编辑部AI洞察001期
-2025-11-14T09:00:34.295811421Z [inf]  速率限制，等待 2 秒后重试...
-2025-11-14T09:00:34.295955179Z [inf]  正在生成简报 (尝试 3/3): 从流量主到私域变现，公众号垂直小号才是王道
-2025-11-14T09:00:34.295961280Z [inf]  生成简报失败 (文章: 3891906515-2247644094_1): 速率限制，已达到最大重试次数
-2025-11-14T09:00:34.295967043Z [inf]  错误详情: Traceback (most recent call last):
-2025-11-14T09:00:34.295973029Z [inf]    File "/app/jobs/brief.py", line 89, in generate_brief_for_article
-2025-11-14T09:00:34.295985348Z [inf]      brief_data = await self.generator.generate(article_data, article_key)
-2025-11-14T09:00:34.295995548Z [inf]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-11-14T09:00:34.296002926Z [inf]    File "/app/core/ai/brief_generator.py", line 262, in generate
-2025-11-14T09:00:36.278459075Z [inf]  正在生成简报 (尝试 2/3): 真正赚钱的不是AI项目，而是被AI放大的生意｜生财编辑部AI洞察001期
-2025-11-14T09:00:37.255965347Z [inf]  速率限制，等待 4 秒后重试...
-2025-11-14T09:00:41.311010293Z [inf]  正在生成简报 (尝试 3/3): 真正赚钱的不是AI项目，而是被AI放大的生意｜生财编辑部AI洞察001期
-2025-11-14T09:00:41.311018436Z [inf]  生成简报失败 (文章: 3891906515-2247644093_1): 速率限制，已达到最大重试次数
-2025-11-14T09:00:41.311042958Z [inf]  错误详情: Traceback (most recent call last):
-2025-11-14T09:00:41.311049965Z [inf]    File "/app/jobs/brief.py", line 89, in generate_brief_for_article
-2025-11-14T09:00:41.311056847Z [inf]      brief_data = await self.generator.generate(article_data, article_key)
-2025-11-14T09:00:41.311061929Z [inf]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-11-14T09:00:41.311070662Z [inf]    File "/app/core/ai/brief_generator.py", line 262, in generate
-2025-11-14T09:00:41.311076127Z [inf]      raise ValueError(f"速率限制，已达到最大重试次数")
-2025-11-14T09:00:41.311081283Z [inf]  ValueError: 速率限制，已达到最大重试次数
-2025-11-14T09:00:41.311102204Z [inf]  
-2025-11-14T09:00:41.311110046Z [inf]  处理进度: 9/10 - 文章ID: 3891906515-2247644091_1
-2025-11-14T09:00:41.311117136Z [inf]  开始为文章生成简报: 2个被忽略的搞钱真相，帮你破除99%的心力卡点
-2025-11-14T09:00:41.311123523Z [inf]  正在生成简报 (尝试 1/3): 2个被忽略的搞钱真相，帮你破除99%的心力卡点
-2025-11-14T09:00:41.311156453Z [inf]  速率限制，等待 2 秒后重试...
-2025-11-14T09:00:43.511691789Z [inf]  正在生成简报 (尝试 2/3): 2个被忽略的搞钱真相，帮你破除99%的心力卡点
-2025-11-14T09:00:44.520944051Z [inf]  速率限制，等待 4 秒后重试...
-2025-11-14T09:00:48.394883048Z [inf]  正在生成简报 (尝试 3/3): 2个被忽略的搞钱真相，帮你破除99%的心力卡点
-2025-11-14T09:00:48.394889391Z [inf]  生成简报失败 (文章: 3891906515-2247644091_1): 速率限制，已达到最大重试次数
-2025-11-14T09:00:48.394896041Z [inf]  错误详情: Traceback (most recent call last):
-2025-11-14T09:00:48.394902546Z [inf]    File "/app/jobs/brief.py", line 89, in generate_brief_for_article
-2025-11-14T09:00:48.394909833Z [inf]      brief_data = await self.generator.generate(article_data, article_key)
-2025-11-14T09:00:48.394916681Z [inf]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-11-14T09:00:48.394923068Z [inf]    File "/app/core/ai/brief_generator.py", line 262, in generate
-2025-11-14T09:00:48.394929167Z [inf]      raise ValueError(f"速率限制，已达到最大重试次数")
-2025-11-14T09:00:48.394935899Z [inf]  ValueError: 速率限制，已达到最大重试次数
-2025-11-14T09:00:48.394942846Z [inf]  
-2025-11-14T09:00:48.394949209Z [inf]  处理进度: 10/10 - 文章ID: 3891906515-2247644073_1
-2025-11-14T09:00:48.394955660Z [inf]  开始为文章生成简报: 我在TikTok上跑出千万播放：分享一个正在爆发的短视频赛道
-2025-11-14T09:00:48.394966984Z [inf]  正在生成简报 (尝试 1/3): 我在TikTok上跑出千万播放：分享一个正在爆发的短视频赛道
-2025-11-14T09:00:48.394972422Z [inf]  速率限制，等待 2 秒后重试...
-2025-11-14T09:00:50.435616767Z [inf]  正在生成简报 (尝试 2/3): 我在TikTok上跑出千万播放：分享一个正在爆发的短视频赛道
-2025-11-14T09:00:50.435622443Z [inf]  速率限制，等待 4 秒后重试...
-2025-11-14T09:00:54.343654691Z [inf]  正在生成简报 (尝试 3/3): 我在TikTok上跑出千万播放：分享一个正在爆发的短视频赛道
-2025-11-14T09:00:55.303902351Z [inf]  生成简报失败 (文章: 3891906515-2247644073_1): 速率限制，已达到最大重试次数
-2025-11-14T09:00:55.303908907Z [inf]  错误详情: Traceback (most recent call last):
-2025-11-14T09:00:55.303915981Z [inf]    File "/app/jobs/brief.py", line 89, in generate_brief_for_article
-2025-11-14T09:00:55.303922791Z [inf]      brief_data = await self.generator.generate(article_data, article_key)
-2025-11-14T09:00:55.303929375Z [inf]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-11-14T09:00:55.303935849Z [inf]    File "/app/core/ai/brief_generator.py", line 262, in generate
-2025-11-14T09:00:55.303941953Z [inf]      raise ValueError(f"速率限制，已达到最大重试次数")
-2025-11-14T09:00:55.303948859Z [inf]  ValueError: 速率限制，已达到最大重试次数
-2025-11-14T09:00:55.303991425Z [inf]  
-2025-11-14T09:01:14.640981170Z [inf]  简报生成成功: 加入129期生财3天体验营，领取双11限时优惠
-2025-11-14T09:01:14.641015007Z [inf]  生成简报失败 (文章: 3891906515-2247644474_2): Instance <Article at 0x7f3f6e230170> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
-2025-11-14T09:01:14.641021749Z [inf]  错误详情: Traceback (most recent call last):
-2025-11-14T09:01:14.641049542Z [inf]    File "/app/jobs/brief.py", line 110, in generate_brief_for_article
-2025-11-14T09:01:14.641056581Z [inf]      print_success(f"简报生成并保存成功: {article.title[:50] if article.title else '未知'}")
-2025-11-14T09:01:14.641062486Z [inf]                                                                 ^^^^^^^^^^^^^
-2025-11-14T09:01:14.641071229Z [inf]    File "/usr/local/lib/python3.13/site-packages/sqlalchemy/orm/attributes.py", line 566, in __get__
-2025-11-14T09:01:14.641077702Z [inf]      return self.impl.get(state, dict_)  # type: ignore[no-any-return]
-2025-11-14T09:01:14.641084426Z [inf]             ~~~~~~~~~~~~~^^^^^^^^^^^^^^
-2025-11-14T09:01:14.641090395Z [inf]    File "/usr/local/lib/python3.13/site-packages/sqlalchemy/orm/attributes.py", line 1086, in get
-2025-11-14T09:01:14.641096250Z [inf]      value = self._fire_loader_callables(state, key, passive)
-2025-11-14T09:01:14.641102430Z [inf]    File "/usr/local/lib/python3.13/site-packages/sqlalchemy/orm/attributes.py", line 1116, in _fire_loader_callables
-2025-11-14T09:01:14.641109077Z [inf]      return state._load_expired(state, passive)
-2025-11-14T09:01:14.641115431Z [inf]             ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
-2025-11-14T09:01:14.641121359Z [inf]    File "/usr/local/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 803, in _load_expired
-2025-11-14T09:01:14.641127627Z [inf]      self.manager.expired_attribute_loader(self, toload, passive)
-2025-11-14T09:01:14.641134541Z [inf]      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
-2025-11-14T09:01:14.646904183Z [inf]    File "/usr/local/lib/python3.13/site-packages/sqlalchemy/orm/loading.py", line 1603, in load_scalar_attributes
-2025-11-14T09:01:14.646911492Z [inf]      raise orm_exc.DetachedInstanceError(
-2025-11-14T09:01:14.646918059Z [inf]      ...<2 lines>...
-2025-11-14T09:01:14.646925546Z [inf]      )
-2025-11-14T09:01:14.646932583Z [inf]  sqlalchemy.orm.exc.DetachedInstanceError: Instance <Article at 0x7f3f6e230170> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
-2025-11-14T09:01:14.646939602Z [inf]  
-2025-11-14T09:01:14.646947739Z [inf]  批量生成完成: 成功 0, 失败 0, 跳过 10, 总计 10
-2025-11-14T09:01:14.646953912Z [inf]  任务执行完成，耗时: 73.85秒
+2025-11-14T12:12:08.134640165Z [inf]  任务执行完成，耗时: 15.46秒
+2025-11-14T12:12:08.134647817Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:12:08.134655497Z [inf]  执行任务
+2025-11-14T12:12:08.134662396Z [inf]  更新公众号MP_WXS_3949862785的sync_time为1763122327
+2025-11-14T12:12:08.134670199Z [inf]  更新公众号MP_WXS_3949862785的updated_at为2025-11-14 20:12:07.860823
+2025-11-14T12:12:11.338313636Z [inf]  Article already exists: 3949862785-2247489030_1
+2025-11-14T12:12:11.338325682Z [inf]  文章添加失败或已存在: 投资者修行：教训都是资产 (ID: 2247489030_1)
+2025-11-14T12:12:13.472509836Z [inf]  文章添加失败或已存在: 当下最蠢的股民是什么人？ (ID: 2247489026_1)
+2025-11-14T12:12:13.472547571Z [inf]  Article already exists: 3949862785-2247489026_1
+2025-11-14T12:12:14.401015701Z [inf]  Article already exists: 3949862785-2247489022_1
+2025-11-14T12:12:14.401035646Z [inf]  文章添加失败或已存在: 买股票就是买“印钞机” (ID: 2247489022_1)
+2025-11-14T12:12:16.215900336Z [inf]  Article already exists: 3949862785-2247489018_1
+2025-11-14T12:12:16.215907022Z [inf]  文章添加失败或已存在: 消费股大涨，大A风格切换了？ (ID: 2247489018_1)
+2025-11-14T12:12:18.115922017Z [inf]  Article already exists: 3949862785-2247489013_1
+2025-11-14T12:12:18.115929646Z [inf]  文章添加失败或已存在: 我对中国科技股的敬畏 (ID: 2247489013_1)
+2025-11-14T12:12:18.115936259Z [inf]  第1页爬取成功
+2025-11-14T12:12:18.116012710Z [inf]  
+2025-11-14T12:12:18.116024053Z [inf]  item end
+2025-11-14T12:12:18.116031102Z [inf]  成功0条
+2025-11-14T12:12:18.116040289Z [inf]  更新完成
+2025-11-14T12:12:18.116067794Z [err]  2025-11-14 20:12:17 - WARNING - 没有更新到文章
+2025-11-14T12:12:18.116075877Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[心海时空]执行成功,0成功条数
+2025-11-14T12:12:18.116083308Z [inf]  任务执行完成，耗时: 10.14秒
+2025-11-14T12:12:18.166466869Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:12:18.166475373Z [inf]  执行任务
+2025-11-14T12:12:18.199926511Z [inf]  更新公众号MP_WXS_3084167106的sync_time为1763122338
+2025-11-14T12:12:18.199936490Z [inf]  更新公众号MP_WXS_3084167106的updated_at为2025-11-14 20:12:18.183876
+2025-11-14T12:12:18.199943168Z [inf]  更新公众号MP_WXS_3084167106的update_time为1763122338
+2025-11-14T12:12:18.210789051Z [inf]  Web浏览器模式,是否采集[容纳商业评论]内容：True
+2025-11-14T12:12:18.210799903Z [inf]  
+2025-11-14T12:12:18.210807963Z [inf]  第1页开始爬取
+2025-11-14T12:12:18.210815172Z [inf]  
+2025-11-14T12:12:37.498694461Z [inf]  更新完成
+2025-11-14T12:12:37.498704279Z [err]  2025-11-14 20:12:35 - WARNING - 没有更新到文章
+2025-11-14T12:12:37.498710157Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[容纳商业评论]执行成功,0成功条数
+2025-11-14T12:12:37.498716445Z [inf]  任务执行完成，耗时: 17.16秒
+2025-11-14T12:12:37.498874815Z [inf]  Article already exists: 3084167106-2652297347_1
+2025-11-14T12:12:37.498900201Z [inf]  文章添加失败或已存在: 一张图读懂：企业业绩增长全路径与实战方法 (ID: 2652297347_1)
+2025-11-14T12:12:37.498913526Z [inf]  Article already exists: 3084167106-2652297261_1
+2025-11-14T12:12:37.498923700Z [inf]  文章添加失败或已存在: 中国战略成就中国速度：1953-2025，十四个五年计划全景透视 (ID: 2652297261_1)
+2025-11-14T12:12:37.498933092Z [inf]  Article already exists: 3084167106-2652297172_1
+2025-11-14T12:12:37.498942189Z [inf]  文章添加失败或已存在: 一张图读懂：费大厨直营门店超200家，在北上广深等一线城市逆势扩张密码 (ID: 2652297172_1)
+2025-11-14T12:12:37.498950394Z [inf]  Article already exists: 3084167106-2652296864_1
+2025-11-14T12:12:37.498958817Z [inf]  文章添加失败或已存在: 谁是硬核科技的无名之王？中国十大千亿级科技企业排行，工业富联、立讯精密、浪潮集团、京东方、万华化学，各个都是世界一流 (ID: 2652296864_1)
+2025-11-14T12:12:37.498967983Z [inf]  Article already exists: 3084167106-2652296588_1
+2025-11-14T12:12:37.498977740Z [inf]  文章添加失败或已存在: 一张图读懂：组织战略6个层次的核心要素金字塔 (ID: 2652296588_1)
+2025-11-14T12:12:37.498989523Z [inf]  第1页爬取成功
+2025-11-14T12:12:37.498998958Z [inf]  
+2025-11-14T12:12:37.499007223Z [inf]  item end
+2025-11-14T12:12:37.499014982Z [inf]  成功0条
+2025-11-14T12:12:37.502748937Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:12:37.502758917Z [inf]  执行任务
+2025-11-14T12:12:37.502768793Z [inf]  更新公众号MP_WXS_3957156820的sync_time为1763122355
+2025-11-14T12:12:37.502773800Z [inf]  更新公众号MP_WXS_3957156820的updated_at为2025-11-14 20:12:35.531871
+2025-11-14T12:12:37.502811121Z [inf]  更新公众号MP_WXS_3957156820的update_time为1763122355
+2025-11-14T12:12:37.502823570Z [inf]  Web浏览器模式,是否采集[格兰投研]内容：True
+2025-11-14T12:12:37.502831964Z [inf]  
+2025-11-14T12:12:37.502838846Z [inf]  第1页开始爬取
+2025-11-14T12:12:37.502851410Z [inf]  
+2025-11-14T12:12:38.505655051Z [inf]  Article already exists: 3957156820-2247505104_1
+2025-11-14T12:12:38.505663446Z [inf]  文章添加失败或已存在: 大消息来了！对A股影响大吗？！ (ID: 2247505104_1)
+2025-11-14T12:12:39.401772398Z [inf]  Article already exists: 3957156820-2247505073_1
+2025-11-14T12:12:39.401776820Z [inf]  文章添加失败或已存在: 热点板块大波动！A股发生了什么？！ (ID: 2247505073_1)
+2025-11-14T12:12:41.574419838Z [inf]  Article already exists: 3957156820-2247505066_1
+2025-11-14T12:12:41.574425630Z [inf]  文章添加失败或已存在: 传奇落幕！A股有新主线了？！ (ID: 2247505066_1)
+2025-11-14T12:12:42.275200787Z [inf]  Article already exists: 3957156820-2247505052_1
+2025-11-14T12:12:42.275205597Z [inf]  文章添加失败或已存在: 好消息来了！A股怎么走？ (ID: 2247505052_1)
+2025-11-14T12:12:43.312697873Z [inf]  Article already exists: 3957156820-2247504985_1
+2025-11-14T12:12:43.312712135Z [inf]  文章添加失败或已存在: 周一，开盘必读! (ID: 2247504985_1)
+2025-11-14T12:12:43.312720564Z [inf]  第1页爬取成功
+2025-11-14T12:12:43.312728423Z [inf]  
+2025-11-14T12:12:43.312737363Z [inf]  item end
+2025-11-14T12:12:43.312745913Z [inf]  成功0条
+2025-11-14T12:12:43.312763015Z [inf]  更新完成
+2025-11-14T12:12:43.312770123Z [err]  2025-11-14 20:12:43 - WARNING - 没有更新到文章
+2025-11-14T12:12:43.312777326Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[格兰投研]执行成功,0成功条数
+2025-11-14T12:12:43.312784230Z [inf]  任务执行完成，耗时: 7.81秒
+2025-11-14T12:12:43.514203751Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:12:43.514214927Z [inf]  执行任务
+2025-11-14T12:12:43.553838261Z [inf]  更新公众号MP_WXS_3925441667的sync_time为1763122363
+2025-11-14T12:12:43.553853710Z [inf]  更新公众号MP_WXS_3925441667的updated_at为2025-11-14 20:12:43.534686
+2025-11-14T12:12:43.553873471Z [inf]  更新公众号MP_WXS_3925441667的update_time为1763122363
+2025-11-14T12:12:43.560280927Z [inf]  Web浏览器模式,是否采集[大红好运妹]内容：True
+2025-11-14T12:12:43.560297550Z [inf]  
+2025-11-14T12:12:43.560307535Z [inf]  第1页开始爬取
+2025-11-14T12:12:43.560316176Z [inf]  
+2025-11-14T12:13:03.560107739Z [inf]  Article already exists: 3925441667-2247491792_1
+2025-11-14T12:13:03.560117570Z [inf]  文章添加失败或已存在: 深夜，大跌！！ (ID: 2247491792_1)
+2025-11-14T12:13:03.560123804Z [inf]  Article already exists: 3925441667-2247491784_1
+2025-11-14T12:13:03.560133504Z [inf]  文章添加失败或已存在: 扎心了！！ (ID: 2247491784_1)
+2025-11-14T12:13:03.560139172Z [inf]  Article already exists: 3925441667-2247491768_1
+2025-11-14T12:13:03.560145756Z [inf]  文章添加失败或已存在: 重要进展！！ (ID: 2247491768_1)
+2025-11-14T12:13:03.560151169Z [inf]  Article already exists: 3925441667-2247491752_1
+2025-11-14T12:13:03.560156746Z [inf]  文章添加失败或已存在: 迫切买入！！ (ID: 2247491752_1)
+2025-11-14T12:13:03.560161955Z [inf]  Article already exists: 3925441667-2247491743_1
+2025-11-14T12:13:03.560169429Z [inf]  文章添加失败或已存在: 新热点！！ (ID: 2247491743_1)
+2025-11-14T12:13:03.560175974Z [inf]  第1页爬取成功
+2025-11-14T12:13:03.560188104Z [inf]  
+2025-11-14T12:13:03.560200701Z [inf]  item end
+2025-11-14T12:13:03.560212853Z [inf]  成功0条
+2025-11-14T12:13:03.560220571Z [inf]  更新完成
+2025-11-14T12:13:03.560229325Z [err]  2025-11-14 20:13:00 - WARNING - 没有更新到文章
+2025-11-14T12:13:03.560236347Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[大红好运妹]执行成功,0成功条数
+2025-11-14T12:13:03.560247565Z [inf]  任务执行完成，耗时: 17.35秒
+2025-11-14T12:13:03.560254011Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:13:03.560260414Z [inf]  执行任务
+2025-11-14T12:13:03.560266405Z [inf]  更新公众号MP_WXS_3623309680的sync_time为1763122381
+2025-11-14T12:13:03.560275325Z [inf]  更新公众号MP_WXS_3623309680的updated_at为2025-11-14 20:13:01.075313
+2025-11-14T12:13:03.560283980Z [inf]  更新公众号MP_WXS_3623309680的update_time为1763122381
+2025-11-14T12:13:03.562966224Z [inf]  Web浏览器模式,是否采集[冰神夜谈]内容：True
+2025-11-14T12:13:03.562974260Z [inf]  
+2025-11-14T12:13:03.562981506Z [inf]  第1页开始爬取
+2025-11-14T12:13:03.562988416Z [inf]  
+2025-11-14T12:13:04.450670933Z [inf]  成功添加文章: 烧了。 (ID: 3623309680-2247488601_1)
+2025-11-14T12:13:04.450677980Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:13:04.450685878Z [inf]  
+2025-11-14T12:13:04.450692859Z [inf]  已触发文章 3623309680-2247488601_1 的AI简报生成任务
+2025-11-14T12:13:05.372312944Z [inf]  Article already exists: 3623309680-2247488587_1
+2025-11-14T12:13:05.372326879Z [inf]  文章添加失败或已存在: 完美预判。 (ID: 2247488587_1)
+2025-11-14T12:13:07.341349301Z [inf]  Article already exists: 3623309680-2247488578_1
+2025-11-14T12:13:07.341355186Z [inf]  文章添加失败或已存在: 等待市场的答卷 (ID: 2247488578_1)
+2025-11-14T12:13:09.336139642Z [inf]  Article already exists: 3623309680-2247488560_1
+2025-11-14T12:13:09.336151937Z [inf]  文章添加失败或已存在: 缩量涨停，筹码稳固！ (ID: 2247488560_1)
+2025-11-14T12:13:10.497677153Z [inf]  第1页爬取成功
+2025-11-14T12:13:10.497695618Z [inf]  
+2025-11-14T12:13:10.497699535Z [inf]  - [**烧了。**](https://mp.weixin.qq.com/s/IsrXGEUHxk_YA1FZkZ7doQ) (2025-11-14 19:04:09)
+2025-11-14T12:13:10.497700660Z [inf]  执行任务
+2025-11-14T12:13:10.497712447Z [inf]  更新公众号MP_WXS_3251517810的sync_time为1763122390
+2025-11-14T12:13:10.497713656Z [inf]  item end
+2025-11-14T12:13:10.497722671Z [inf]  更新公众号MP_WXS_3251517810的updated_at为2025-11-14 20:13:10.331459
+2025-11-14T12:13:10.497730831Z [inf]  更新公众号MP_WXS_3251517810的update_time为1763122390
+2025-11-14T12:13:10.497734095Z [inf]  
+2025-11-14T12:13:10.497739734Z [inf]  Web浏览器模式,是否采集[刘小排r]内容：True
+2025-11-14T12:13:10.497746306Z [inf]  
+2025-11-14T12:13:10.497753874Z [inf]  第1页开始爬取
+2025-11-14T12:13:10.497758574Z [inf]  Article already exists: 3623309680-2247488536_1
+2025-11-14T12:13:10.497765251Z [inf]  成功1条
+2025-11-14T12:13:10.497771352Z [inf]  
+2025-11-14T12:13:10.497773545Z [inf]  文章添加失败或已存在: 你说，我听你说。 (ID: 2247488536_1)
+2025-11-14T12:13:10.497778665Z [inf]  ### 冰神夜谈 订阅消息：
+2025-11-14T12:13:10.497779987Z [inf]  更新完成
+2025-11-14T12:13:10.497785760Z [inf]  
+2025-11-14T12:13:10.497795320Z [inf]  
+2025-11-14T12:13:10.497797146Z [inf]  发送消息: 
+2025-11-14T12:13:10.497798790Z [inf]      
+2025-11-14T12:13:10.497798940Z [inf]  未提供webhook_url
+2025-11-14T12:13:10.497807979Z [inf]  
+2025-11-14T12:13:10.497812564Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[冰神夜谈]执行成功,1成功条数
+2025-11-14T12:13:10.497822251Z [inf]  任务执行完成，耗时: 9.07秒
+2025-11-14T12:13:10.497832390Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:13:10.503239799Z [inf]  
+2025-11-14T12:13:30.499797049Z [inf]  Article already exists: 3251517810-2247499568_1
+2025-11-14T12:13:30.499808991Z [inf]  文章添加失败或已存在: Claude Skills 不就是把提示词存个文件夹吗？ (ID: 2247499568_1)
+2025-11-14T12:13:30.499817224Z [inf]  Article already exists: 3251517810-2247499562_1
+2025-11-14T12:13:30.499824424Z [inf]  文章添加失败或已存在: 终于有国产模型支持「看图写代码」了：9块9元包月的Doubao‑Seed‑Code实测 (ID: 2247499562_1)
+2025-11-14T12:13:30.499832472Z [inf]  Article already exists: 3251517810-2247499534_1
+2025-11-14T12:13:30.499840374Z [inf]  文章添加失败或已存在: 创业反思：选择最短路径，是对的吗？ (ID: 2247499534_1)
+2025-11-14T12:13:30.499849845Z [inf]  Article already exists: 3251517810-2247499525_1
+2025-11-14T12:13:30.499860549Z [inf]  文章添加失败或已存在: 双十一大福利：0.99块钱，买Kimi 【coding包月】套餐~ (ID: 2247499525_1)
+2025-11-14T12:13:30.499871465Z [inf]  Article already exists: 3251517810-2247499495_1
+2025-11-14T12:13:30.499877450Z [inf]  文章添加失败或已存在: 三十八而立 (ID: 2247499495_1)
+2025-11-14T12:13:30.499883000Z [inf]  第1页爬取成功
+2025-11-14T12:13:30.499889936Z [inf]  
+2025-11-14T12:13:30.499896068Z [inf]  item end
+2025-11-14T12:13:30.499901387Z [inf]  成功0条
+2025-11-14T12:13:30.499906603Z [inf]  更新完成
+2025-11-14T12:13:30.499911807Z [err]  2025-11-14 20:13:21 - WARNING - 没有更新到文章
+2025-11-14T12:13:30.499917012Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[刘小排r]执行成功,0成功条数
+2025-11-14T12:13:30.499921673Z [inf]  任务执行完成，耗时: 10.77秒
+2025-11-14T12:13:30.499927469Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:13:30.499932141Z [inf]  执行任务
+2025-11-14T12:13:30.499938733Z [inf]  更新公众号MP_WXS_3078132892的sync_time为1763122401
+2025-11-14T12:13:30.502570584Z [inf]  更新公众号MP_WXS_3078132892的updated_at为2025-11-14 20:13:21.262992
+2025-11-14T12:13:30.502588309Z [inf]  更新公众号MP_WXS_3078132892的update_time为1763122401
+2025-11-14T12:13:30.502599957Z [inf]  Web浏览器模式,是否采集[FBIF食品饮料创新]内容：True
+2025-11-14T12:13:30.502609465Z [inf]  
+2025-11-14T12:13:30.502618474Z [inf]  第1页开始爬取
+2025-11-14T12:13:30.502628768Z [inf]  
+2025-11-14T12:13:31.387353195Z [inf]  成功添加文章: 11.5元买一瓶“水”？不，是胖东来在卖的透明可乐 (ID: 3078132892-2652888714_1)
+2025-11-14T12:13:31.387364627Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:13:31.387374066Z [inf]  
+2025-11-14T12:13:31.387409881Z [inf]  已触发文章 3078132892-2652888714_1 的AI简报生成任务
+2025-11-14T12:13:32.378037376Z [inf]  成功添加文章: 乐事以“现金红包+明星见面”双轨抽奖，激发高价值体验 (ID: 3078132892-2652888714_2)
+2025-11-14T12:13:32.378043796Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:13:32.378049846Z [inf]  
+2025-11-14T12:13:32.378055195Z [inf]  已触发文章 3078132892-2652888714_2 的AI简报生成任务
+2025-11-14T12:13:34.372994930Z [inf]  成功添加文章: 对话「水獭吨吨」联创莫莫子：用冲调的方式，做茶饮“基础款” (ID: 3078132892-2652888714_3)
+2025-11-14T12:13:34.373002243Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:13:34.373009514Z [inf]  
+2025-11-14T12:13:34.373016434Z [inf]  已触发文章 3078132892-2652888714_3 的AI简报生成任务
+2025-11-14T12:13:35.465217169Z [inf]  成功添加文章: 2025年双十一全网销售数据解读报告 (ID: 3078132892-2652888714_4)
+2025-11-14T12:13:35.468307463Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:13:35.468337625Z [inf]  
+2025-11-14T12:13:35.468351578Z [inf]  已触发文章 3078132892-2652888714_4 的AI简报生成任务
+2025-11-14T12:13:37.448148467Z [inf]  Article already exists: 3078132892-2652888620_1
+2025-11-14T12:13:37.448160439Z [inf]  文章添加失败或已存在: 骨头汤装进牛奶盒，被美国人当“饮料”，一年卖出上亿美元 (ID: 2652888620_1)
+2025-11-14T12:13:39.511761432Z [inf]  Article already exists: 3078132892-2652888620_2
+2025-11-14T12:13:39.511769039Z [inf]  文章添加失败或已存在: 瑞幸大股东考虑收购Costa！估值达10亿英镑或更高 (ID: 2652888620_2)
+2025-11-14T12:13:40.435537646Z [inf]  Article already exists: 3078132892-2652888620_3
+2025-11-14T12:13:40.435549424Z [inf]  文章添加失败或已存在: 白砂糖重回配料表 (ID: 2652888620_3)
+2025-11-14T12:13:42.375918809Z [inf]  Article already exists: 3078132892-2652888620_4
+2025-11-14T12:13:42.375926155Z [inf]  文章添加失败或已存在: 尼尔森2026消费展望：“十大省钱趋势”来了 (ID: 2652888620_4)
+2025-11-14T12:13:44.333400885Z [inf]  Article already exists: 3078132892-2652888357_1
+2025-11-14T12:13:44.333407869Z [inf]  文章添加失败或已存在: 刷屏的34个亨氏番茄，创意来自一个曾差点离职的00后 (ID: 2652888357_1)
+2025-11-14T12:13:46.357908666Z [inf]  Article already exists: 3078132892-2652888357_2
+2025-11-14T12:13:46.357913634Z [inf]  文章添加失败或已存在: “走不出”广东的嘉顿面包，凭什么火了近百年？ (ID: 2652888357_2)
+2025-11-14T12:13:47.425971001Z [inf]  Article already exists: 3078132892-2652888357_3
+2025-11-14T12:13:47.425983328Z [inf]  文章添加失败或已存在: 从5块到98块，奶皮子糖葫芦成了今年最狠的“消费刺客” (ID: 2652888357_3)
+2025-11-14T12:13:49.321527391Z [inf]  文章添加失败或已存在: 汉堡王中国业务易主 (ID: 2652888357_4)
+2025-11-14T12:13:49.321842690Z [inf]  Article already exists: 3078132892-2652888357_4
+2025-11-14T12:13:51.272314135Z [inf]  Article already exists: 3078132892-2652888213_1
+2025-11-14T12:13:51.272321001Z [inf]  文章添加失败或已存在: 9个月狂揽2.7亿元！满记在山姆推出王炸单品，新零售成第二增长引擎 (ID: 2652888213_1)
+2025-11-14T12:13:52.301384766Z [inf]  Article already exists: 3078132892-2652888213_2
+2025-11-14T12:13:52.301390686Z [inf]  文章添加失败或已存在: 34个番茄参加运动会，网友：“这是今年最好的地铁广告” (ID: 2652888213_2)
+2025-11-14T12:13:54.446837607Z [inf]  Article already exists: 3078132892-2652888213_3
+2025-11-14T12:13:54.446845008Z [inf]  文章添加失败或已存在: 从SKP到星巴克，为何博裕总能拿下好标的？ (ID: 2652888213_3)
+2025-11-14T12:13:55.541199477Z [inf]  Article already exists: 3078132892-2652888213_4
+2025-11-14T12:13:55.541211579Z [inf]  文章添加失败或已存在: 日本即饮咖啡的PET化进程：从“速饮罐装”到“慢饮瓶装”的产业重构 (ID: 2652888213_4)
+2025-11-14T12:13:57.329701776Z [inf]  Article already exists: 3078132892-2652887978_1
+2025-11-14T12:13:57.329708294Z [inf]  文章添加失败或已存在: 连锅卖的爆米花，拿下日本11年销量冠军 (ID: 2652887978_1)
+2025-11-14T12:13:59.335027357Z [inf]  Article already exists: 3078132892-2652887978_2
+2025-11-14T12:13:59.335035029Z [inf]  文章添加失败或已存在: 一杯酸奶，估值1422亿元 (ID: 2652887978_2)
+2025-11-14T12:14:01.429580354Z [inf]  Article already exists: 3078132892-2652887978_3
+2025-11-14T12:14:01.429593904Z [inf]  文章添加失败或已存在: 不止糖葫芦，奶茶、烘焙以及汉堡也裹上了奶皮子 (ID: 2652887978_3)
+2025-11-14T12:14:02.527405906Z [inf]  Article already exists: 3078132892-2652887978_4
+2025-11-14T12:14:02.527413771Z [inf]  文章添加失败或已存在: 市场规模将突破50亿美元，它是被称为“绿色黄金”的药食同源 (ID: 2652887978_4)
+2025-11-14T12:14:02.527422943Z [inf]  第1页爬取成功
+2025-11-14T12:14:02.527430858Z [inf]  
+2025-11-14T12:14:02.527437993Z [inf]  item end
+2025-11-14T12:14:02.527444492Z [inf]  成功4条
+2025-11-14T12:14:02.527454718Z [inf]  更新完成
+2025-11-14T12:14:02.527475515Z [inf]  发送消息: 
+2025-11-14T12:14:02.527484530Z [inf]  ### FBIF食品饮料创新 订阅消息：
+2025-11-14T12:14:02.527493921Z [inf]  
+2025-11-14T12:14:02.527502031Z [inf]  
+2025-11-14T12:14:02.527508789Z [inf]  - [**11.5元买一瓶“水”？不，是胖东来在卖的透明可乐**](https://mp.weixin.qq.com/s/sdyAH0OmNxgWxOGNCNyDMQ) (2025-11-14 08:31:41)
+2025-11-14T12:14:02.527515455Z [inf]  
+2025-11-14T12:14:02.527520658Z [inf]  
+2025-11-14T12:14:02.527528893Z [inf]  
+2025-11-14T12:14:02.527535770Z [inf]  - [**乐事以“现金红包+明星见面”双轨抽奖，激发高价值体验**](https://mp.weixin.qq.com/s/kGzv84iW4C1JOhsDuHQJhA) (2025-11-14 08:31:41)
+2025-11-14T12:14:02.527541025Z [inf]  
+2025-11-14T12:14:02.527646308Z [inf]  
+2025-11-14T12:14:02.527651918Z [inf]  
+2025-11-14T12:14:02.527656676Z [inf]  - [**对话「水獭吨吨」联创莫莫子：用冲调的方式，做茶饮“基础款”**](https://mp.weixin.qq.com/s/SEfazildXhtMTlWYVYdKEA) (2025-11-14 08:31:41)
+2025-11-14T12:14:02.527662566Z [inf]  
+2025-11-14T12:14:02.527667914Z [inf]  
+2025-11-14T12:14:02.527677967Z [inf]  
+2025-11-14T12:14:02.527684914Z [inf]  - [**2025年双十一全网销售数据解读报告**](https://mp.weixin.qq.com/s/m6sz6ScNaXoVH-5ouFhq2Q) (2025-11-14 08:31:41)
+2025-11-14T12:14:02.527692455Z [inf]  
+2025-11-14T12:14:02.530297614Z [inf]  
+2025-11-14T12:14:02.530303864Z [inf]  
+2025-11-14T12:14:02.530309880Z [inf]      
+2025-11-14T12:14:02.530316805Z [inf]  未提供webhook_url
+2025-11-14T12:14:02.530323542Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[FBIF食品饮料创新]执行成功,4成功条数
+2025-11-14T12:14:02.530331233Z [inf]  任务执行完成，耗时: 41.26秒
+2025-11-14T12:14:03.523684343Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:14:03.523690720Z [inf]  执行任务
+2025-11-14T12:14:03.523698245Z [inf]  更新公众号MP_WXS_3871826782的sync_time为1763122442
+2025-11-14T12:14:03.523705150Z [inf]  更新公众号MP_WXS_3871826782的updated_at为2025-11-14 20:14:02.715160
+2025-11-14T12:14:03.523712160Z [inf]  更新公众号MP_WXS_3871826782的update_time为1763122442
+2025-11-14T12:14:03.523720051Z [inf]  Web浏览器模式,是否采集[大红好运哥]内容：True
+2025-11-14T12:14:03.523728122Z [inf]  
+2025-11-14T12:14:03.523735282Z [inf]  第1页开始爬取
+2025-11-14T12:14:03.523743287Z [inf]  
+2025-11-14T12:14:23.654686387Z [inf]  文章添加失败或已存在: 事大了！！ (ID: 2247490362_1)
+2025-11-14T12:14:23.654700621Z [inf]  Article already exists: 3871826782-2247490358_1
+2025-11-14T12:14:23.654714212Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:14:23.654715527Z [inf]  文章添加失败或已存在: 太太，太诡异！！！ (ID: 2247490358_1)
+2025-11-14T12:14:23.654730495Z [inf]  Article already exists: 3871826782-2247490354_1
+2025-11-14T12:14:23.654738846Z [inf]  执行任务
+2025-11-14T12:14:23.654742687Z [inf]  文章添加失败或已存在: 字少！事大！！ (ID: 2247490354_1)
+2025-11-14T12:14:23.654748230Z [inf]  更新公众号MP_WXS_3015646136的sync_time为1763122460
+2025-11-14T12:14:23.654755585Z [inf]  第1页爬取成功
+2025-11-14T12:14:23.654760701Z [inf]  更新公众号MP_WXS_3015646136的updated_at为2025-11-14 20:14:20.675379
+2025-11-14T12:14:23.654791717Z [inf]  Article already exists: 3871826782-2247490370_1
+2025-11-14T12:14:23.654799398Z [inf]  文章添加失败或已存在: 字少！事大！ (ID: 2247490370_1)
+2025-11-14T12:14:23.654806334Z [inf]  Article already exists: 3871826782-2247490366_1
+2025-11-14T12:14:23.654814215Z [inf]  
+2025-11-14T12:14:23.654819763Z [inf]  文章添加失败或已存在: 大涨！大赚！！ (ID: 2247490366_1)
+2025-11-14T12:14:23.654824653Z [inf]  item end
+2025-11-14T12:14:23.654833205Z [inf]  Article already exists: 3871826782-2247490362_1
+2025-11-14T12:14:23.654836949Z [inf]  成功0条
+2025-11-14T12:14:23.654846569Z [err]  2025-11-14 20:14:20 - WARNING - 没有更新到文章
+2025-11-14T12:14:23.654847333Z [inf]  更新完成
+2025-11-14T12:14:23.654860503Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[大红好运哥]执行成功,0成功条数
+2025-11-14T12:14:23.654868497Z [inf]  任务执行完成，耗时: 17.76秒
+2025-11-14T12:14:23.654888306Z [inf]  更新公众号MP_WXS_3015646136的update_time为1763122460
+2025-11-14T12:14:23.659479342Z [inf]  第1页开始爬取
+2025-11-14T12:14:23.659486866Z [inf]  
+2025-11-14T12:14:23.659600857Z [inf]  Web浏览器模式,是否采集[L先生说]内容：True
+2025-11-14T12:14:23.659609227Z [inf]  
+2025-11-14T12:14:26.655909314Z [inf]  Article already exists: 3015646136-2247488630_1
+2025-11-14T12:14:26.655918223Z [inf]  文章添加失败或已存在: 简单到不可能失败的高效技巧 (ID: 2247488630_1)
+2025-11-14T12:14:28.901072266Z [inf]  Article already exists: 3015646136-2247488625_1
+2025-11-14T12:14:28.901080495Z [inf]  文章添加失败或已存在: 这个少见的思维方式，让你脱胎换骨般成长 (ID: 2247488625_1)
+2025-11-14T12:14:30.158538436Z [inf]  Article already exists: 3015646136-2247488621_1
+2025-11-14T12:14:30.158545566Z [inf]  文章添加失败或已存在: 警惕：会让大脑悄悄变笨的生活方式 (ID: 2247488621_1)
+2025-11-14T12:14:31.148001780Z [inf]  Article already exists: 3015646136-2247488614_1
+2025-11-14T12:14:31.148007209Z [inf]  文章添加失败或已存在: 每天半小时，就能受益终生的习惯 (ID: 2247488614_1)
+2025-11-14T12:14:32.269713909Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:14:32.269730000Z [inf]  执行任务
+2025-11-14T12:14:32.269918126Z [inf]  Article already exists: 3015646136-2247488609_1
+2025-11-14T12:14:32.269926092Z [inf]  文章添加失败或已存在: 这些生活方式，让大脑变得更聪明 (ID: 2247488609_1)
+2025-11-14T12:14:32.269934315Z [inf]  第1页爬取成功
+2025-11-14T12:14:32.269942851Z [inf]  
+2025-11-14T12:14:32.269952970Z [inf]  item end
+2025-11-14T12:14:32.269961196Z [inf]  成功0条
+2025-11-14T12:14:32.269970297Z [inf]  更新完成
+2025-11-14T12:14:32.269978393Z [err]  2025-11-14 20:14:32 - WARNING - 没有更新到文章
+2025-11-14T12:14:32.269985715Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[L先生说]执行成功,0成功条数
+2025-11-14T12:14:32.269992518Z [inf]  任务执行完成，耗时: 11.42秒
+2025-11-14T12:14:33.166557264Z [inf]  更新公众号MP_WXS_3079310539的sync_time为1763122472
+2025-11-14T12:14:33.166574212Z [inf]  更新公众号MP_WXS_3079310539的updated_at为2025-11-14 20:14:32.278633
+2025-11-14T12:14:33.166584962Z [inf]  更新公众号MP_WXS_3079310539的update_time为1763122472
+2025-11-14T12:14:33.166593125Z [inf]  Web浏览器模式,是否采集[小饭桌]内容：True
+2025-11-14T12:14:33.166601785Z [inf]  
+2025-11-14T12:14:33.166611278Z [inf]  第1页开始爬取
+2025-11-14T12:14:33.166621430Z [inf]  
+2025-11-14T12:14:40.394886066Z [inf]  Article already exists: 3079310539-2653837844_1
+2025-11-14T12:14:40.394891320Z [inf]  文章添加失败或已存在: 上纬新材，又爆了！ (ID: 2653837844_1)
+2025-11-14T12:14:42.542167903Z [inf]  Article already exists: 3079310539-2653837844_2
+2025-11-14T12:14:42.542174840Z [inf]  文章添加失败或已存在: 掘金蓝海，机遇坦桑｜小饭局出海系列 (ID: 2653837844_2)
+2025-11-14T12:14:43.440978750Z [inf]  Article already exists: 3079310539-2653837832_1
+2025-11-14T12:14:43.440986495Z [inf]  文章添加失败或已存在: 瓜分国产GPU资本盛宴，Pre-IPO投资人“突击入股” (ID: 2653837832_1)
+2025-11-14T12:14:44.600489493Z [inf]  Article already exists: 3079310539-2653837832_2
+2025-11-14T12:14:44.600501023Z [inf]  文章添加失败或已存在: 瞄准线索获客行业痛点，打造AI线索转化Agent，「亿量科技」完成数千万元B1轮融资 (ID: 2653837832_2)
+2025-11-14T12:14:46.524726424Z [inf]  Article already exists: 3079310539-2653837824_1
+2025-11-14T12:14:46.524735531Z [inf]  文章添加失败或已存在: 自动驾驶赛道，一天来了两个超级IPO (ID: 2653837824_1)
+2025-11-14T12:14:47.649169593Z [inf]  Article already exists: 3079310539-2653837824_2
+2025-11-14T12:14:47.649189815Z [inf]  文章添加失败或已存在: “预见·2026” 年度榜单正式启动申报 (ID: 2653837824_2)
+2025-11-14T12:14:49.574003140Z [inf]  Article already exists: 3079310539-2653837818_1
+2025-11-14T12:14:49.574010846Z [inf]  文章添加失败或已存在: 140亿，又一“中芯系” IPO即将诞生！ (ID: 2653837818_1)
+2025-11-14T12:14:50.532447605Z [inf]  Article already exists: 3079310539-2653837813_1
+2025-11-14T12:14:50.532451690Z [inf]  文章添加失败或已存在: 市值超5万亿美元，昨晚英伟达又创造了历史 (ID: 2653837813_1)
+2025-11-14T12:14:50.532456351Z [inf]  第1页爬取成功
+2025-11-14T12:14:50.536047928Z [inf]  
+2025-11-14T12:14:50.536059745Z [inf]  item end
+2025-11-14T12:14:50.536067030Z [inf]  成功0条
+2025-11-14T12:14:50.536074345Z [inf]  更新完成
+2025-11-14T12:14:50.536081153Z [err]  2025-11-14 20:14:50 - WARNING - 没有更新到文章
+2025-11-14T12:14:50.536088977Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[小饭桌]执行成功,0成功条数
+2025-11-14T12:14:50.536095697Z [inf]  任务执行完成，耗时: 18.20秒
+2025-11-14T12:14:51.655059821Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:14:51.655068019Z [inf]  执行任务
+2025-11-14T12:14:51.655073209Z [inf]  更新公众号MP_WXS_3215037546的sync_time为1763122490
+2025-11-14T12:14:51.655079781Z [inf]  更新公众号MP_WXS_3215037546的updated_at为2025-11-14 20:14:50.675669
+2025-11-14T12:14:51.655086740Z [inf]  更新公众号MP_WXS_3215037546的update_time为1763122490
+2025-11-14T12:14:51.660661286Z [inf]  Web浏览器模式,是否采集[笔记侠]内容：True
+2025-11-14T12:14:51.660684792Z [inf]  
+2025-11-14T12:14:51.660693701Z [inf]  第1页开始爬取
+2025-11-14T12:14:51.660702233Z [inf]  
+2025-11-14T12:14:54.740956631Z [inf]  Article already exists: 3215037546-2654899909_1
+2025-11-14T12:14:54.740965712Z [inf]  文章添加失败或已存在: 为什么管理者必须要大量阅读？ (ID: 2654899909_1)
+2025-11-14T12:14:57.556316308Z [inf]  Article already exists: 3215037546-2654899908_1
+2025-11-14T12:14:57.556322322Z [inf]  文章添加失败或已存在: 巴菲特的60封股东信：时间，是最好的护城河 (ID: 2654899908_1)
+2025-11-14T12:14:59.616479093Z [inf]  Article already exists: 3215037546-2654899908_2
+2025-11-14T12:14:59.616488624Z [inf]  文章添加失败或已存在: 中国制造业“内卷式”现象是如何形成的？ (ID: 2654899908_2)
+2025-11-14T12:15:00.717207475Z [inf]  Article already exists: 3215037546-2654899894_1
+2025-11-14T12:15:00.717214538Z [inf]  文章添加失败或已存在: 靠谱，是对一个人最高的评价 (ID: 2654899894_1)
+2025-11-14T12:15:02.600983587Z [inf]  Article already exists: 3215037546-2654899893_1
+2025-11-14T12:15:02.600989414Z [inf]  文章添加失败或已存在: 段永平罕见访谈：我之所以是我，大多是因为我不做什么 (ID: 2654899893_1)
+2025-11-14T12:15:04.730037607Z [inf]  Article already exists: 3215037546-2654899893_2
+2025-11-14T12:15:04.730053092Z [inf]  文章添加失败或已存在: 巴菲特发布最后一封致股东信：我“纯属运气好” (ID: 2654899893_2)
+2025-11-14T12:15:04.730058875Z [inf]  Article already exists: 3215037546-2654899877_1
+2025-11-14T12:15:04.730065680Z [inf]  文章添加失败或已存在: 十五五规划，释放的9大信号 (ID: 2654899877_1)
+2025-11-14T12:15:04.730071504Z [inf]  第1页爬取成功
+2025-11-14T12:15:04.730077631Z [inf]  
+2025-11-14T12:15:04.730083568Z [inf]  item end
+2025-11-14T12:15:04.730089442Z [inf]  成功0条
+2025-11-14T12:15:04.730095223Z [inf]  更新完成
+2025-11-14T12:15:04.730100823Z [err]  2025-11-14 20:15:04 - WARNING - 没有更新到文章
+2025-11-14T12:15:04.730106353Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[笔记侠]执行成功,0成功条数
+2025-11-14T12:15:04.730112101Z [inf]  任务执行完成，耗时: 13.99秒
+2025-11-14T12:15:05.756898271Z [inf]  更新公众号MP_WXS_3220199623的updated_at为2025-11-14 20:15:04.860889
+2025-11-14T12:15:05.756912649Z [inf]  更新公众号MP_WXS_3220199623的update_time为1763122504
+2025-11-14T12:15:05.756924792Z [inf]  Web浏览器模式,是否采集[42章经]内容：True
+2025-11-14T12:15:05.756930985Z [inf]  
+2025-11-14T12:15:05.756938101Z [inf]  第1页开始爬取
+2025-11-14T12:15:05.756944937Z [inf]  
+2025-11-14T12:15:05.756958928Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:15:05.756968786Z [inf]  执行任务
+2025-11-14T12:15:05.756976618Z [inf]  更新公众号MP_WXS_3220199623的sync_time为1763122504
+2025-11-14T12:15:25.278291300Z [inf]  Article already exists: 3220199623-2651051302_1
+2025-11-14T12:15:25.278304328Z [inf]  文章添加失败或已存在: 为什么说 AI 还没到泡沫？等四篇 | 42章经 AI Newsletter (ID: 2651051302_1)
+2025-11-14T12:15:25.278313299Z [inf]  Article already exists: 3220199623-2651051244_1
+2025-11-14T12:15:25.278322043Z [inf]  文章添加失败或已存在: OpusClip 增长秘诀：如果每个阶段只让我选一件事做 | 42章经 (ID: 2651051244_1)
+2025-11-14T12:15:25.278329741Z [inf]  Article already exists: 3220199623-2651051208_1
+2025-11-14T12:15:25.278348309Z [inf]  文章添加失败或已存在: Figma 如何战胜 Adobe 等六篇 | 42章经 AI Newsletter (ID: 2651051208_1)
+2025-11-14T12:15:25.278355710Z [inf]  Article already exists: 3220199623-2651051164_1
+2025-11-14T12:15:25.278362334Z [inf]  文章添加失败或已存在: 一个原教旨主义产品经理眼中的世界｜42章经 (ID: 2651051164_1)
+2025-11-14T12:15:25.278369358Z [inf]  Article already exists: 3220199623-2651051042_1
+2025-11-14T12:15:25.278377364Z [inf]  文章添加失败或已存在: 组织能力才是 AI 公司真正的壁垒｜42章经 (ID: 2651051042_1)
+2025-11-14T12:15:25.278386518Z [inf]  第1页爬取成功
+2025-11-14T12:15:25.278395498Z [inf]  
+2025-11-14T12:15:25.278403565Z [inf]  item end
+2025-11-14T12:15:25.278410414Z [inf]  成功0条
+2025-11-14T12:15:25.278416994Z [inf]  更新完成
+2025-11-14T12:15:25.278424175Z [err]  2025-11-14 20:15:23 - WARNING - 没有更新到文章
+2025-11-14T12:15:25.278437308Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[42章经]执行成功,0成功条数
+2025-11-14T12:15:25.278444284Z [inf]  任务执行完成，耗时: 18.34秒
+2025-11-14T12:15:25.278449701Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:15:25.278455383Z [inf]  执行任务
+2025-11-14T12:15:25.281915567Z [inf]  更新公众号MP_WXS_3572959446的sync_time为1763122523
+2025-11-14T12:15:25.281926282Z [inf]  更新公众号MP_WXS_3572959446的updated_at为2025-11-14 20:15:23.396412
+2025-11-14T12:15:25.281934371Z [inf]  更新公众号MP_WXS_3572959446的update_time为1763122523
+2025-11-14T12:15:25.281941608Z [inf]  Web浏览器模式,是否采集[晚点LatePost]内容：True
+2025-11-14T12:15:25.281948680Z [inf]  
+2025-11-14T12:15:25.281955778Z [inf]  第1页开始爬取
+2025-11-14T12:15:25.281962098Z [inf]  
+2025-11-14T12:15:32.162969972Z [inf]  Article already exists: 3572959446-2247530441_1
+2025-11-14T12:15:32.162977089Z [inf]  文章添加失败或已存在: 平替时代：一家车企、一个行业如何被自己的成功困住 (ID: 2247530441_1)
+2025-11-14T12:15:34.283659548Z [inf]  Article already exists: 3572959446-2247530441_2
+2025-11-14T12:15:34.283958618Z [inf]  文章添加失败或已存在: 找不到槽点的毛戈平 (ID: 2247530441_2)
+2025-11-14T12:15:35.424222726Z [inf]  Article already exists: 3572959446-2247530412_1
+2025-11-14T12:15:35.424230533Z [inf]  文章添加失败或已存在: 飞书的第一个双十一：以 AI 参与电商效率战 (ID: 2247530412_1)
+2025-11-14T12:15:37.691376473Z [inf]  Article already exists: 3572959446-2247530412_2
+2025-11-14T12:15:37.691384044Z [inf]  文章添加失败或已存在: 适者生存，比亚迪学着用日本的方式进入日本 (ID: 2247530412_2)
+2025-11-14T12:15:38.823240903Z [inf]  Article already exists: 3572959446-2247530398_1
+2025-11-14T12:15:38.823248622Z [inf]  文章添加失败或已存在: 对话深势科技张林峰、孙伟杰：AI for Science，从开始到现在 (ID: 2247530398_1)
+2025-11-14T12:15:40.820033864Z [inf]  Article already exists: 3572959446-2247530398_2
+2025-11-14T12:15:40.820039786Z [inf]  文章添加失败或已存在: 市场分歧的背后，赛力斯已现 “滞胀” 迹象 (ID: 2247530398_2)
+2025-11-14T12:15:42.880624385Z [inf]  文章添加失败或已存在: 淘宝闪购双十一作战计划，和零售持久战的新开始 (ID: 2247530364_1)
+2025-11-14T12:15:42.880663199Z [inf]  Article already exists: 3572959446-2247530364_1
+2025-11-14T12:15:43.930388882Z [inf]  Article already exists: 3572959446-2247530364_2
+2025-11-14T12:15:43.930393926Z [inf]  文章添加失败或已存在: 安世半导体事件发酵一个月，车企和供应链怎么说？ (ID: 2247530364_2)
+2025-11-14T12:15:45.910504639Z [inf]  Article already exists: 3572959446-2247530364_3
+2025-11-14T12:15:45.910513563Z [inf]  文章添加失败或已存在: 特别策划丨ThinkPad×端脑科技：算力平权之路，与思考者同行 (ID: 2247530364_3)
+2025-11-14T12:15:47.818868076Z [inf]  Article already exists: 3572959446-2247530338_1
+2025-11-14T12:15:47.818873520Z [inf]  文章添加失败或已存在: 鸿蒙智行闯出中国汽车高端化 “新解法” (ID: 2247530338_1)
+2025-11-14T12:15:47.818878447Z [inf]  第1页爬取成功
+2025-11-14T12:15:47.818884161Z [inf]  
+2025-11-14T12:15:47.818889138Z [inf]  item end
+2025-11-14T12:15:47.818894209Z [inf]  成功0条
+2025-11-14T12:15:47.818900034Z [inf]  更新完成
+2025-11-14T12:15:47.818904934Z [err]  2025-11-14 20:15:47 - WARNING - 没有更新到文章
+2025-11-14T12:15:47.818910133Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[晚点LatePost]执行成功,0成功条数
+2025-11-14T12:15:47.818915646Z [inf]  任务执行完成，耗时: 24.03秒
+2025-11-14T12:15:47.818920823Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:15:47.818926289Z [inf]  执行任务
+2025-11-14T12:15:47.819009757Z [inf]  更新公众号MP_WXS_3874762412的sync_time为1763122547
+2025-11-14T12:15:47.819019452Z [inf]  更新公众号MP_WXS_3874762412的updated_at为2025-11-14 20:15:47.625392
+2025-11-14T12:15:47.819026321Z [inf]  更新公众号MP_WXS_3874762412的update_time为1763122547
+2025-11-14T12:15:47.819034753Z [inf]  Web浏览器模式,是否采集[深思圈]内容：True
+2025-11-14T12:15:47.819045079Z [inf]  
+2025-11-14T12:15:47.819131044Z [inf]  第1页开始爬取
+2025-11-14T12:15:47.819138727Z [inf]  
+2025-11-14T12:16:07.528003604Z [inf]  Article already exists: 3874762412-2247491309_1
+2025-11-14T12:16:07.528016636Z [inf]  文章添加失败或已存在: 从"最蠢的想法"到年收入1亿美元：Gamma的逆袭之路 (ID: 2247491309_1)
+2025-11-14T12:16:07.528025406Z [inf]  Article already exists: 3874762412-2247491291_1
+2025-11-14T12:16:07.528033678Z [inf]  文章添加失败或已存在: 如何在产品发布第一天就获得百万曝光：一个 23 岁创业者的百万美元生意经 (ID: 2247491291_1)
+2025-11-14T12:16:07.528041599Z [inf]  Article already exists: 3874762412-2247491282_1
+2025-11-14T12:16:07.528052778Z [inf]  文章添加失败或已存在: Cursor 首度揭秘："训练即产品"，用强化学习让 AI 编程快 4 倍的秘密武器 (ID: 2247491282_1)
+2025-11-14T12:16:07.528071620Z [inf]  Article already exists: 3874762412-2247491230_1
+2025-11-14T12:16:07.528081605Z [inf]  文章添加失败或已存在: 深度长文｜AI初创公司如何打赢招聘这场战争 (ID: 2247491230_1)
+2025-11-14T12:16:07.528088876Z [inf]  Article already exists: 3874762412-2247491057_1
+2025-11-14T12:16:07.528129105Z [inf]  文章添加失败或已存在: 揭秘a16z是如何靠新媒体成为全球顶级VC的 (ID: 2247491057_1)
+2025-11-14T12:16:07.528139020Z [inf]  第1页爬取成功
+2025-11-14T12:16:07.528149050Z [inf]  
+2025-11-14T12:16:07.528157897Z [inf]  item end
+2025-11-14T12:16:07.528172213Z [inf]  成功0条
+2025-11-14T12:16:07.528180058Z [inf]  更新完成
+2025-11-14T12:16:07.528191082Z [err]  2025-11-14 20:16:04 - WARNING - 没有更新到文章
+2025-11-14T12:16:07.528199547Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[深思圈]执行成功,0成功条数
+2025-11-14T12:16:07.528208007Z [inf]  任务执行完成，耗时: 17.19秒
+2025-11-14T12:16:07.528215121Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:16:07.534382238Z [inf]  执行任务
+2025-11-14T12:16:07.534396937Z [inf]  更新公众号MP_WXS_3298956650的sync_time为1763122564
+2025-11-14T12:16:07.534404024Z [inf]  更新公众号MP_WXS_3298956650的updated_at为2025-11-14 20:16:04.994835
+2025-11-14T12:16:07.534410944Z [inf]  更新公众号MP_WXS_3298956650的update_time为1763122564
+2025-11-14T12:16:07.534417892Z [inf]  Web浏览器模式,是否采集[投资界]内容：True
+2025-11-14T12:16:07.534425456Z [inf]  
+2025-11-14T12:16:07.534432723Z [inf]  第1页开始爬取
+2025-11-14T12:16:07.534440326Z [inf]  
+2025-11-14T12:16:16.620246884Z [inf]  Article already exists: 3298956650-2247703014_1
+2025-11-14T12:16:16.620255661Z [inf]  文章添加失败或已存在: 段永平，最神奇一笔投资 (ID: 2247703014_1)
+2025-11-14T12:16:18.736299459Z [inf]  Article already exists: 3298956650-2247703014_2
+2025-11-14T12:16:18.736306465Z [inf]  文章添加失败或已存在: 两个IPO找上高瓴 (ID: 2247703014_2)
+2025-11-14T12:16:19.842819238Z [inf]  Article already exists: 3298956650-2247703014_3
+2025-11-14T12:16:19.842827722Z [inf]  文章添加失败或已存在: 李飞飞长文火爆硅谷 (ID: 2247703014_3)
+2025-11-14T12:16:20.803071842Z [inf]  Article already exists: 3298956650-2247703014_4
+2025-11-14T12:16:20.803079665Z [inf]  文章添加失败或已存在: 医生降薪潮 (ID: 2247703014_4)
+2025-11-14T12:16:22.668729291Z [inf]  Article already exists: 3298956650-2247702825_1
+2025-11-14T12:16:22.668737558Z [inf]  文章添加失败或已存在: 源码11岁，刚刚募集6亿美元 (ID: 2247702825_1)
+2025-11-14T12:16:24.811896312Z [inf]  Article already exists: 3298956650-2247702825_2
+2025-11-14T12:16:24.811913224Z [inf]  文章添加失败或已存在: 雷军挖来一位女将 (ID: 2247702825_2)
+2025-11-14T12:16:25.733627021Z [inf]  Article already exists: 3298956650-2247702825_3
+2025-11-14T12:16:25.733634592Z [inf]  文章添加失败或已存在: 警惕一级市场的挤出效应 (ID: 2247702825_3)
+2025-11-14T12:16:26.722454444Z [inf]  Article already exists: 3298956650-2247702825_4
+2025-11-14T12:16:26.722464708Z [inf]  文章添加失败或已存在: 创·投嘉年华，六大站点一起来玩 (ID: 2247702825_4)
+2025-11-14T12:16:28.813709189Z [inf]  Article already exists: 3298956650-2247702610_1
+2025-11-14T12:16:28.813716140Z [inf]  文章添加失败或已存在: 孙正义，撤了 (ID: 2247702610_1)
+2025-11-14T12:16:29.950096556Z [inf]  Article already exists: 3298956650-2247702610_2
+2025-11-14T12:16:29.950105543Z [inf]  文章添加失败或已存在: 合肥国资，买了一家上市公司 (ID: 2247702610_2)
+2025-11-14T12:16:31.745293296Z [inf]  Article already exists: 3298956650-2247702610_3
+2025-11-14T12:16:31.745299684Z [inf]  文章添加失败或已存在: 我在巴西一天卖3000单 (ID: 2247702610_3)
+2025-11-14T12:16:34.027236657Z [inf]  Article already exists: 3298956650-2247702610_4
+2025-11-14T12:16:34.027242364Z [inf]  文章添加失败或已存在: “朝好融”投融资路演厅——数字经济领航专场 (ID: 2247702610_4)
+2025-11-14T12:16:34.991113631Z [inf]  Article already exists: 3298956650-2247702493_1
+2025-11-14T12:16:34.991119059Z [inf]  文章添加失败或已存在: 35亿，年底最大VC募资诞生 (ID: 2247702493_1)
+2025-11-14T12:16:36.995395128Z [inf]  Article already exists: 3298956650-2247702493_2
+2025-11-14T12:16:36.995406950Z [inf]  文章添加失败或已存在: 他们买下中国汉堡王 (ID: 2247702493_2)
+2025-11-14T12:16:38.099287122Z [inf]  Article already exists: 3298956650-2247702493_3
+2025-11-14T12:16:38.099297353Z [inf]  文章添加失败或已存在: 中国人集体戒酒 (ID: 2247702493_3)
+2025-11-14T12:16:39.940765225Z [inf]  Article already exists: 3298956650-2247702493_4
+2025-11-14T12:16:39.940773183Z [inf]  文章添加失败或已存在: 华人首富炼成 (ID: 2247702493_4)
+2025-11-14T12:16:40.989688603Z [inf]  Article already exists: 3298956650-2247702392_1
+2025-11-14T12:16:40.989695958Z [inf]  文章添加失败或已存在: 一群人，投出三个5000亿 (ID: 2247702392_1)
+2025-11-14T12:16:43.061199242Z [inf]  Article already exists: 3298956650-2247702392_2
+2025-11-14T12:16:43.061207921Z [inf]  文章添加失败或已存在: 我，AI创始人，去深圳了 (ID: 2247702392_2)
+2025-11-14T12:16:44.286932943Z [inf]  Article already exists: 3298956650-2247702392_3
+2025-11-14T12:16:44.286942958Z [inf]  文章添加失败或已存在: 黄仁勋的疯狂投资版图 (ID: 2247702392_3)
+2025-11-14T12:16:46.064838417Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[投资界]执行成功,0成功条数
+2025-11-14T12:16:46.064857359Z [inf]  任务执行完成，耗时: 40.89秒
+2025-11-14T12:16:46.064868138Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:16:46.064876381Z [inf]  执行任务
+2025-11-14T12:16:46.064998680Z [inf]  Article already exists: 3298956650-2247702392_4
+2025-11-14T12:16:46.065004358Z [inf]  文章添加失败或已存在: 小登老登吵起来了 (ID: 2247702392_4)
+2025-11-14T12:16:46.065012097Z [inf]  第1页爬取成功
+2025-11-14T12:16:46.065020765Z [inf]  
+2025-11-14T12:16:46.065028262Z [inf]  item end
+2025-11-14T12:16:46.065036609Z [inf]  成功0条
+2025-11-14T12:16:46.065043277Z [inf]  更新完成
+2025-11-14T12:16:46.065049983Z [err]  2025-11-14 20:16:45 - WARNING - 没有更新到文章
+2025-11-14T12:16:46.093311830Z [inf]  更新公众号MP_WXS_3252017115的sync_time为1763122606
+2025-11-14T12:16:46.093322478Z [inf]  更新公众号MP_WXS_3252017115的updated_at为2025-11-14 20:16:46.076526
+2025-11-14T12:16:46.093329576Z [inf]  更新公众号MP_WXS_3252017115的update_time为1763122606
+2025-11-14T12:16:46.102704538Z [inf]  Web浏览器模式,是否采集[龙共火火]内容：True
+2025-11-14T12:16:46.102716044Z [inf]  
+2025-11-14T12:16:46.102735797Z [inf]  第1页开始爬取
+2025-11-14T12:16:46.102744224Z [inf]  
+2025-11-14T12:17:05.881286854Z [inf]  Article already exists: 3252017115-2454715254_1
+2025-11-14T12:17:05.881294148Z [inf]  文章添加失败或已存在: 段永平最新深度访谈：“稀里糊涂 6 个月赚了 20 倍” (ID: 2454715254_1)
+2025-11-14T12:17:05.881300153Z [inf]  Article already exists: 3252017115-2454715249_1
+2025-11-14T12:17:05.881306549Z [inf]  文章添加失败或已存在: 下一波流量红利，藏在“想象力输入法”里 (ID: 2454715249_1)
+2025-11-14T12:17:05.881312775Z [inf]  Article already exists: 3252017115-2454715232_1
+2025-11-14T12:17:05.881323012Z [inf]  文章添加失败或已存在: 创业6年深度反思：关于流量、平台、IP、认知成长及团队 (ID: 2454715232_1)
+2025-11-14T12:17:05.881333855Z [inf]  Article already exists: 3252017115-2454715204_1
+2025-11-14T12:17:05.881340834Z [inf]  文章添加失败或已存在: 创业三年，关于短视频+直播+流量千万级经验复盘 (ID: 2454715204_1)
+2025-11-14T12:17:05.881347027Z [inf]  Article already exists: 3252017115-2454715164_1
+2025-11-14T12:17:05.881352478Z [inf]  文章添加失败或已存在: 十倍速成长背后的秘密 (ID: 2454715164_1)
+2025-11-14T12:17:05.881358896Z [inf]  第1页爬取成功
+2025-11-14T12:17:05.881365936Z [inf]  
+2025-11-14T12:17:05.881378633Z [inf]  item end
+2025-11-14T12:17:05.881386353Z [inf]  成功0条
+2025-11-14T12:17:05.881392738Z [inf]  更新完成
+2025-11-14T12:17:05.881397654Z [err]  2025-11-14 20:17:03 - WARNING - 没有更新到文章
+2025-11-14T12:17:05.881403300Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[龙共火火]执行成功,0成功条数
+2025-11-14T12:17:05.881409194Z [inf]  任务执行完成，耗时: 17.43秒
+2025-11-14T12:17:05.881415721Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:17:05.881420821Z [inf]  执行任务
+2025-11-14T12:17:05.881426487Z [inf]  更新公众号MP_WXS_3236757533的sync_time为1763122623
+2025-11-14T12:17:06.803058384Z [inf]  更新公众号MP_WXS_3236757533的updated_at为2025-11-14 20:17:03.695007
+2025-11-14T12:17:06.803063983Z [inf]  更新公众号MP_WXS_3236757533的update_time为1763122623
+2025-11-14T12:17:06.803070010Z [inf]  Web浏览器模式,是否采集[量子位]内容：True
+2025-11-14T12:17:06.803076499Z [inf]  
+2025-11-14T12:17:06.803084512Z [inf]  第1页开始爬取
+2025-11-14T12:17:06.803090456Z [inf]  
+2025-11-14T12:17:12.897695573Z [inf]  成功添加文章: 原神Agent，字节出品 (ID: 3236757533-2247843594_1)
+2025-11-14T12:17:12.900983186Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:12.901007879Z [inf]  
+2025-11-14T12:17:12.901016382Z [inf]  已触发文章 3236757533-2247843594_1 的AI简报生成任务
+2025-11-14T12:17:14.130225563Z [inf]  成功添加文章: 这届清华特奖机器人含量爆表！丘成桐（国内版）现身点评 (ID: 3236757533-2247843594_2)
+2025-11-14T12:17:14.130232410Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:14.130240352Z [inf]  
+2025-11-14T12:17:14.130249631Z [inf]  已触发文章 3236757533-2247843594_2 的AI简报生成任务
+2025-11-14T12:17:15.141347900Z [inf]  成功添加文章: 聊AI，当然得来量子位MEET大会！首波嘉宾阵容曝光 (ID: 3236757533-2247843489_1)
+2025-11-14T12:17:15.141356707Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:15.141365602Z [inf]  
+2025-11-14T12:17:15.141373777Z [inf]  已触发文章 3236757533-2247843489_1 的AI简报生成任务
+2025-11-14T12:17:16.065879592Z [inf]  成功添加文章: 4个旷视天才具身创业获投近10亿，阿里独家很瞩目 (ID: 3236757533-2247843489_2)
+2025-11-14T12:17:16.065885585Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:16.065892592Z [inf]  
+2025-11-14T12:17:16.065899663Z [inf]  已触发文章 3236757533-2247843489_2 的AI简报生成任务
+2025-11-14T12:17:17.068320935Z [inf]  成功添加文章: 小米给智能家居做了个“大模型大脑” (ID: 3236757533-2247843489_3)
+2025-11-14T12:17:17.068359585Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:17.068370126Z [inf]  
+2025-11-14T12:17:17.068378001Z [inf]  已触发文章 3236757533-2247843489_3 的AI简报生成任务
+2025-11-14T12:17:19.105342131Z [inf]  成功添加文章: 最后一周！人工智能年度榜单申报即将截止。 (ID: 3236757533-2247843489_4)
+2025-11-14T12:17:19.105349903Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:19.105358222Z [inf]  
+2025-11-14T12:17:19.105368632Z [inf]  已触发文章 3236757533-2247843489_4 的AI简报生成任务
+2025-11-14T12:17:20.132561946Z [inf]  成功添加文章: 何必DiT！字节首次拿着自回归，单GPU一分钟生成5秒720p视频 | NeurIPS'25 Oral (ID: 3236757533-2247843279_1)
+2025-11-14T12:17:20.132566766Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:20.132573038Z [inf]  
+2025-11-14T12:17:20.132579281Z [inf]  已触发文章 3236757533-2247843279_1 的AI简报生成任务
+2025-11-14T12:17:22.062042407Z [inf]  成功添加文章: 发布即开放：百度猎户座葫芦里卖的什么药？ (ID: 3236757533-2247843279_2)
+2025-11-14T12:17:22.062050804Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:22.062057262Z [inf]  
+2025-11-14T12:17:22.062064025Z [inf]  已触发文章 3236757533-2247843279_2 的AI简报生成任务
+2025-11-14T12:17:23.307931437Z [inf]  成功添加文章: 腾讯总裁剧透微信搭载智能体！阿里和谷歌也都开始互相伤害了 (ID: 3236757533-2247843279_3)
+2025-11-14T12:17:23.307937336Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:23.307946748Z [inf]  
+2025-11-14T12:17:23.307954203Z [inf]  已触发文章 3236757533-2247843279_3 的AI简报生成任务
+2025-11-14T12:17:25.445434150Z [inf]  成功添加文章: 破解多模态大模型“选择困难症”！内部决策机制首次揭秘：在冲突信息间疯狂"振荡" (ID: 3236757533-2247843279_4)
+2025-11-14T12:17:25.445442153Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:25.445449101Z [inf]  
+2025-11-14T12:17:25.445456102Z [inf]  已触发文章 3236757533-2247843279_4 的AI简报生成任务
+2025-11-14T12:17:27.215649462Z [inf]  成功添加文章: 报名启动！快来和张亚勤孙茂松一起参与MEET2026智能未来大会 (ID: 3236757533-2247843279_5)
+2025-11-14T12:17:27.215657062Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:27.215664717Z [inf]  
+2025-11-14T12:17:27.215851442Z [inf]  已触发文章 3236757533-2247843279_5 的AI简报生成任务
+2025-11-14T12:17:29.735616945Z [inf]  成功添加文章: 雷军下铺的兄弟，创业家务机器人 (ID: 3236757533-2247843009_1)
+2025-11-14T12:17:29.735623692Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:29.735633116Z [inf]  
+2025-11-14T12:17:29.735641853Z [inf]  已触发文章 3236757533-2247843009_1 的AI简报生成任务
+2025-11-14T12:17:30.675666950Z [inf]  成功添加文章: AI Coding最贵300人：2年2050亿估值，刚又被塞了160亿 (ID: 3236757533-2247843009_2)
+2025-11-14T12:17:30.675672996Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:30.675678838Z [inf]  
+2025-11-14T12:17:30.675683611Z [inf]  已触发文章 3236757533-2247843009_2 的AI简报生成任务
+2025-11-14T12:17:32.737244994Z [inf]  成功添加文章: 破解多模态大模型“选择困难症”！内部决策机制首次揭秘：在冲突信息间疯狂"振荡" (ID: 3236757533-2247843009_3)
+2025-11-14T12:17:32.737249695Z [inf]  默认队列队列任务添加成功
+2025-11-14T12:17:32.737254645Z [inf]  
+2025-11-14T12:17:32.737258800Z [inf]  已触发文章 3236757533-2247843009_3 的AI简报生成任务
+2025-11-14T12:17:32.737262826Z [inf]  Article already exists: 3236757533-2247842469_1
+2025-11-14T12:17:32.737266883Z [inf]  文章添加失败或已存在: LeCun在Meta的最后一篇论文 (ID: 2247842469_1)
+2025-11-14T12:17:34.735649221Z [inf]  - [**这届清华特奖机器人含量爆表！丘成桐（国内版）现身点评**](https://mp.weixin.qq.com/s/rFH3Qqt2prcLyFxUDh2d8w) (2025-11-14 20:10:00)
+2025-11-14T12:17:34.735662480Z [inf]  
+2025-11-14T12:17:34.735669078Z [inf]  
+2025-11-14T12:17:34.735674946Z [inf]  
+2025-11-14T12:17:34.735681219Z [inf]  - [**聊AI，当然得来量子位MEET大会！首波嘉宾阵容曝光**](https://mp.weixin.qq.com/s/ZLdhMt_E1vnau3HtMi8QRQ) (2025-11-14 16:22:00)
+2025-11-14T12:17:34.735688145Z [inf]  
+2025-11-14T12:17:34.735693440Z [inf]  
+2025-11-14T12:17:34.735699775Z [inf]  
+2025-11-14T12:17:34.735707475Z [inf]  - [**4个旷视天才具身创业获投近10亿，阿里独家很瞩目**](https://mp.weixin.qq.com/s/u-CsrzrxChW_ydtqoUiFmg) (2025-11-14 16:22:00)
+2025-11-14T12:17:34.735714495Z [inf]  
+2025-11-14T12:17:34.735778484Z [inf]  Article already exists: 3236757533-2247842469_2
+2025-11-14T12:17:34.735786714Z [inf]  文章添加失败或已存在: 用155万模拟视频给模型上课！GVE模型一次学会9种视频检索技能 (ID: 2247842469_2)
+2025-11-14T12:17:34.735794951Z [inf]  第1页爬取成功
+2025-11-14T12:17:34.735802248Z [inf]  
+2025-11-14T12:17:34.735810682Z [inf]  item end
+2025-11-14T12:17:34.735819933Z [inf]  成功14条
+2025-11-14T12:17:34.735822467Z [inf]  
+2025-11-14T12:17:34.735828480Z [inf]  更新完成
+2025-11-14T12:17:34.735832124Z [inf]  
+2025-11-14T12:17:34.735837276Z [inf]  发送消息: 
+2025-11-14T12:17:34.735852189Z [inf]  ### 量子位 订阅消息：
+2025-11-14T12:17:34.735862854Z [inf]  
+2025-11-14T12:17:34.735870713Z [inf]  
+2025-11-14T12:17:34.735877005Z [inf]  - [**原神Agent，字节出品**](https://mp.weixin.qq.com/s/JmPJgo7YBmVgokw_1Z1HYw) (2025-11-14 20:10:00)
+2025-11-14T12:17:34.735884596Z [inf]  
+2025-11-14T12:17:34.735891785Z [inf]  
+2025-11-14T12:17:34.735898257Z [inf]  
+2025-11-14T12:17:34.740674163Z [inf]  - [**小米给智能家居做了个“大模型大脑”**](https://mp.weixin.qq.com/s/J96jkuJb-eBqiPJEyasopA) (2025-11-14 16:22:00)
+2025-11-14T12:17:34.740682455Z [inf]  
+2025-11-14T12:17:34.740690104Z [inf]  
+2025-11-14T12:17:34.742276260Z [inf]  
+2025-11-14T12:17:34.742287540Z [inf]  - [**最后一周！人工智能年度榜单申报即将截止。**](https://mp.weixin.qq.com/s/jajmUcHeie_cdbzmECZEuA) (2025-11-14 16:22:00)
+2025-11-14T12:17:34.742294797Z [inf]  
+2025-11-14T12:17:34.742301592Z [inf]  
+2025-11-14T12:17:34.742307907Z [inf]  
+2025-11-14T12:17:34.742314270Z [inf]  - [**何必DiT！字节首次拿着自回归，单GPU一分钟生成5秒720p视频 | NeurIPS'25 Oral**](https://mp.weixin.qq.com/s/IZb4h4JeVDsRTwautceYrQ) (2025-11-14 13:34:59)
+2025-11-14T12:17:34.742320896Z [inf]  
+2025-11-14T12:17:34.742326672Z [inf]  
+2025-11-14T12:17:34.742331903Z [inf]  
+2025-11-14T12:17:34.742337960Z [inf]  - [**发布即开放：百度猎户座葫芦里卖的什么药？**](https://mp.weixin.qq.com/s/p8cTklnd6ZlPNUzK_g6NpQ) (2025-11-14 13:34:59)
+2025-11-14T12:17:34.742344602Z [inf]  
+2025-11-14T12:17:34.742355108Z [inf]  
+2025-11-14T12:17:34.742364115Z [inf]  
+2025-11-14T12:17:34.742369693Z [inf]  - [**腾讯总裁剧透微信搭载智能体！阿里和谷歌也都开始互相伤害了**](https://mp.weixin.qq.com/s/WRCHqD606UDDQs9wcX_X0Q) (2025-11-14 13:34:59)
+2025-11-14T12:17:34.742374569Z [inf]  
+2025-11-14T12:17:34.742379363Z [inf]  
+2025-11-14T12:17:34.742387179Z [inf]  
+2025-11-14T12:17:34.742392028Z [inf]  - [**破解多模态大模型“选择困难症”！内部决策机制首次揭秘：在冲突信息间疯狂"振荡"**](https://mp.weixin.qq.com/s/njPWfccEKJ3iSI3f8mDCvQ) (2025-11-14 13:34:59)
+2025-11-14T12:17:34.742397199Z [inf]  
+2025-11-14T12:17:34.742402099Z [inf]  
+2025-11-14T12:17:34.742407503Z [inf]  
+2025-11-14T12:17:34.742412423Z [inf]  - [**报名启动！快来和张亚勤孙茂松一起参与MEET2026智能未来大会**](https://mp.weixin.qq.com/s/BPktt04RFkr6KKuDXGd1OA) (2025-11-14 13:34:59)
+2025-11-14T12:17:34.745167222Z [inf]  
+2025-11-14T12:17:34.745175008Z [inf]  - [**AI Coding最贵300人：2年2050亿估值，刚又被塞了160亿**](https://mp.weixin.qq.com/s/cyk0xsTA5PP9FF5dE14UFA) (2025-11-14 10:03:28)
+2025-11-14T12:17:34.745185574Z [inf]  
+2025-11-14T12:17:34.745192316Z [inf]  
+2025-11-14T12:17:34.745198303Z [inf]  
+2025-11-14T12:17:34.745204591Z [inf]  - [**破解多模态大模型“选择困难症”！内部决策机制首次揭秘：在冲突信息间疯狂"振荡"**](https://mp.weixin.qq.com/s/Uhv2YognuVd9IKwAlnOeDw) (2025-11-14 10:03:28)
+2025-11-14T12:17:34.745210233Z [inf]  
+2025-11-14T12:17:34.745217384Z [inf]  
+2025-11-14T12:17:34.745237199Z [inf]  
+2025-11-14T12:17:34.745247372Z [inf]      
+2025-11-14T12:17:34.745254798Z [inf]  未提供webhook_url
+2025-11-14T12:17:34.745262751Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[量子位]执行成功,14成功条数
+2025-11-14T12:17:34.745270358Z [inf]  任务执行完成，耗时: 30.85秒
+2025-11-14T12:17:34.745278692Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:17:34.745285066Z [inf]  执行任务
+2025-11-14T12:17:34.745538483Z [inf]  
+2025-11-14T12:17:34.745544548Z [inf]  
+2025-11-14T12:17:34.745550962Z [inf]  
+2025-11-14T12:17:34.745556418Z [inf]  - [**雷军下铺的兄弟，创业家务机器人**](https://mp.weixin.qq.com/s/cyctmaZWRsaiJMLWNnbMMw) (2025-11-14 10:03:28)
+2025-11-14T12:17:34.745561593Z [inf]  
+2025-11-14T12:17:34.745569240Z [inf]  
+2025-11-14T12:17:35.691446814Z [inf]  更新公众号MP_WXS_3895742803的sync_time为1763122654
+2025-11-14T12:17:35.691451621Z [inf]  更新公众号MP_WXS_3895742803的updated_at为2025-11-14 20:17:34.750416
+2025-11-14T12:17:35.691455979Z [inf]  更新公众号MP_WXS_3895742803的update_time为1763122654
+2025-11-14T12:17:35.691459980Z [inf]  Web浏览器模式,是否采集[Founder Park]内容：True
+2025-11-14T12:17:35.691465982Z [inf]  
+2025-11-14T12:17:35.691470057Z [inf]  第1页开始爬取
+2025-11-14T12:17:35.691474339Z [inf]  
+2025-11-14T12:17:55.139013925Z [err]  2025-11-14 20:17:53 - WARNING - 没有更新到文章
+2025-11-14T12:17:55.139026822Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:17:55.139078880Z [inf]  Article already exists: 3895742803-2247520944_1
+2025-11-14T12:17:55.139086169Z [inf]  文章添加失败或已存在: 创业一年后，李飞飞推出首款可商用世界模型 Marble，任意模态都可生成 3D 世界 (ID: 2247520944_1)
+2025-11-14T12:17:55.139093791Z [inf]  Article already exists: 3895742803-2247520896_1
+2025-11-14T12:17:55.139101664Z [inf]  文章添加失败或已存在: 更会聊天、主打情绪价值，OpenAI 发布 GPT-5.1 (ID: 2247520896_1)
+2025-11-14T12:17:55.139108936Z [inf]  Article already exists: 3895742803-2247520874_1
+2025-11-14T12:17:55.139116482Z [inf]  文章添加失败或已存在: 段永平少有的深度访谈：买股票就是买公司，真懂这句话的人，可能不到 1% (ID: 2247520874_1)
+2025-11-14T12:17:55.139138839Z [inf]  Article already exists: 3895742803-2247520868_1
+2025-11-14T12:17:55.139146941Z [inf]  文章添加失败或已存在: APP 上线 40 天后，Sora 核心团队分享了他们对于 AI 社交的关键思考 (ID: 2247520868_1)
+2025-11-14T12:17:55.139154665Z [inf]  Article already exists: 3895742803-2247520862_1
+2025-11-14T12:17:55.139161723Z [inf]  文章添加失败或已存在: 巴菲特发布谢幕信：伟大的不是金钱、名气或权力，而是善良 (ID: 2247520862_1)
+2025-11-14T12:17:55.139169043Z [inf]  第1页爬取成功
+2025-11-14T12:17:55.139175788Z [inf]  
+2025-11-14T12:17:55.139380061Z [inf]  item end
+2025-11-14T12:17:55.139397952Z [inf]  成功0条
+2025-11-14T12:17:55.139406094Z [inf]  更新完成
+2025-11-14T12:17:55.139413313Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[Founder Park]执行成功,0成功条数
+2025-11-14T12:17:55.139420078Z [inf]  任务执行完成，耗时: 18.77秒
+2025-11-14T12:17:55.141346827Z [inf]  执行任务
+2025-11-14T12:17:55.141358627Z [inf]  更新公众号MP_WXS_3890900599的sync_time为1763122673
+2025-11-14T12:17:55.141365768Z [inf]  更新公众号MP_WXS_3890900599的updated_at为2025-11-14 20:17:53.708395
+2025-11-14T12:17:55.141371938Z [inf]  更新公众号MP_WXS_3890900599的update_time为1763122673
+2025-11-14T12:17:55.141378138Z [inf]  Web浏览器模式,是否采集[好运哥2008]内容：True
+2025-11-14T12:17:55.141385849Z [inf]  
+2025-11-14T12:17:55.141392392Z [inf]  第1页开始爬取
+2025-11-14T12:17:55.141400095Z [inf]  
+2025-11-14T12:18:04.242501152Z [inf]  Article already exists: 3890900599-2247501976_1
+2025-11-14T12:18:04.242510064Z [inf]  文章添加失败或已存在: 慌了！！ (ID: 2247501976_1)
+2025-11-14T12:18:05.205631687Z [inf]  Article already exists: 3890900599-2247501960_1
+2025-11-14T12:18:05.205639138Z [inf]  文章添加失败或已存在: 突然！又出利好！！！ (ID: 2247501960_1)
+2025-11-14T12:18:06.256083106Z [inf]  Article already exists: 3890900599-2247501947_1
+2025-11-14T12:18:06.256091606Z [inf]  文章添加失败或已存在: 突发利空！！ (ID: 2247501947_1)
+2025-11-14T12:18:08.318506833Z [inf]  Article already exists: 3890900599-2247501943_1
+2025-11-14T12:18:08.318515467Z [inf]  文章添加失败或已存在: 利好催化！大爆发！！ (ID: 2247501943_1)
+2025-11-14T12:18:09.164511013Z [inf]  成功0条
+2025-11-14T12:18:09.164526331Z [inf]  更新完成
+2025-11-14T12:18:09.164537379Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[好运哥2008]执行成功,0成功条数
+2025-11-14T12:18:09.164547037Z [err]  2025-11-14 20:18:08 - WARNING - 没有更新到文章
+2025-11-14T12:18:09.164555414Z [inf]  任务执行完成，耗时: 14.99秒
+2025-11-14T12:18:09.164564904Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:18:09.164572655Z [inf]  执行任务
+2025-11-14T12:18:09.164580794Z [inf]  更新公众号MP_WXS_3532644686的sync_time为1763122688
+2025-11-14T12:18:09.164592801Z [inf]  更新公众号MP_WXS_3532644686的updated_at为2025-11-14 20:18:08.894689
+2025-11-14T12:18:09.164601415Z [inf]  更新公众号MP_WXS_3532644686的update_time为1763122688
+2025-11-14T12:18:09.164610564Z [inf]  Web浏览器模式,是否采集[九边]内容：True
+2025-11-14T12:18:09.164629344Z [inf]  
+2025-11-14T12:18:09.164638891Z [inf]  第1页开始爬取
+2025-11-14T12:18:09.164647752Z [inf]  
+2025-11-14T12:18:09.164749953Z [inf]  Article already exists: 3890900599-2247501939_1
+2025-11-14T12:18:09.164757550Z [inf]  文章添加失败或已存在: 周末大利好，来啦！！ (ID: 2247501939_1)
+2025-11-14T12:18:09.164764648Z [inf]  第1页爬取成功
+2025-11-14T12:18:09.164772209Z [inf]  
+2025-11-14T12:18:09.164779376Z [inf]  item end
+2025-11-14T12:18:28.863042935Z [inf]  Article already exists: 3532644686-2247504419_1
+2025-11-14T12:18:28.863049796Z [inf]  文章添加失败或已存在: 世界的本质就是筛选 (ID: 2247504419_1)
+2025-11-14T12:18:28.863058469Z [inf]  Article already exists: 3532644686-2247504419_2
+2025-11-14T12:18:28.863065238Z [inf]  文章添加失败或已存在: 求助！云南普洱茶大量积压，一斤也是批发价！ (ID: 2247504419_2)
+2025-11-14T12:18:28.863071748Z [inf]  Article already exists: 3532644686-2247504406_1
+2025-11-14T12:18:28.863079713Z [inf]  文章添加失败或已存在: 聊个真正的邪修 (ID: 2247504406_1)
+2025-11-14T12:18:28.863086993Z [inf]  Article already exists: 3532644686-2247504406_2
+2025-11-14T12:18:28.863097733Z [inf]  文章添加失败或已存在: 最大的坑（翡翠） (ID: 2247504406_2)
+2025-11-14T12:18:28.863104977Z [inf]  Article already exists: 3532644686-2247504385_1
+2025-11-14T12:18:28.863111698Z [inf]  文章添加失败或已存在: 穷人家庭真正的坑在哪里 (ID: 2247504385_1)
+2025-11-14T12:18:28.863118792Z [inf]  Article already exists: 3532644686-2247504385_2
+2025-11-14T12:18:28.863126328Z [inf]  文章添加失败或已存在: 这哪儿是养娃，简直是氪金开盲盒！ (ID: 2247504385_2)
+2025-11-14T12:18:28.863133314Z [inf]  Article already exists: 3532644686-2247504367_1
+2025-11-14T12:18:28.863143787Z [inf]  文章添加失败或已存在: 除了俄乌战争，还有一场伤亡更大的战争已经打了两年多 (ID: 2247504367_1)
+2025-11-14T12:18:30.641237310Z [inf]  Article already exists: 3532644686-2247504367_2
+2025-11-14T12:18:30.641242643Z [inf]  文章添加失败或已存在: 六年来，我逢人就推的国货面霜，吊打千元大牌，双十一超值团！ (ID: 2247504367_2)
+2025-11-14T12:18:32.623564601Z [inf]  成功0条
+2025-11-14T12:18:32.623571726Z [inf]  更新完成
+2025-11-14T12:18:32.623577951Z [err]  2025-11-14 20:18:32 - WARNING - 没有更新到文章
+2025-11-14T12:18:32.623584275Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[九边]执行成功,0成功条数
+2025-11-14T12:18:32.623590775Z [inf]  任务执行完成，耗时: 23.24秒
+2025-11-14T12:18:32.623597203Z [inf]  开始执行队列任务: do_job
+2025-11-14T12:18:32.623606784Z [inf]  执行任务
+2025-11-14T12:18:32.623613427Z [inf]  更新公众号MP_WXS_3098577967的sync_time为1763122712
+2025-11-14T12:18:32.623620168Z [inf]  更新公众号MP_WXS_3098577967的updated_at为2025-11-14 20:18:32.337053
+2025-11-14T12:18:32.623624452Z [inf]  Article already exists: 3532644686-2247504349_1
+2025-11-14T12:18:32.623628248Z [inf]  更新公众号MP_WXS_3098577967的update_time为1763122712
+2025-11-14T12:18:32.623632765Z [inf]  文章添加失败或已存在: 一个可能停不下来的循环 (ID: 2247504349_1)
+2025-11-14T12:18:32.623636380Z [inf]  Web浏览器模式,是否采集[李倩说品牌]内容：True
+2025-11-14T12:18:32.623642237Z [inf]  第1页爬取成功
+2025-11-14T12:18:32.623643365Z [inf]  
+2025-11-14T12:18:32.623649828Z [inf]  第1页开始爬取
+2025-11-14T12:18:32.623652680Z [inf]  
+2025-11-14T12:18:32.623659188Z [inf]  
+2025-11-14T12:18:32.623662264Z [inf]  item end
+2025-11-14T12:18:40.678460143Z [inf]  Article already exists: 3098577967-2649070164_1
+2025-11-14T12:18:40.678484569Z [inf]  文章添加失败或已存在: 想活下去、赚到钱，记住这5个“说清楚”的姿势 (ID: 2649070164_1)
+2025-11-14T12:18:41.791981492Z [inf]  Article already exists: 3098577967-2649070137_1
+2025-11-14T12:18:41.791991919Z [inf]  文章添加失败或已存在: 搞了17年的“双11”老了，接下来平台会怎么玩？ (ID: 2649070137_1)
+2025-11-14T12:18:43.862155003Z [inf]  文章添加失败或已存在: 山东人为什么不愿意做生意？ (ID: 2649069978_1)
+2025-11-14T12:18:43.862306564Z [inf]  Article already exists: 3098577967-2649069978_1
+2025-11-14T12:18:44.942870221Z [inf]  Article already exists: 3098577967-2649069956_1
+2025-11-14T12:18:44.942879243Z [inf]  文章添加失败或已存在: 平台争的，其实是好的“付费创作者”​ (ID: 2649069956_1)
+2025-11-14T12:18:46.003774236Z [inf]  Article already exists: 3098577967-2649069952_1
+2025-11-14T12:18:46.003782035Z [inf]  文章添加失败或已存在: 分享一个读书方法​ (ID: 2649069952_1)
+2025-11-14T12:18:46.003790386Z [inf]  第1页爬取成功
+2025-11-14T12:18:46.003797672Z [inf]  
+2025-11-14T12:18:46.003804316Z [inf]  item end
+2025-11-14T12:18:46.003811469Z [inf]  成功0条
+2025-11-14T12:18:46.003817944Z [inf]  更新完成
+2025-11-14T12:18:46.003823844Z [inf]  任务(ea89327d-a2c6-40a7-b69e-c36df2453786)[李倩说品牌]执行成功,0成功条数
+2025-11-14T12:18:46.003829476Z [inf]  任务执行完成，耗时: 13.58秒
+2025-11-14T12:18:46.003835949Z [err]  2025-11-14 20:18:45 - WARNING - 没有更新到文章
+2025-11-14T12:18:47.052341924Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:18:47.052349073Z [inf]  开始为文章生成简报: 这个方法比较稳！！
+2025-11-14T12:18:47.052355661Z [inf]  正在生成简报 (尝试 1/3): 这个方法比较稳！！
+2025-11-14T12:19:46.648953192Z [inf]  简报生成成功: 这个方法比较稳！！
+2025-11-14T12:19:46.648960418Z [inf]  简报生成并保存成功: 这个方法比较稳！！ (article_key: 3878690707-2247525467_1)
+2025-11-14T12:19:46.648967493Z [inf]  任务执行完成，耗时: 59.40秒
+2025-11-14T12:19:46.648974309Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:19:46.648981189Z [inf]  开始为文章生成简报: 羊毛要被薅秃了！！
+2025-11-14T12:19:46.648988463Z [inf]  正在生成简报 (尝试 1/3): 羊毛要被薅秃了！！
+2025-11-14T12:20:46.596467131Z [inf]  请求超时 (超时时间: 60秒)，尝试 1/3
+2025-11-14T12:20:48.555604771Z [inf]  正在生成简报 (尝试 2/3): 羊毛要被薅秃了！！
+2025-11-14T12:21:48.058350345Z [inf]  简报生成成功: 羊毛要被薅秃了！！
+2025-11-14T12:21:48.058356472Z [inf]  简报生成并保存成功: 羊毛要被薅秃了！！ (article_key: 3878690707-2247525450_1)
+2025-11-14T12:21:48.058361546Z [inf]  任务执行完成，耗时: 121.11秒
+2025-11-14T12:21:48.058366668Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:21:48.058371707Z [inf]  开始为文章生成简报: 中1签，赚400！！
+2025-11-14T12:21:48.058376115Z [inf]  正在生成简报 (尝试 1/3): 中1签，赚400！！
+2025-11-14T12:22:48.201103348Z [inf]  简报生成成功: 中1签，赚400！！
+2025-11-14T12:22:48.201109510Z [inf]  简报生成并保存成功: 中1签，赚400！！ (article_key: 3878690707-2247525441_1)
+2025-11-14T12:22:48.201115691Z [inf]  任务执行完成，耗时: 59.81秒
+2025-11-14T12:22:48.201124514Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:22:48.201131316Z [inf]  开始为文章生成简报: 规模暴增190%！一只股息率超高的红利基金
+2025-11-14T12:22:48.201138483Z [inf]  正在生成简报 (尝试 1/3): 规模暴增190%！一只股息率超高的红利基金
+2025-11-14T12:23:48.611187016Z [inf]  简报生成成功: 规模暴增190%！一只股息率超高的红利基金
+2025-11-14T12:23:48.611195703Z [inf]  简报生成并保存成功: 规模暴增190%！一只股息率超高的红利基金 (article_key: 3878690707-2247525430_1)
+2025-11-14T12:23:48.611203909Z [inf]  任务执行完成，耗时: 52.53秒
+2025-11-14T12:23:48.611212280Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:23:48.611220286Z [inf]  开始为文章生成简报: 这2个准备放弃了！！
+2025-11-14T12:23:48.611229269Z [inf]  正在生成简报 (尝试 1/3): 这2个准备放弃了！！
+2025-11-14T12:24:38.611455575Z [inf]  简报生成成功: 这2个准备放弃了！！
+2025-11-14T12:24:38.611487521Z [inf]  简报生成并保存成功: 这2个准备放弃了！！ (article_key: 3878690707-2247525418_1)
+2025-11-14T12:24:38.611501625Z [inf]  任务执行完成，耗时: 50.79秒
+2025-11-14T12:24:38.611509879Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:24:38.611518403Z [inf]  开始为文章生成简报: 岚图梦想家卖40万+，凭啥还卖疯了?
+2025-11-14T12:24:38.611527095Z [inf]  正在生成简报 (尝试 1/3): 岚图梦想家卖40万+，凭啥还卖疯了?
+2025-11-14T12:25:28.616011485Z [inf]  简报生成成功: 岚图梦想家卖40万+，凭啥还卖疯了?
+2025-11-14T12:25:28.616027049Z [inf]  简报生成并保存成功: 岚图梦想家卖40万+，凭啥还卖疯了? (article_key: 3921643922-2247525761_1)
+2025-11-14T12:25:28.616036295Z [inf]  任务执行完成，耗时: 54.98秒
+2025-11-14T12:25:28.616044867Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:25:28.616052693Z [inf]  开始为文章生成简报: 从极客到全民，AI眼镜正复刻“iPhone时刻”
+2025-11-14T12:25:28.616057791Z [inf]  正在生成简报 (尝试 1/3): 从极客到全民，AI眼镜正复刻“iPhone时刻”
+2025-11-14T12:26:27.806181701Z [inf]  简报生成成功: 从极客到全民，AI眼镜正复刻“iPhone时刻”
+2025-11-14T12:26:27.806194368Z [inf]  简报生成并保存成功: 从极客到全民，AI眼镜正复刻“iPhone时刻” (article_key: 3871984074-2247648479_1)
+2025-11-14T12:26:27.806202504Z [inf]  任务执行完成，耗时: 57.31秒
+2025-11-14T12:26:27.806209400Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:26:27.806216599Z [inf]  开始为文章生成简报: 倒计时33天，刀法峰会主题及大纲总览｜激发·2025刀法年度品效峰会
+2025-11-14T12:26:27.806225212Z [inf]  正在生成简报 (尝试 1/3): 倒计时33天，刀法峰会主题及大纲总览｜激发·2025刀法年度品效峰会
+2025-11-14T12:27:07.810519505Z [inf]  简报生成成功: 倒计时33天，刀法峰会主题及大纲总览｜激发·2025刀法年度品效峰会
+2025-11-14T12:27:07.810531293Z [inf]  简报生成并保存成功: 倒计时33天，刀法峰会主题及大纲总览｜激发·2025刀法年度品效峰会 (article_key: 3871984074-2247648479_2)
+2025-11-14T12:27:07.810539059Z [inf]  任务执行完成，耗时: 35.59秒
+2025-11-14T12:27:07.810547712Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:27:07.810556888Z [inf]  开始为文章生成简报: 华夏盛世，爱我中华！
+2025-11-14T12:27:07.810563134Z [inf]  正在生成简报 (尝试 1/3): 华夏盛世，爱我中华！
+2025-11-14T12:28:07.817488049Z [inf]  简报生成成功: 华夏盛世，爱我中华！
+2025-11-14T12:28:07.817497267Z [inf]  简报生成并保存成功: 华夏盛世，爱我中华！ (article_key: 3227014168-2649749129_1)
+2025-11-14T12:28:07.817503882Z [inf]  任务执行完成，耗时: 59.38秒
+2025-11-14T12:28:07.817509939Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:28:07.817517770Z [inf]  开始为文章生成简报: 警惕！“街溜子业务员”！
+2025-11-14T12:28:07.817523774Z [inf]  正在生成简报 (尝试 1/3): 警惕！“街溜子业务员”！
+2025-11-14T12:28:47.083979823Z [inf]  简报生成成功: 警惕！“街溜子业务员”！
+2025-11-14T12:28:47.083998721Z [inf]  简报生成并保存成功: 警惕！“街溜子业务员”！ (article_key: 3093541033-2651878068_1)
+2025-11-14T12:28:47.084011447Z [inf]  任务执行完成，耗时: 44.20秒
+2025-11-14T12:28:47.084019139Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:28:47.084027489Z [inf]  开始为文章生成简报: 独家：盒马创始人侯毅开的派特鲜生将全关
+2025-11-14T12:28:47.084036485Z [inf]  正在生成简报 (尝试 1/3): 独家：盒马创始人侯毅开的派特鲜生将全关
+2025-11-14T12:29:17.084019127Z [inf]  简报生成成功: 独家：盒马创始人侯毅开的派特鲜生将全关
+2025-11-14T12:29:17.084037309Z [inf]  简报生成并保存成功: 独家：盒马创始人侯毅开的派特鲜生将全关 (article_key: 3093541033-2651878068_2)
+2025-11-14T12:29:17.084048246Z [inf]  任务执行完成，耗时: 25.94秒
+2025-11-14T12:29:17.084057864Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:29:17.084067404Z [inf]  开始为文章生成简报: 饮料市场刮起“销量第一”“品类首创”“领导品牌”市场地位认证风
+2025-11-14T12:29:17.084077421Z [inf]  正在生成简报 (尝试 1/3): 饮料市场刮起“销量第一”“品类首创”“领导品牌”市场地位认证风
+2025-11-14T12:30:07.165991824Z [inf]  简报生成成功: 饮料市场刮起“销量第一”“品类首创”“领导品牌”市场地位认证风
+2025-11-14T12:30:07.165997778Z [inf]  简报生成并保存成功: 饮料市场刮起“销量第一”“品类首创”“领导品牌”市场地位认证风 (article_key: 3093541033-2651878068_3)
+2025-11-14T12:30:07.166003681Z [inf]  任务执行完成，耗时: 56.49秒
+2025-11-14T12:30:07.166009594Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:30:07.166015414Z [inf]  开始为文章生成简报: 程序员副业日记：AI编程，向内求，从自身需求出发
+2025-11-14T12:30:07.166020892Z [inf]  正在生成简报 (尝试 1/3): 程序员副业日记：AI编程，向内求，从自身需求出发
+2025-11-14T12:30:57.907932265Z [inf]  简报生成成功: 程序员副业日记：AI编程，向内求，从自身需求出发
+2025-11-14T12:30:57.907939394Z [inf]  简报生成并保存成功: 程序员副业日记：AI编程，向内求，从自身需求出发 (article_key: 3870775826-2247498219_1)
+2025-11-14T12:30:57.907945421Z [inf]  任务执行完成，耗时: 51.37秒
+2025-11-14T12:30:57.907951826Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:30:57.907958199Z [inf]  开始为文章生成简报: 一个人如何靠AI干出一个团队的活？我的多场景N倍提效实战复盘
+2025-11-14T12:30:57.907966350Z [inf]  正在生成简报 (尝试 1/3): 一个人如何靠AI干出一个团队的活？我的多场景N倍提效实战复盘
+2025-11-14T12:31:37.193895497Z [inf]  简报生成成功: 一个人如何靠AI干出一个团队的活？我的多场景N倍提效实战复盘
+2025-11-14T12:31:37.193905173Z [inf]  简报生成并保存成功: 一个人如何靠AI干出一个团队的活？我的多场景N倍提效实战复盘 (article_key: 3891906515-2247644987_1)
+2025-11-14T12:31:37.193916565Z [inf]  任务执行完成，耗时: 34.64秒
+2025-11-14T12:31:37.193926546Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:31:37.193935942Z [inf]  开始为文章生成简报: 生财3天免费体验营第129期即将开营：真实项目案例+社群陪伴+直播大课帮你突破赚钱认知
+2025-11-14T12:31:37.193943771Z [inf]  正在生成简报 (尝试 1/3): 生财3天免费体验营第129期即将开营：真实项目案例+社群陪伴+直播大课帮你突破赚钱认知
+2025-11-14T12:32:07.195573602Z [inf]  简报生成成功: 生财3天免费体验营第129期即将开营：真实项目案例+社群陪伴+直播大课帮你突破赚钱认知
+2025-11-14T12:32:07.195586717Z [inf]  简报生成并保存成功: 生财3天免费体验营第129期即将开营：真实项目案例+社群陪伴+直播大课帮你突破赚钱认知 (article_key: 3891906515-2247644987_2)
+2025-11-14T12:32:07.195596027Z [inf]  任务执行完成，耗时: 33.47秒
+2025-11-14T12:32:07.195601630Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:32:07.195607208Z [inf]  开始为文章生成简报: 凯迪仕：一把锁，成为「品质生活」的开始
+2025-11-14T12:32:07.195616591Z [inf]  正在生成简报 (尝试 1/3): 凯迪仕：一把锁，成为「品质生活」的开始
+2025-11-14T12:32:47.196700500Z [inf]  简报生成成功: 凯迪仕：一把锁，成为「品质生活」的开始
+2025-11-14T12:32:47.196711494Z [inf]  简报生成并保存成功: 凯迪仕：一把锁，成为「品质生活」的开始 (article_key: 3531813169-2247721518_1)
+2025-11-14T12:32:47.196719824Z [inf]  任务执行完成，耗时: 39.75秒
+2025-11-14T12:32:47.196726758Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:32:47.196735130Z [inf]  开始为文章生成简报: 烧了。
+2025-11-14T12:32:47.196743883Z [inf]  正在生成简报 (尝试 1/3): 烧了。
+2025-11-14T12:33:37.205533978Z [inf]  简报生成成功: 烧了。
+2025-11-14T12:33:37.205542880Z [inf]  简报生成并保存成功: 烧了。 (article_key: 3623309680-2247488601_1)
+2025-11-14T12:33:37.205548976Z [inf]  任务执行完成，耗时: 45.50秒
+2025-11-14T12:33:37.205567894Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:33:37.205575300Z [inf]  开始为文章生成简报: 11.5元买一瓶“水”？不，是胖东来在卖的透明可乐
+2025-11-14T12:33:37.205582408Z [inf]  正在生成简报 (尝试 1/3): 11.5元买一瓶“水”？不，是胖东来在卖的透明可乐
+2025-11-14T12:34:37.468192118Z [inf]  简报生成成功: 11.5元买一瓶“水”？不，是胖东来在卖的透明可乐
+2025-11-14T12:34:37.468201141Z [inf]  简报生成并保存成功: 11.5元买一瓶“水”？不，是胖东来在卖的透明可乐 (article_key: 3078132892-2652888714_1)
+2025-11-14T12:34:37.468208207Z [inf]  任务执行完成，耗时: 57.50秒
+2025-11-14T12:34:37.468214633Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:34:37.468221568Z [inf]  开始为文章生成简报: 乐事以“现金红包+明星见面”双轨抽奖，激发高价值体验
+2025-11-14T12:34:37.468230775Z [inf]  正在生成简报 (尝试 1/3): 乐事以“现金红包+明星见面”双轨抽奖，激发高价值体验
+2025-11-14T12:35:37.541897487Z [inf]  请求超时 (超时时间: 60秒)，尝试 1/3
+2025-11-14T12:35:37.541907042Z [inf]  正在生成简报 (尝试 2/3): 乐事以“现金红包+明星见面”双轨抽奖，激发高价值体验
+2025-11-14T12:36:37.668383123Z [inf]  简报生成成功: 乐事以“现金红包+明星见面”双轨抽奖，激发高价值体验
+2025-11-14T12:36:37.668390056Z [inf]  简报生成并保存成功: 乐事以“现金红包+明星见面”双轨抽奖，激发高价值体验 (article_key: 3078132892-2652888714_2)
+2025-11-14T12:36:37.668396809Z [inf]  任务执行完成，耗时: 121.30秒
+2025-11-14T12:36:37.668404152Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:36:37.668411310Z [inf]  开始为文章生成简报: 对话「水獭吨吨」联创莫莫子：用冲调的方式，做茶饮“基础款”
+2025-11-14T12:36:37.668417331Z [inf]  正在生成简报 (尝试 1/3): 对话「水獭吨吨」联创莫莫子：用冲调的方式，做茶饮“基础款”
+2025-11-14T12:37:17.673821550Z [inf]  INFO:     100.64.0.4:35846 - "GET / HTTP/1.1" 200 OK
+2025-11-14T12:37:17.673837444Z [inf]  INFO:     100.64.0.4:35846 - "GET /assets/index.17bc1c17.css HTTP/1.1" 200 OK
+2025-11-14T12:37:17.673851928Z [inf]  INFO:     100.64.0.4:35864 - "GET /assets/index.a7aa895c.js HTTP/1.1" 200 OK
+2025-11-14T12:37:17.673860777Z [inf]  INFO:     100.64.0.4:35864 - "GET /static/logo.svg HTTP/1.1" 200 OK
+2025-11-14T12:37:17.673869168Z [inf]  INFO:     100.64.0.4:35846 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
+2025-11-14T12:37:17.673876494Z [inf]  INFO:     100.64.0.4:35864 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
+2025-11-14T12:37:17.673884163Z [inf]  INFO:     100.64.0.4:35868 - "GET /api/v1/wx/sys/info HTTP/1.1" 200 OK
+2025-11-14T12:37:17.673893896Z [inf]  INFO:     100.64.0.4:35864 - "GET /api/v1/wx/mps?offset=0&limit=10 HTTP/1.1" 200 OK
+2025-11-14T12:37:17.673905153Z [inf]  INFO:     100.64.0.4:35868 - "GET /static/default-avatar.png HTTP/1.1" 200 OK
+2025-11-14T12:37:17.673915055Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cache-control': 'no-cache', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'pragma': 'no-cache', 'priority': 'u=1, i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'DXsNAqt2So-JZGYoDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123830333'}
+2025-11-14T12:37:17.675129015Z [inf]  SELECT articles.id, articles.mp_id, articles.title, articles.pic_url, articles.url, articles.description, articles.status, articles.publish_time, articles.created_at, articles.updated_at, articles.is_export 
+2025-11-14T12:37:17.675144761Z [inf]  FROM articles 
+2025-11-14T12:37:17.675153623Z [inf]  WHERE articles.status != 1000 ORDER BY articles.created_at DESC
+2025-11-14T12:37:17.675165435Z [inf]   LIMIT 10 OFFSET 0
+2025-11-14T12:37:17.675173558Z [inf]  文章列表查询：共10篇文章，其中0篇有简报
+2025-11-14T12:37:17.675181101Z [inf]  查询的文章ID列表: ['3236757533-2247843009_3', '3236757533-2247843009_2', '3236757533-2247843009_1', '3236757533-2247843279_5', '3236757533-2247843279_4']...
+2025-11-14T12:37:17.675189368Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cache-control': 'no-cache', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'pragma': 'no-cache', 'priority': 'u=1, i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'YbZ2EZPZTD6gNuCVDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123830333'}
+2025-11-14T12:37:17.675196429Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cache-control': 'no-cache', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'pragma': 'no-cache', 'priority': 'u=1, i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'dA8TYeRORxGMwPmlDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123830333'}
+2025-11-14T12:37:17.677047178Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cache-control': 'no-cache', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'pragma': 'no-cache', 'priority': 'i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'h0l8rkZiTDCwWStODcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123830329'}
+2025-11-14T12:37:17.677069318Z [inf]  INFO:     100.64.0.4:35864 - "GET /api/v1/wx/articles?offset=0&limit=10&search=&status=&mp_id= HTTP/1.1" 200 OK
+2025-11-14T12:37:17.677076685Z [inf]  INFO:     100.64.0.4:35846 - "GET /static/res/logo/http%3A//mmbiz.qpic.cn/mmbiz_png/CpibNcoQfQmxUkSTr8u7JJNWeJfzAO8Y4Y15euzIyoCXblT3fUSibdSaURb1ibK30Rq0vVmWKFBg4ZeNkc2aV4Fhg/0?wx_fmt=png HTTP/1.1" 200 OK
+2025-11-14T12:37:17.677083610Z [inf]  INFO:     100.64.0.4:35880 - "GET /static/res/logo/http%3A//mmbiz.qpic.cn/mmbiz_png/qpAK9iaV2O3sJgoBraTTtb4HvpIUu0gjF1iaeu47FWB2mazlo7BSDYJJYk3Td5HVich4ag1IUbv1T7208rVBVqg5w/0?wx_fmt=png HTTP/1.1" 200 OK
+2025-11-14T12:37:17.677100455Z [inf]  INFO:     100.64.0.4:35896 - "GET /static/res/logo/http%3A//mmbiz.qpic.cn/mmbiz_png/INpibEpTBzYc9t2fWVAdcBibTcgRhiccpicFsSjMg8uMfQpp4GxuUheROouqH3Wib3icibVYDExhC4DSPBm667DoWNm1w/0?wx_fmt=png HTTP/1.1" 200 OK
+2025-11-14T12:37:17.677106342Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cache-control': 'no-cache', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'pragma': 'no-cache', 'priority': 'u=1, i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': '3dNG8hjjRY-o9bOwDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123830334'}
+2025-11-14T12:37:17.680018239Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cache-control': 'no-cache', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'pragma': 'no-cache', 'priority': 'u=1, i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'C-s9VYkSSmeXLIY3DcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123830334'}
+2025-11-14T12:37:17.680027426Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cache-control': 'no-cache', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'pragma': 'no-cache', 'priority': 'u=1, i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'pP6zBWUFTiSttF4ZDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123830334'}
+2025-11-14T12:37:17.681512970Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cache-control': 'no-cache', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'pragma': 'no-cache', 'priority': 'u=1, i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'PN4_jg8CTYa5c4pVDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123830379'}
+2025-11-14T12:37:17.681525418Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cache-control': 'no-cache', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'pragma': 'no-cache', 'priority': 'u=1, i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'THxbsXq_Tz2G6SyyDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123830379'}
+2025-11-14T12:37:17.683188166Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cache-control': 'no-cache', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'pragma': 'no-cache', 'priority': 'u=1, i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'TvJ2d8_BT6iPBDBZDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123830379'}
+2025-11-14T12:37:17.683196836Z [inf]  INFO:     100.64.0.4:35912 - "GET /static/res/logo/http%3A//mmbiz.qpic.cn/mmbiz_png/PIKqwNU2vse2AOTJATS0ewHU6iaZ0gs1BziaN3VDXjMhmJ3UXicQ77m4dhicZicOEkjsiaK79WTSxpmRM97oaldN7yTg/0?wx_fmt=png HTTP/1.1" 200 OK
+2025-11-14T12:37:17.683203342Z [inf]  INFO:     100.64.0.4:35902 - "GET /static/res/logo/http%3A//mmbiz.qpic.cn/mmbiz_png/ZYpa3icG6mygI88bZIovPmKFhIfIcr54tSwtKKY07ttHp3Jlr4pbMbmgPfYpjxicxTu1bO3o8pVZiaOB2nUMR74bQ/0?wx_fmt=png HTTP/1.1" 200 OK
+2025-11-14T12:37:17.683208566Z [inf]  INFO:     100.64.0.4:35868 - "GET /static/res/logo/http%3A//mmbiz.qpic.cn/mmbiz_png/FXZ27ATaW4cH09mpIboNm8camz9xHgjbAkjt7jA8cwaibgibkD0oNfRhQrGlM7Ja6lQDpnwibZugH5kmH2fpRMWqA/0?wx_fmt=png HTTP/1.1" 200 OK
+2025-11-14T12:37:17.683214890Z [inf]  INFO:     100.64.0.4:35922 - "GET /static/res/logo/http%3A//mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtCEFSVW5ubo08Zfv1qB5iapricibTBdETkBNtolJxnSUib6UXhjWWz3aib8vETY00P2lKR1uG3qLHicSoWg/0?wx_fmt=png HTTP/1.1" 200 OK
+2025-11-14T12:37:17.685363817Z [inf]  INFO:     100.64.0.4:35940 - "GET /static/res/logo/http%3A//mmbiz.qpic.cn/mmbiz_png/dygwicf7PdYlbuB6FLkMrtVSDW3Rrd4gickDM18K7aPDHFHgSd2LySNsxHiadFBuV0g1e3RBF0ialBbWtqnMXXyg3Q/0?wx_fmt=png HTTP/1.1" 200 OK
+2025-11-14T12:37:17.685379695Z [inf]  INFO:     100.64.0.4:35916 - "GET /static/res/logo/http%3A//mmbiz.qpic.cn/mmbiz_png/d0UFib2qfYOfpW3gcia4NqAuARiaricSe4MMH8swNfP0AzKnvI5cD6vC0Mz3wJRzOd1QntmTZXr827Khkj2nTaIuAg/0?wx_fmt=png HTTP/1.1" 200 OK
+2025-11-14T12:37:17.685393553Z [inf]  INFO:     100.64.0.4:35920 - "GET /static/res/logo/http%3A//mmbiz.qpic.cn/sz_mmbiz_png/hzGVnWia1nhWBtnreGSIBJWAWCnccjRiaJvh7Dliaic5mxnbxUQgB2ic1LFz1lu2xsiakuja16Ldiahr15e75evz1qWrw/0?wx_fmt=png HTTP/1.1" 200 OK
+2025-11-14T12:37:17.685403137Z [inf]  INFO:     100.64.0.4:35916 - "GET /static/logo.svg HTTP/1.1" 200 OK
+2025-11-14T12:37:18.526090983Z [inf]  简报生成成功: 对话「水獭吨吨」联创莫莫子：用冲调的方式，做茶饮“基础款”
+2025-11-14T12:37:18.526098010Z [inf]  简报生成并保存成功: 对话「水獭吨吨」联创莫莫子：用冲调的方式，做茶饮“基础款” (article_key: 3078132892-2652888714_3)
+2025-11-14T12:37:18.526105090Z [inf]  任务执行完成，耗时: 48.13秒
+2025-11-14T12:37:18.656042023Z [inf]  开始执行队列任务: generate_brief_sync
+2025-11-14T12:37:18.693297432Z [inf]  开始为文章生成简报: 2025年双十一全网销售数据解读报告
+2025-11-14T12:37:18.693306995Z [inf]  正在生成简报 (尝试 1/3): 2025年双十一全网销售数据解读报告
+2025-11-14T12:37:48.696901514Z [inf]  SELECT articles.id, articles.mp_id, articles.title, articles.pic_url, articles.url, articles.description, articles.status, articles.publish_time, articles.created_at, articles.updated_at, articles.is_export 
+2025-11-14T12:37:48.696910269Z [inf]  FROM articles 
+2025-11-14T12:37:48.696918755Z [inf]  WHERE articles.status != 1000 ORDER BY articles.created_at DESC
+2025-11-14T12:37:48.696925306Z [inf]   LIMIT 10 OFFSET 10
+2025-11-14T12:37:48.696936360Z [inf]  文章列表查询：共10篇文章，其中5篇有简报
+2025-11-14T12:37:48.696942780Z [inf]  数据库中的brief.article_key列表: ['3078132892-2652888714_2', '3531813169-2247721518_1', '3078132892-2652888714_3', '3078132892-2652888714_1', '3623309680-2247488601_1']...
+2025-11-14T12:37:48.696948107Z [inf]  查询的文章ID列表: ['3236757533-2247843489_2', '3236757533-2247843489_1', '3236757533-2247843594_2', '3236757533-2247843594_1', '3078132892-2652888714_4']...
+2025-11-14T12:37:48.696952650Z [inf]  ✓ 文章 3078132892-2652888714_3 有简报 (article.id=3078132892-2652888714_3)
+2025-11-14T12:37:48.696957954Z [inf]  ✓ 文章 3078132892-2652888714_2 有简报 (article.id=3078132892-2652888714_2)
+2025-11-14T12:37:48.696964649Z [inf]  ✓ 文章 3078132892-2652888714_1 有简报 (article.id=3078132892-2652888714_1)
+2025-11-14T12:37:48.696969815Z [inf]  ✓ 文章 3623309680-2247488601_1 有简报 (article.id=3623309680-2247488601_1)
+2025-11-14T12:37:48.696975358Z [inf]  ✓ 文章 3531813169-2247721518_1 有简报 (article.id=3531813169-2247721518_1)
+2025-11-14T12:37:48.696979996Z [inf]  INFO:     100.64.0.4:40922 - "GET /api/v1/wx/articles?offset=10&limit=10&search=&status=&mp_id= HTTP/1.1" 200 OK
+2025-11-14T12:37:48.696985121Z [inf]  INFO:     100.64.0.4:40922 - "GET /api/v1/wx/articles/3236757533-2247843489_2 HTTP/1.1" 200 OK
+2025-11-14T12:37:48.696992837Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'priority': 'i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'qQqjyhVSR0KLYehQDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123867359'}
+2025-11-14T12:37:48.699099036Z [inf]  INFO:     100.64.0.4:40922 - "GET /static/res/logo/https%3A//mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBicH2ynCfjwYibEpOYoCkmYIecfyefvz8df3evgwiadiaEU6FYDuhmc9cWZXKqLjzZpYcWN660qoo58A/640?wx_fmt=png&from=appmsg HTTP/1.1" 200 OK
+2025-11-14T12:37:48.699106758Z [inf]  INFO:     100.64.0.4:40976 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
+2025-11-14T12:37:48.699112736Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'priority': 'i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'dYVLaCs5QgunUemdDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123867359'}
+2025-11-14T12:37:48.699118116Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'priority': 'i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'qp4krP-mTAqZcAUWDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123867359'}
+2025-11-14T12:37:48.701225820Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'priority': 'i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': '5pl2WMyHTo2ruYkLDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123867359'}
+2025-11-14T12:37:48.701237915Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'priority': 'i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'E0sw7YPKSWqXpH_-DcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123867359'}
+2025-11-14T12:37:48.701245783Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'priority': 'i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'FU1vsFZeT52maZUeDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123867359'}
+2025-11-14T12:37:48.703869856Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'priority': 'i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': '2tzbj2AYR_ezre-KDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123867359'}
+2025-11-14T12:37:48.703875912Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'priority': 'i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': 'NaoJO2RjQKWRlbEyDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123867359'}
+2025-11-14T12:37:48.703881791Z [inf]  INFO:     100.64.0.4:40962 - "GET /static/res/logo/https%3A//mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBicH2ynCfjwYibEpOYoCkmYIh4VuwQyu1Zx3QcGIUxfsFsW9Rzt6yKcQwKWibF5JESRdKBc0Uyj7d7A/640?wx_fmt=png&from=appmsg HTTP/1.1" 200 OK
+2025-11-14T12:37:48.705523280Z [inf]  INFO:     100.64.0.4:40932 - "GET /static/res/logo/https%3A//mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBicH2ynCfjwYibEpOYoCkmYIfz01UfDEdQR1LyAFFhkj11f88cxJJgVJb4x1mwmw4h3h3LzBLRbY1A/640?wx_fmt=png&from=appmsg HTTP/1.1" 200 OK
+2025-11-14T12:37:48.705535183Z [inf]  INFO:     100.64.0.4:40988 - "GET /static/res/logo/https%3A//mmbiz.qpic.cn/mmbiz_jpg/YicUhk5aAGtBicH2ynCfjwYibEpOYoCkmYI7SkCCmOLrELACwy5uMLrtibAJ1LKBo8aXy3WJI4PQsG2DZjMkzkyicFQ/640?wx_fmt=jpeg HTTP/1.1" 200 OK
+2025-11-14T12:37:48.705542561Z [inf]  INFO:     100.64.0.4:40940 - "GET /static/res/logo/https%3A//mmbiz.qpic.cn/mmbiz_jpg/YicUhk5aAGtBicH2ynCfjwYibEpOYoCkmYIt8l7nQ9JhRj9owXneRYPzUNmkUKRpsCwicmx58Cgg310cRFS5nsoyicg/640?wx_fmt=jpeg HTTP/1.1" 200 OK
+2025-11-14T12:37:48.705551598Z [inf]  INFO:     100.64.0.4:40958 - "GET /static/res/logo/https%3A//mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBicH2ynCfjwYibEpOYoCkmYIrufDAPHJFzZvpUQl1lZNb7IhlFwrrQhvtt3iarLibDOe5YWLcJYU7GLA/640?wx_fmt=png&from=appmsg HTTP/1.1" 200 OK
+2025-11-14T12:37:48.705557965Z [inf]  INFO:     100.64.0.4:40974 - "GET /static/res/logo/https%3A//mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBicH2ynCfjwYibEpOYoCkmYIyMmH2cXJkQMIuDoZn9HxSbhicA7AcWNiaqduPkic6AYlYlBC2kTBP1PLA/640?wx_fmt=png&from=appmsg HTTP/1.1" 200 OK
+2025-11-14T12:37:48.705565154Z [inf]  INFO:     100.64.0.4:40994 - "GET /static/res/logo/https%3A//mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBicH2ynCfjwYibEpOYoCkmYI1rfrnoahOPPB66YEafg39Klt0ygXPflh8Eks6WkFBnaq2Eq4icqia3tQ/640?wx_fmt=png&from=appmsg HTTP/1.1" 200 OK
+2025-11-14T12:37:48.705571792Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'priority': 'i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': '7AvUpoDhSoG7d_gPDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123867966'}
+2025-11-14T12:37:48.708212802Z [inf]  {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'zh-CN,zh;q=0.9', 'cookie': 'Hm_lvt_975de8724ac02eb7e6d2357bb95c067d=1762247907,1763092459; HMACCOUNT=750A886B8EE3D279; Hm_lpvt_975de8724ac02eb7e6d2357bb95c067d=1763123830', 'priority': 'i', 'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"macOS"', 'sec-fetch-dest': 'image', 'sec-fetch-mode': 'no-cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '101.44.81.41', 'x-forwarded-host': 'rss.aistockdaily.com', 'x-forwarded-proto': 'https', 'x-railway-edge': 'railway/asia-southeast1-eqsg3a', 'x-railway-request-id': '1SgVurF_SkWnDJ2kDcO5xA', 'x-real-ip': '101.44.81.41', 'x-request-start': '1763123867966'}
+2025-11-14T12:37:48.708218852Z [inf]  INFO:     100.64.0.4:40994 - "GET /static/res/logo/https%3A//mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBicH2ynCfjwYibEpOYoCkmYIwE3QIhV7sdp5PNHCckCic1hVd4k31dIXp8wodw7ldLFk52HbmFHu4ibQ/640?wx_fmt=png&from=appmsg HTTP/1.1" 200 OK
+2025-11-14T12:37:48.708224501Z [inf]  INFO:     100.64.0.4:40974 - "GET /static/res/logo/https%3A//mmbiz.qpic.cn/mmbiz_png/YicUhk5aAGtBicH2ynCfjwYibEpOYoCkmYIRMzfaQqrnPjb4IFOBpVcnq3OwlLknpDiaHKQMQ04CLoPF3QUv8rxYsg/640?wx_fmt=png&from=appmsg HTTP/1.1" 200 OK
+2025-11-14T12:38:28.871513172Z [inf]  请求超时 (超时时间: 60秒)，尝试 1/3
+2025-11-14T12:38:28.871519197Z [inf]  正在生成简报 (尝试 2/3): 2025年双十一全网销售数据解读报告
