@@ -134,8 +134,13 @@ async def get_articles(
                 ).all()
                 brief_article_keys = {brief[0] for brief in briefs}
                 # 调试日志：打印查询到的简报数量
-                from core.print import print_info
+                from core.print import print_info, print_warning
                 print_info(f"文章列表查询：共{len(article_ids)}篇文章，其中{len(brief_article_keys)}篇有简报")
+                # 打印所有brief的article_key（用于调试）
+                if brief_article_keys:
+                    print_info(f"数据库中的brief.article_key列表: {list(brief_article_keys)[:5]}...")  # 只打印前5个
+                # 打印所有article.id（用于调试）
+                print_info(f"查询的文章ID列表: {article_ids[:5]}...")  # 只打印前5个
             
             # 合并公众号名称和简报状态到文章列表
             article_list = []
@@ -145,10 +150,15 @@ async def get_articles(
                 article_dict["mp_name"] = mp_names.get(article.mp_id, "未知公众号")
                 has_brief = article.id in brief_article_keys
                 article_dict["has_brief"] = has_brief  # 添加是否有简报的标识
-                # 调试日志：如果文章应该有简报但没有，打印警告
+                # 调试日志：打印匹配情况
+                from core.print import print_info, print_warning
                 if has_brief:
-                    from core.print import print_info
-                    print_info(f"文章 {article.id[:50]} 有简报")
+                    print_info(f"✓ 文章 {article.id[:50]} 有简报 (article.id={article.id})")
+                else:
+                    # 检查是否有类似的article_key（可能是格式问题）
+                    matching_keys = [key for key in brief_article_keys if article.id in key or key in article.id]
+                    if matching_keys:
+                        print_warning(f"⚠ 文章 {article.id[:50]} 没有匹配的简报，但发现相似的article_key: {matching_keys}")
                 article_list.append(article_dict)
 
             from .base import success_response
