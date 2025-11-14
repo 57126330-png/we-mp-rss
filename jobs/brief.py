@@ -281,7 +281,17 @@ def start_brief_generation_task():
     interval = int(cfg.get('ai.brief_generate_interval', 60))  # 默认60分钟
     batch_size = int(cfg.get('ai.brief_batch_size', 10))  # 默认每批10篇
     
-    cron_expr = f"*/{interval} * * * *"  # 每N分钟执行一次
+    # 生成cron表达式，处理分钟和小时的转换
+    if interval < 60:
+        # 小于60分钟：每N分钟执行一次
+        cron_expr = f"*/{interval} * * * *"
+    elif interval == 60:
+        # 等于60分钟：每小时的第0分钟执行
+        cron_expr = "0 * * * *"
+    else:
+        # 大于60分钟：转换为小时
+        hours = interval // 60
+        cron_expr = f"0 */{hours} * * *"
     
     def do_generate():
         """执行简报生成任务"""
