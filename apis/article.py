@@ -124,12 +124,23 @@ async def get_articles(
                     )
                     mp_names[article.mp_id] = feed.mp_name if feed else "未知公众号"
 
-            # 合并公众号名称到文章列表
+            # 查询哪些文章已有简报（批量查询，提高性能）
+            from core.models.brief import Brief
+            article_ids = [article.id for article in articles]
+            brief_article_keys = set()
+            if article_ids:  # 避免空列表查询
+                briefs = session.query(Brief.article_key).filter(
+                    Brief.article_key.in_(article_ids)
+                ).all()
+                brief_article_keys = {brief[0] for brief in briefs}
+            
+            # 合并公众号名称和简报状态到文章列表
             article_list = []
             for article in articles:
                 article_dict = dict(article.__dict__)
                 article_dict.pop("_sa_instance_state", None)
                 article_dict["mp_name"] = mp_names.get(article.mp_id, "未知公众号")
+                article_dict["has_brief"] = article.id in brief_article_keys  # 添加是否有简报的标识
                 article_list.append(article_dict)
 
             from .base import success_response

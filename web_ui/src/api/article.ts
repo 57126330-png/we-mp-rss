@@ -87,6 +87,15 @@ export const getArticleDetail = (id: number,action_type:number) => {
 }
 
 /**
+ * 获取文章AI简报
+ * @param id 文章ID
+ * @returns 简报数据
+ */
+export const getArticleBrief = (id: string | number) => {
+  return http.get<{code: number, data: any}>(`/wx/articles/${id}/brief`)
+}
+
+/**
  * 获取上一篇文章详情
  * @param id 当前文章ID
  * @returns 上一篇文章详情结果

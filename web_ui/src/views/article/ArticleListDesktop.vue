@@ -132,6 +132,14 @@
                 <a-button type="text" @click="viewArticle(record)" :title="record.id">
                   <template #icon><icon-eye /></template>
                 </a-button>
+                <a-button 
+                  v-if="record.has_brief" 
+                  type="text" 
+                  @click="viewBrief(record)" 
+                  :title="'查看AI简报'"
+                  style="color: #165DFF;">
+                  <template #icon><icon-robot /></template>
+                </a-button>
                 <a-button type="text" status="danger" @click="deleteArticle(record.id)">
                   <template #icon><icon-delete /></template>
                 </a-button>
@@ -170,6 +178,48 @@
               {{ currentArticle.time }}
             </div>
           </a-modal>
+          
+          <!-- AI简报模态框 -->
+          <a-modal v-model:visible="briefModalVisible" title="AI简报" width="800px" :footer="false">
+            <div style="max-height: 70vh; overflow-y: auto;">
+              <a-divider>摘要</a-divider>
+              <div style="margin-bottom: 20px; line-height: 1.8; color: var(--color-text-1);">
+                {{ currentBrief.summary }}
+              </div>
+              
+              <a-divider v-if="currentBrief.highlights && currentBrief.highlights.length > 0">核心要点</a-divider>
+              <a-list v-if="currentBrief.highlights && currentBrief.highlights.length > 0" :data="currentBrief.highlights" bordered>
+                <template #item="{ item }">
+                  <a-list-item>
+                    <a-list-item-meta>
+                      <template #title>
+                        <strong>{{ item.title || '要点' }}</strong>
+                      </template>
+                      <template #description>
+                        <div style="color: var(--color-text-2); line-height: 1.6;">
+                          {{ item.detail || item.description || '' }}
+                        </div>
+                      </template>
+                    </a-list-item-meta>
+                  </a-list-item>
+                </template>
+              </a-list>
+              
+              <a-divider v-if="currentBrief.tags && currentBrief.tags.length > 0">标签</a-divider>
+              <div v-if="currentBrief.tags && currentBrief.tags.length > 0" style="margin-bottom: 20px;">
+                <a-tag v-for="tag in currentBrief.tags" :key="tag" style="margin-right: 8px; margin-bottom: 8px;">
+                  {{ tag }}
+                </a-tag>
+              </div>
+              
+              <div v-if="currentBrief.confidence" style="margin-top: 20px; color: var(--color-text-3); font-size: 12px;">
+                置信度: {{ (currentBrief.confidence * 100).toFixed(1) }}%
+              </div>
+              <div v-if="currentBrief.generated_at" style="margin-top: 10px; color: var(--color-text-3); font-size: 12px;">
+                生成时间: {{ formatDateTime(currentBrief.generated_at) }}
+              </div>
+            </div>
+          </a-modal>
         </a-card>
       </a-layout-content>
     </a-layout>
@@ -181,8 +231,8 @@ import { Avatar } from '@/utils/constants'
 import { translatePage, setCurrentLanguage } from '@/utils/translate';
 import { ref, onMounted, h } from 'vue'
 import axios from 'axios'
-import { IconApps, IconAtt, IconDelete, IconEdit, IconEye, IconRefresh, IconScan, IconWeiboCircleFill, IconWifi, IconCode } from '@arco-design/web-vue/es/icon'
-import { getArticles, deleteArticle as deleteArticleApi, ClearArticle, ClearDuplicateArticle, getArticleDetail } from '@/api/article'
+import { IconApps, IconAtt, IconDelete, IconEdit, IconEye, IconRefresh, IconScan, IconWeiboCircleFill, IconWifi, IconCode, IconRobot } from '@arco-design/web-vue/es/icon'
+import { getArticles, deleteArticle as deleteArticleApi, ClearArticle, ClearDuplicateArticle, getArticleDetail, getArticleBrief } from '@/api/article'
 import { ExportOPML, ExportMPS, ImportMPS } from '@/api/export'
 import ExportModal from '@/components/ExportModal.vue'
 import { getSubscriptions, UpdateMps } from '@/api/subscription'
@@ -532,6 +582,40 @@ const currentArticle = ref({
   url: ''
 })
 const articleModalVisible = ref(false)
+
+const currentBrief = ref({
+  summary: '',
+  highlights: [] as any[],
+  tags: [] as string[],
+  confidence: 0,
+  generated_at: ''
+})
+const briefModalVisible = ref(false)
+
+const viewBrief = async (record: any) => {
+  loading.value = true
+  try {
+    const response = await getArticleBrief(record.id)
+    if (response.data.code === 0 && response.data.data) {
+      const brief = response.data.data
+      currentBrief.value = {
+        summary: brief.summary || '',
+        highlights: brief.highlights || [],
+        tags: brief.tags || [],
+        confidence: brief.confidence || 0,
+        generated_at: brief.generated_at || ''
+      }
+      briefModalVisible.value = true
+    } else {
+      Message.error('获取AI简报失败')
+    }
+  } catch (error) {
+    console.error('获取AI简报错误:', error)
+    Message.error('获取AI简报失败')
+  } finally {
+    loading.value = false
+  }
+}
 
 const deleteArticle = (id: number) => {
   Modal.confirm({
