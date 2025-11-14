@@ -118,6 +118,8 @@ ai:
   brief_enabled: ${AI_BRIEF_ENABLED:-False}
   #是否自动生成简报 默认False
   brief_auto_generate: ${AI_BRIEF_AUTO_GENERATE:-False}
+  #抓取文章后是否立即生成简报 默认True（如果brief_enabled=True）
+  brief_auto_generate_on_fetch: ${AI_BRIEF_AUTO_GENERATE_ON_FETCH:-True}
   #自动生成简报的时间间隔 单位分钟 默认60分钟
   brief_generate_interval: ${AI_BRIEF_GENERATE_INTERVAL:-60}
   #每批处理的文章数量 默认10篇
