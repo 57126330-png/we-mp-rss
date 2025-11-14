@@ -126,7 +126,15 @@ class BriefService:
                 session.add(brief)
                 session.commit()
                 
-                print_success(f"简报生成并保存成功: {article_title}")
+                # 验证保存是否成功
+                verify_brief = session.query(Brief).filter(
+                    Brief.article_key == article_key
+                ).first()
+                if verify_brief:
+                    print_success(f"简报生成并保存成功: {article_title} (article_key: {article_key})")
+                else:
+                    print_error(f"简报保存后验证失败: {article_key}")
+                
                 return brief
                 
             except Exception as e:

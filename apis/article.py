@@ -133,6 +133,9 @@ async def get_articles(
                     Brief.article_key.in_(article_ids)
                 ).all()
                 brief_article_keys = {brief[0] for brief in briefs}
+                # 调试日志：打印查询到的简报数量
+                from core.print import print_info
+                print_info(f"文章列表查询：共{len(article_ids)}篇文章，其中{len(brief_article_keys)}篇有简报")
             
             # 合并公众号名称和简报状态到文章列表
             article_list = []
@@ -140,7 +143,12 @@ async def get_articles(
                 article_dict = dict(article.__dict__)
                 article_dict.pop("_sa_instance_state", None)
                 article_dict["mp_name"] = mp_names.get(article.mp_id, "未知公众号")
-                article_dict["has_brief"] = article.id in brief_article_keys  # 添加是否有简报的标识
+                has_brief = article.id in brief_article_keys
+                article_dict["has_brief"] = has_brief  # 添加是否有简报的标识
+                # 调试日志：如果文章应该有简报但没有，打印警告
+                if has_brief:
+                    from core.print import print_info
+                    print_info(f"文章 {article.id[:50]} 有简报")
                 article_list.append(article_dict)
 
             from .base import success_response
