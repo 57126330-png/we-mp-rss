@@ -210,9 +210,9 @@ def start_all_task():
       #开启自动同步未同步 文章任务
     from jobs.fetch_no_article import start_sync_content
     start_sync_content()
-    # 启动AI简报生成任务
-    from jobs.brief import start_brief_generation_task
-    start_brief_generation_task()
+    # 启动AI简报生成任务（已禁用定时任务，只在抓取时自动生成以节省token）
+    # from jobs.brief import start_brief_generation_task
+    # start_brief_generation_task()
     start_job()
 if __name__ == '__main__':
     # do_job()
