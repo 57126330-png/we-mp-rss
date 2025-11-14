@@ -377,8 +377,15 @@ const fetchArticles = async () => {
       ...item,
       mp_name: item.mp_name || item.account_name || '未知公众号',
       publish_time: item.publish_time || item.create_time || '-',
-      url: item.url || "https://mp.weixin.qq.com/s/" + item.id
+      url: item.url || "https://mp.weixin.qq.com/s/" + item.id,
+      has_brief: item.has_brief || false  // 确保has_brief字段存在
     }))
+    // 调试日志：打印has_brief字段
+    console.log('文章列表数据（前3条）:', articles.value.slice(0, 3).map(a => ({
+      id: a.id,
+      title: a.title?.substring(0, 30),
+      has_brief: a.has_brief
+    })))
     pagination.value.total = res.total || 0
   } catch (error) {
     console.error('获取文章列表错误:', error)

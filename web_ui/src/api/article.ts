@@ -20,6 +20,7 @@ export interface Article {
   status: number
   link: string
   created_at: string
+  has_brief?: boolean  // 是否有AI简报
 }
 
 /**
