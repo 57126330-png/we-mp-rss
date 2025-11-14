@@ -124,8 +124,8 @@ ai:
   brief_generate_interval: ${AI_BRIEF_GENERATE_INTERVAL:-60}
   #每批处理的文章数量 默认10篇
   brief_batch_size: ${AI_BRIEF_BATCH_SIZE:-10}
-  #最大并发数（同时处理的文章数量）默认2个，避免触发API速率限制
-  brief_max_concurrent: ${AI_BRIEF_MAX_CONCURRENT:-2}
+  #最大并发数（同时处理的文章数量）默认1个，避免触发API速率限制
+  brief_max_concurrent: ${AI_BRIEF_MAX_CONCURRENT:-1}
   #GLM API密钥（也可通过环境变量GLM_API_KEY设置）
   glm_api_key: ${GLM_API_KEY:-}
   #GLM API地址 默认https://open.bigmodel.cn/api/paas/v4/chat/completions

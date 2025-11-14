@@ -51,44 +51,63 @@ class BriefService:
             print_warning("AI简报功能已禁用")
             return None
         
-        # 使用session_scope确保连接正确关闭
+        # 第一步：查询文章信息（在session内完成所有数据获取）
+        with DB.session_scope(auto_commit=False) as session:
+            # 检查简报是否已存在
+            existing_brief = session.query(Brief).filter(
+                Brief.article_key == article_key
+            ).first()
+            
+            if existing_brief:
+                print_info(f"文章 {article_key} 的简报已存在，跳过生成")
+                return existing_brief
+            
+            # 查询文章（article_key就是Article.id）
+            article = session.query(Article).filter(Article.id == article_key).first()
+            if not article:
+                print_error(f"文章不存在: {article_key}")
+                return None
+            
+            # 检查文章是否有内容
+            if not article.content or article.content.strip() == '':
+                print_warning(f"文章 {article_key} 内容为空，跳过简报生成")
+                return None
+            
+            # 获取公众号名称
+            mp_name = '未知'
+            if article.mp_id:
+                feed = session.query(Feed).filter(Feed.id == article.mp_id).first()
+                if feed:
+                    mp_name = feed.mp_name or '未知'
+            
+            # 准备文章数据（在session内获取，避免分离问题）
+            article_data = self._get_article_data(article, mp_name)
+            # 提前保存文章标题，避免session分离后无法访问
+            article_title = article.title[:50] if article.title else '未知'
+        
+        # 第二步：生成简报（在session外执行，避免长时间占用连接）
+        try:
+            print_info(f"开始为文章生成简报: {article_title}")
+            brief_data = await self.generator.generate(article_data, article_key)
+        except Exception as e:
+            print_error(f"生成简报失败 (文章: {article_key}): {str(e)}")
+            import traceback
+            print_error(f"错误详情: {traceback.format_exc()}")
+            return None
+        
+        # 第三步：保存简报（重新获取session用于保存）
         with DB.session_scope(auto_commit=False) as session:
             try:
-                # 检查简报是否已存在
+                # 再次检查简报是否已存在（防止并发创建）
                 existing_brief = session.query(Brief).filter(
                     Brief.article_key == article_key
                 ).first()
                 
                 if existing_brief:
-                    print_info(f"文章 {article_key} 的简报已存在，跳过生成")
+                    print_info(f"文章 {article_key} 的简报已存在（并发创建），跳过保存")
                     return existing_brief
                 
-                # 查询文章（article_key就是Article.id）
-                article = session.query(Article).filter(Article.id == article_key).first()
-                if not article:
-                    print_error(f"文章不存在: {article_key}")
-                    return None
-                
-                # 检查文章是否有内容
-                if not article.content or article.content.strip() == '':
-                    print_warning(f"文章 {article_key} 内容为空，跳过简报生成")
-                    return None
-                
-                # 获取公众号名称
-                mp_name = '未知'
-                if article.mp_id:
-                    feed = session.query(Feed).filter(Feed.id == article.mp_id).first()
-                    if feed:
-                        mp_name = feed.mp_name or '未知'
-                
-                # 准备文章数据
-                article_data = self._get_article_data(article, mp_name)
-                
-                # 生成简报（在session外执行，避免长时间占用连接）
-                print_info(f"开始为文章生成简报: {article.title[:50] if article.title else '未知'}")
-                brief_data = await self.generator.generate(article_data, article_key)
-                
-                # 保存简报（重新获取session用于保存）
+                # 创建并保存简报
                 brief = Brief(
                     id=str(uuid.uuid4()),
                     article_key=article_key,  # article_key就是Article.id
@@ -107,12 +126,12 @@ class BriefService:
                 session.add(brief)
                 session.commit()
                 
-                print_success(f"简报生成并保存成功: {article.title[:50] if article.title else '未知'}")
+                print_success(f"简报生成并保存成功: {article_title}")
                 return brief
                 
             except Exception as e:
                 session.rollback()
-                print_error(f"生成简报失败 (文章: {article_key}): {str(e)}")
+                print_error(f"保存简报失败 (文章: {article_key}): {str(e)}")
                 import traceback
                 print_error(f"错误详情: {traceback.format_exc()}")
                 return None

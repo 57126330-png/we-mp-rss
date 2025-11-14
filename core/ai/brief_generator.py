@@ -253,7 +253,8 @@ class BriefGenerator:
                         raise ValueError(error_msg)
                     elif response.status_code == 429:
                         if attempt < self.max_retries - 1:
-                            wait_time = (attempt + 1) * 2  # 指数退避
+                            # 增加等待时间：2秒、6秒、12秒（指数退避）
+                            wait_time = 2 * (2 ** attempt)
                             print_warning(f"速率限制，等待 {wait_time} 秒后重试...")
                             import asyncio
                             await asyncio.sleep(wait_time)
