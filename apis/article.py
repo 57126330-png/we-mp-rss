@@ -151,6 +151,7 @@ async def get_articles(
 async def get_article_detail(
     article_id: str,
     content: bool = False,
+    include_brief: bool = Query(False, description="是否包含AI简报"),
     # current_user: dict = Depends(get_current_user)
 ):
     # 使用上下文管理器确保 session 被正确清理（只读操作，不需要 commit）
@@ -166,7 +167,20 @@ async def get_article_detail(
                         message="文章不存在"
                     )
                 )
-            return success_response(article)
+            
+            result = dict(article.__dict__)
+            result.pop("_sa_instance_state", None)
+            
+            # 如果需要包含简报
+            if include_brief:
+                from core.models.brief import Brief
+                brief = session.query(Brief).filter(Brief.article_key == article_id).first()
+                if brief:
+                    result['brief'] = brief.to_dict()
+                else:
+                    result['brief'] = None
+            
+            return success_response(result)
         except HTTPException as e:
             raise e
         except Exception as e:
@@ -305,5 +319,78 @@ async def get_prev_article(
             detail=error_response(
                 code=50001,
                 message=f"获取上一篇文章失败: {str(e)}"
+            )
+        )
+
+@router.get("/{article_id}/brief", summary="获取文章AI简报")
+async def get_article_brief(
+    article_id: str,
+    current_user: dict = Depends(get_current_user)
+):
+    """获取指定文章的AI简报"""
+    with DB.session_scope(auto_commit=False) as session:
+        try:
+            from core.models.brief import Brief
+            
+            brief = session.query(Brief).filter(Brief.article_key == article_id).first()
+            
+            if not brief:
+                raise HTTPException(
+                    status_code=fast_status.HTTP_404_NOT_FOUND,
+                    detail=error_response(
+                        code=40402,
+                        message="该文章尚未生成AI简报"
+                    )
+                )
+            
+            return success_response(brief.to_dict())
+        except HTTPException as e:
+            raise e
+        except Exception as e:
+            raise HTTPException(
+                status_code=fast_status.HTTP_406_NOT_ACCEPTABLE,
+                detail=error_response(
+                    code=50001,
+                    message=f"获取AI简报失败: {str(e)}"
+                )
+            )
+
+@router.post("/{article_id}/brief/generate", summary="手动生成文章AI简报")
+async def generate_article_brief(
+    article_id: str,
+    current_user: dict = Depends(get_current_user)
+):
+    """手动触发为指定文章生成AI简报"""
+    try:
+        from jobs.brief import generate_brief_for_article
+        import asyncio
+        
+        # 获取或创建事件循环
+        try:
+            loop = asyncio.get_event_loop()
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+        
+        brief = await generate_brief_for_article(article_id)
+        
+        if not brief:
+            raise HTTPException(
+                status_code=fast_status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=error_response(
+                    code=50002,
+                    message="AI简报生成失败，请检查文章内容和配置"
+                )
+            )
+        
+        return success_response(brief.to_dict(), message="AI简报生成成功")
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        raise HTTPException(
+            status_code=fast_status.HTTP_406_NOT_ACCEPTABLE,
+            detail=error_response(
+                code=50001,
+                message=f"生成AI简报失败: {str(e)}"
             )
         )

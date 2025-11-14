@@ -1,0 +1,115 @@
+You reached the start of the range
+Nov 10, 2025, 6:33 PM
+Mounting volume on: /var/lib/containers/railwayapp/bind-mounts/64309a02-4076-4c34-abcd-b94790a339df/vol_rsgjgo9o3yrw5vf1
+Starting Container
+自动检查并同步文章内容功能未启用
+[默认]连接初始化
+[内容修正]连接初始化
+[内容修正] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+名称:we-mp-rss
+[文章采集API] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+队列任务后台运行
+版本:1.4.7 API_BASE:/api/v1/wx
+启动服务器
+[任务调度]连接初始化
+[默认]连接初始化
+[任务调度] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+WARNING:  Current configuration will not reload as not all conditions are met, please refer to documentation.
+[默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+队列任务后台运行
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+[默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+INFO:     Started parent process [1]
+[文章采集API]连接初始化
+[默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+[默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+名称:we-mp-rss
+版本:1.4.7 API_BASE:/api/v1/wx
+名称:we-mp-rss
+版本:1.4.7 API_BASE:/api/v1/wx
+2025-11-10 18:35:32 - INFO - Adding cron job with expression: 0 */4 * * *
+2025-11-10 18:35:32 - INFO - Successfully added job 定时采集 33892909-9f36-47df-b0b1-2d897ac14002
+已添加任务: 33892909-9f36-47df-b0b1-2d897ac14002
+2025-11-10 18:35:32 - INFO - Starting scheduler...
+启动任务
+2025-11-10 18:35:32 - INFO - Scheduler started successfully
+[默认]连接初始化
+[默认]连接初始化
+[默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+[默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+[用户连接]连接初始化
+[默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+[默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+[用户连接]连接初始化
+[用户连接] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+[用户连接] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+[文章采集API]连接初始化
+[文章采集API] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+[任务调度]连接初始化
+[文章采集API]连接初始化
+[文章采集API] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+[任务调度]连接初始化
+[任务调度] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+队列任务后台运行
+INFO:     Waiting for application startup.
+INFO:     Started server process [5]
+INFO:     Application startup complete.
+INFO:     Waiting for application startup.
+队列任务后台运行
+[任务调度] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+INFO:     Started server process [6]
+INFO:     Application startup complete.
+INFO:     100.64.0.2:18082 - "GET / HTTP/1.1" 200 OK
+INFO:     100.64.0.2:18082 - "GET /assets/index.31ba8011.css HTTP/1.1" 200 OK
+INFO:     100.64.0.2:18096 - "GET /assets/index.a4f08d13.js HTTP/1.1" 200 OK
+INFO:     100.64.0.2:18096 - "GET /static/logo.svg HTTP/1.1" 200 OK
+INFO:     100.64.0.2:18096 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
+INFO:     100.64.0.2:18110 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
+INFO:     100.64.0.2:18082 - "GET /api/v1/wx/sys/info HTTP/1.1" 200 OK
+INFO:     100.64.0.2:18082 - "GET /static/default-avatar.png HTTP/1.1" 200 OK
+INFO:     100.64.0.2:18082 - "GET /api/v1/wx/mps?offset=0&limit=10 HTTP/1.1" 200 OK
+SELECT articles.id, articles.mp_id, articles.title, articles.pic_url, articles.url, articles.description, articles.status, articles.publish_time, articles.created_at, articles.updated_at, articles.is_export 
+FROM articles 
+WHERE articles.status != 1000 ORDER BY articles.created_at DESC
+ LIMIT 10 OFFSET 0
+INFO:     100.64.0.2:18082 - "GET /api/v1/wx/articles?offset=0&limit=10&search=&status=&mp_id= HTTP/1.1" 200 OK
+INFO:     100.64.0.2:38454 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
+2025-11-10 18:39:02,473 - ConfigManager - INFO - 开始转换配置到列表...
+['db', 'secret', 'token', 'notice.wechat', 'notice.feishu', 'notice.dingding']
+2025-11-10 18:39:02,474 - ConfigManager - INFO - 配置已成功转换为列表
+INFO:     100.64.0.2:38466 - "GET /api/v1/wx/configs?offset=10&limit=10 HTTP/1.1" 200 OK
+INFO:     100.64.0.2:38454 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
+INFO:     100.64.0.2:38454 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
+INFO:     100.64.0.2:38454 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
+INFO:     100.64.0.2:38466 - "GET /api/v1/wx/message_tasks?offset=0&limit=10 HTTP/1.1" 200 OK
+INFO:     100.64.0.2:38466 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
+INFO:     100.64.0.2:38454 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
+INFO:     100.64.0.2:38466 - "GET /api/v1/wx/mps?kw=&offset=0&limit=10 HTTP/1.1" 200 OK
+INFO:     100.64.0.2:38466 - "GET /message-tasks/editor.worker.bundle.js HTTP/1.1" 200 OK
+INFO:     100.64.0.2:15252 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
+INFO:     100.64.0.2:15254 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
+INFO:     100.64.0.2:15252 - "GET /api/v1/wx/tags?offset=0&limit=10 HTTP/1.1" 200 OK
+INFO:     100.64.0.2:15252 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
+INFO:     100.64.0.2:15252 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
+INFO:     100.64.0.2:15254 - "GET /api/v1/wx/message_tasks?offset=0&limit=10 HTTP/1.1" 200 OK
+重载任务
+队列已清空
+[默认]连接初始化
+[默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+[默认] 检测到 Supabase Pooler Transaction 模式（端口 6543），使用连接池配置: pool_size=5, max_overflow=10
+2025-11-10 18:39:35 - INFO - Adding cron job with expression: 0 */4 * * *
+2025-11-10 18:39:35 - INFO - Successfully added job 定时采集 33892909-9f36-47df-b0b1-2d897ac14002
+已添加任务: 33892909-9f36-47df-b0b1-2d897ac14002
+2025-11-10 18:39:35 - INFO - Starting scheduler...
+2025-11-10 18:39:35 - INFO - Scheduler started successfully
+启动任务
+INFO:     100.64.0.2:15254 - "PUT /api/v1/wx/message_tasks/job/fresh HTTP/1.1" 200 OK
+INFO:     100.64.0.2:15254 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
+INFO:     100.64.0.2:15252 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
+INFO:     100.64.0.2:15254 - "GET /api/v1/wx/mps?kw=&offset=0&limit=10 HTTP/1.1" 200 OK
+INFO:     100.64.0.2:15254 - "GET /api/v1/wx/auth/verify HTTP/1.1" 200 OK
+INFO:     100.64.0.2:56538 - "GET /api/v1/wx/user HTTP/1.1" 200 OK
+INFO:     100.64.0.2:15254 - "GET /api/v1/wx/mps?offset=0&limit=10 HTTP/1.1" 200 OK
+INFO:     100.64.0.2:15254 - "GET /static/logo.svg HTTP/1.1" 304 Not Modified
+SELECT articles.id, articles.mp_id, articles.title, articles.pic_url, articles.url, articles.description, articles.status, articles.publish_time, articles.created_at, articles.updated_at, articles.is_export 
+FROM articles 

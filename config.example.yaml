@@ -111,3 +111,26 @@ export:
     enable: ${EXPORT_MARKDOWN:-False}
     #markdown导出目录 默认./data/markdown
     dir: ${EXPORT_MARKDOWN_DIR:-./data/markdown}
+
+#AI简报生成配置
+ai:
+  #是否启用AI简报功能 默认False
+  brief_enabled: ${AI_BRIEF_ENABLED:-False}
+  #是否自动生成简报 默认False
+  brief_auto_generate: ${AI_BRIEF_AUTO_GENERATE:-False}
+  #自动生成简报的时间间隔 单位分钟 默认60分钟
+  brief_generate_interval: ${AI_BRIEF_GENERATE_INTERVAL:-60}
+  #每批处理的文章数量 默认10篇
+  brief_batch_size: ${AI_BRIEF_BATCH_SIZE:-10}
+  #最大并发数（同时处理的文章数量）默认2个，避免触发API速率限制
+  brief_max_concurrent: ${AI_BRIEF_MAX_CONCURRENT:-2}
+  #GLM API密钥（也可通过环境变量GLM_API_KEY设置）
+  glm_api_key: ${GLM_API_KEY:-}
+  #GLM API地址 默认https://open.bigmodel.cn/api/paas/v4/chat/completions
+  glm_api_url: ${GLM_API_URL:-https://open.bigmodel.cn/api/paas/v4/chat/completions}
+  #使用的AI模型 默认GLM-4.5-Flash
+  glm_model: ${GLM_MODEL:-GLM-4.5-Flash}
+  #API请求超时时间 单位秒 默认60秒
+  timeout: ${AI_TIMEOUT:-60}
+  #最大重试次数 默认3次
+  max_retries: ${AI_MAX_RETRIES:-3}
