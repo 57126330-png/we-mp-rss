@@ -134,7 +134,6 @@ async def get_articles(
                 ).all()
                 brief_article_keys = {brief[0] for brief in briefs}
                 # 调试日志：打印查询到的简报数量
-                from core.print import print_info, print_warning
                 print_info(f"文章列表查询：共{len(article_ids)}篇文章，其中{len(brief_article_keys)}篇有简报")
                 # 打印所有brief的article_key（用于调试）
                 if brief_article_keys:
@@ -151,7 +150,6 @@ async def get_articles(
                 has_brief = article.id in brief_article_keys
                 article_dict["has_brief"] = has_brief  # 添加是否有简报的标识
                 # 调试日志：打印匹配情况
-                from core.print import print_info, print_warning
                 if has_brief:
                     print_info(f"✓ 文章 {article.id[:50]} 有简报 (article.id={article.id})")
                 else:
