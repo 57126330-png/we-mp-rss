@@ -132,14 +132,16 @@
                 <a-button type="text" @click="viewArticle(record)" :title="record.id">
                   <template #icon><icon-eye /></template>
                 </a-button>
-                <a-button 
+                <span 
                   v-if="record.has_brief" 
-                  type="text" 
                   @click="viewBrief(record)" 
                   :title="'查看AI简报'"
-                  style="color: #165DFF;">
-                  <template #icon><icon-robot /></template>
-                </a-button>
+                  style="color: #ff4d4f; font-weight: bold; cursor: pointer; margin: 0 4px; user-select: none; transition: opacity 0.2s;"
+                  class="ai-badge"
+                  @mouseenter="$event.target.style.opacity = '0.8'"
+                  @mouseleave="$event.target.style.opacity = '1'">
+                  [AI]
+                </span>
                 <a-button type="text" status="danger" @click="deleteArticle(record.id)">
                   <template #icon><icon-delete /></template>
                 </a-button>
@@ -231,7 +233,7 @@ import { Avatar } from '@/utils/constants'
 import { translatePage, setCurrentLanguage } from '@/utils/translate';
 import { ref, onMounted, h } from 'vue'
 import axios from 'axios'
-import { IconApps, IconAtt, IconDelete, IconEdit, IconEye, IconRefresh, IconScan, IconWeiboCircleFill, IconWifi, IconCode, IconRobot } from '@arco-design/web-vue/es/icon'
+import { IconApps, IconAtt, IconDelete, IconEdit, IconEye, IconRefresh, IconScan, IconWeiboCircleFill, IconWifi, IconCode } from '@arco-design/web-vue/es/icon'
 import { getArticles, deleteArticle as deleteArticleApi, ClearArticle, ClearDuplicateArticle, getArticleDetail, getArticleBrief } from '@/api/article'
 import { ExportOPML, ExportMPS, ImportMPS } from '@/api/export'
 import ExportModal from '@/components/ExportModal.vue'
